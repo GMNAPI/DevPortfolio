@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+.next/
+out/
+build/
+dist/
+
+# Coverage
+coverage/
+
+# Misc
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local

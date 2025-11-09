@@ -91,14 +91,10 @@ describe('Button Component', () => {
       expect(screen.getByRole('button')).toHaveClass('custom-class');
     });
 
-    it('should render as link when asChild is used with anchor', () => {
-      render(
-        <Button asChild>
-          <a href="/test">Link Button</a>
-        </Button>
-      );
-      const link = screen.getByRole('link');
-      expect(link).toHaveAttribute('href', '/test');
+    it('should support aria-label for accessibility', () => {
+      render(<Button aria-label="Submit form">Submit</Button>);
+      const button = screen.getByRole('button', { name: /submit/i });
+      expect(button).toBeInTheDocument();
     });
   });
 });

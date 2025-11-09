@@ -10,13 +10,12 @@
  * </Button>
  */
 
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/shared/utils/cn';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'default' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-  asChild?: boolean;
   children: React.ReactNode;
 }
 
@@ -33,24 +32,12 @@ const buttonSizes = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'md', asChild = false, children, ...props }, ref) => {
+  ({ className, variant = 'default', size = 'md', children, ...props }, ref) => {
     const baseStyles =
       'inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
     const variantStyles = buttonVariants[variant];
     const sizeStyles = buttonSizes[size];
-
-    // If asChild, render children directly with applied styles
-    if (asChild) {
-      const child = children as React.ReactElement;
-      return (
-        <child.type
-          {...child.props}
-          className={cn(baseStyles, variantStyles, sizeStyles, className, child.props.className)}
-          ref={ref}
-        />
-      );
-    }
 
     return (
       <button ref={ref} className={cn(baseStyles, variantStyles, sizeStyles, className)} {...props}>

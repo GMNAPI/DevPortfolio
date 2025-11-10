@@ -5,7 +5,7 @@ import { Project } from '@/core/entities/Project';
 import { PROJECTS } from '@/shared/constants/projects';
 
 interface ProjectDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,10 +14,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  const projectData = PROJECTS.find(
-    (project) => (project.detailSlug ?? project.id) === params.slug
-  );
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const { slug } = await params;
+  const projectData = PROJECTS.find((project) => (project.detailSlug ?? project.id) === slug);
 
   if (!projectData) {
     notFound();

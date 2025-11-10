@@ -22,21 +22,22 @@ Este proyecto sigue [Conventional Commits](https://www.conventionalcommits.org/)
 
 ## Types Permitidos
 
-| Type | Descripción | Ejemplo |
-|------|-------------|---------|
-| `feat` | Nueva funcionalidad | `feat(hero): add CV download button` |
-| `fix` | Corrección de bug | `fix(contact): resolve email validation issue` |
-| `docs` | Cambios en documentación | `docs(readme): update installation instructions` |
-| `style` | Cambios de formato (no afectan código) | `style(projects): adjust card spacing` |
-| `refactor` | Refactorización de código | `refactor(utils): simplify cn function` |
-| `test` | Añadir o modificar tests | `test(hero): add unit tests for Hero component` |
-| `chore` | Mantenimiento, dependencias | `chore(deps): update next to v15.0.3` |
-| `perf` | Mejoras de performance | `perf(images): implement lazy loading` |
-| `ci` | Cambios en CI/CD | `ci: add GitHub Actions workflow` |
+| Type       | Descripción                            | Ejemplo                                          |
+| ---------- | -------------------------------------- | ------------------------------------------------ |
+| `feat`     | Nueva funcionalidad                    | `feat(hero): add CV download button`             |
+| `fix`      | Corrección de bug                      | `fix(contact): resolve email validation issue`   |
+| `docs`     | Cambios en documentación               | `docs(readme): update installation instructions` |
+| `style`    | Cambios de formato (no afectan código) | `style(projects): adjust card spacing`           |
+| `refactor` | Refactorización de código              | `refactor(utils): simplify cn function`          |
+| `test`     | Añadir o modificar tests               | `test(hero): add unit tests for Hero component`  |
+| `chore`    | Mantenimiento, dependencias            | `chore(deps): update next to v15.0.3`            |
+| `perf`     | Mejoras de performance                 | `perf(images): implement lazy loading`           |
+| `ci`       | Cambios en CI/CD                       | `ci: add GitHub Actions workflow`                |
 
 ## Scopes Sugeridos
 
 ### Por Componente/Feature
+
 - `hero` - Hero section
 - `about` - About section
 - `projects` - Projects section
@@ -46,6 +47,7 @@ Este proyecto sigue [Conventional Commits](https://www.conventionalcommits.org/)
 - `footer` - Footer
 
 ### Por Área Técnica
+
 - `i18n` - Internacionalización
 - `api` - API routes
 - `seo` - SEO y metadata
@@ -189,6 +191,7 @@ Closes #2, #5
 ## Commits Pequeños y Atómicos
 
 ✅ **Bueno** (commits atómicos):
+
 ```
 feat(hero): add personal information constants
 feat(hero): implement CV download button
@@ -196,6 +199,7 @@ feat(hero): integrate professional image
 ```
 
 ❌ **Malo** (commit muy grande):
+
 ```
 feat(hero): complete hero section with all features
 ```

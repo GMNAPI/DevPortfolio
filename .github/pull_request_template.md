@@ -35,8 +35,8 @@ Refs #
 
 <!-- Si hay cambios visuales, añade capturas de pantalla -->
 
-| Antes | Después |
-|-------|---------|
+| Antes               | Después             |
+| ------------------- | ------------------- |
 | <!-- screenshot --> | <!-- screenshot --> |
 
 ## Checklist de Calidad
@@ -44,6 +44,7 @@ Refs #
 <!-- Marca todo lo que aplique y hayas verificado -->
 
 ### General
+
 - [ ] El código sigue las convenciones del proyecto
 - [ ] He realizado una auto-revisión de mi código
 - [ ] He comentado el código en áreas complicadas
@@ -51,32 +52,38 @@ Refs #
 - [ ] Los commits siguen [Conventional Commits](.github/COMMIT_CONVENTION.md)
 
 ### Testing
+
 - [ ] He añadido tests que prueban mi fix o feature
 - [ ] Tests nuevos y existentes pasan localmente (`npm test`)
 - [ ] La cobertura de tests se mantiene o mejora
 
 ### Build & Lint
+
 - [ ] El código compila sin errores (`npm run build`)
 - [ ] ESLint pasa sin errores (`npm run lint`)
 - [ ] Prettier está aplicado (`npm run format` o `npm run format:check`)
 - [ ] TypeScript no tiene errores de tipos
 
 ### Documentación
+
 - [ ] He actualizado la documentación relevante
 - [ ] README.md actualizado si es necesario
 - [ ] CLAUDE.md actualizado si cambia la arquitectura
 
 ### Performance & SEO
+
 - [ ] Las imágenes están optimizadas
 - [ ] No hay console.logs en código de producción
 - [ ] Meta tags actualizados si es necesario
 
 ### i18n (si aplica)
+
 - [ ] Traducciones añadidas en `locales/es.json`
 - [ ] Traducciones añadidas en `locales/en.json`
 - [ ] Textos usan `useTranslations` hook
 
 ### Accesibilidad
+
 - [ ] Roles ARIA apropiados
 - [ ] Alt text en imágenes
 - [ ] Navegación por teclado funciona
@@ -87,10 +94,12 @@ Refs #
 <!-- Describe cómo has probado estos cambios -->
 
 **Entorno de prueba:**
+
 - [ ] Local development
 - [ ] Preview deployment
 
 **Navegadores probados:**
+
 - [ ] Chrome
 - [ ] Firefox
 - [ ] Safari

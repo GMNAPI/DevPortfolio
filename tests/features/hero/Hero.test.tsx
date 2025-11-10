@@ -6,9 +6,7 @@ describe('Hero Section', () => {
   describe('Rendering', () => {
     it('should render main heading with full name', () => {
       render(<Hero />);
-      expect(
-        screen.getByRole('heading', { name: /ángel hidalgo barreiro/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /ángel hidalgo barreiro/i })).toBeInTheDocument();
     });
 
     it('should render tagline', () => {
@@ -16,28 +14,22 @@ describe('Hero Section', () => {
       expect(
         screen.getByRole('heading', {
           name: /desarrollador de cosas.*saas.*node\.js.*react.*php\/symfony/i,
-        }),
+        })
       ).toBeInTheDocument();
     });
 
     it('should render bio description', () => {
       render(<Hero />);
       expect(
-        screen.getByText(/desarrollador full-stack con amplia experiencia/i),
+        screen.getByText(/desarrollador full-stack con amplia experiencia/i)
       ).toBeInTheDocument();
     });
 
     it('should render all CTA buttons', () => {
       render(<Hero />);
-      expect(
-        screen.getByRole('button', { name: /ver proyectos/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /descargar cv/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole('button', { name: /contactar/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /ver proyectos/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /descargar cv/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /contactar/i })).toBeInTheDocument();
     });
 
     it('should have proper heading hierarchy', () => {

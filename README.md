@@ -63,12 +63,14 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md) para más detalles.
 ## 🚀 Tech Stack
 
 ### Core
+
 - **Framework**: [Next.js 15](https://nextjs.org/) con App Router
 - **UI Library**: [React 19](https://react.dev/)
 - **Language**: [TypeScript 5](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS 3.4](https://tailwindcss.com/)
 
 ### Features
+
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Theme**: [next-themes](https://github.com/pacocoursey/next-themes)
 - **i18n**: [next-intl](https://next-intl-docs.vercel.app/)
@@ -76,6 +78,7 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md) para más detalles.
 - **Email**: [Nodemailer](https://nodemailer.com/)
 
 ### Development
+
 - **Testing**: [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/)
 - **Linting**: [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
 - **Fonts**: [JetBrains Mono](https://www.jetbrains.com/lp/mono/) via next/font
@@ -164,25 +167,31 @@ npm run test:coverage
 Este portfolio showcase 10 proyectos reales organizados en 6 categorías:
 
 ### 1. Facturación & Compliance
+
 - **VerifacturGMN**: Sistema completo de facturación electrónica compatible con VeriFactu/AEAT
-- **FacturaeDocusaurus**: Documentación técnica VERI*FACTU
+- **FacturaeDocusaurus**: Documentación técnica VERI\*FACTU
 
 ### 2. Gestión de Servicios
+
 - **apiGns**: API REST moderna (Symfony 7.3 + API Platform)
 - **FrontendJson**: Frontend empresarial (Next.js 15 + TypeScript)
 
 ### 3. Arquitectura Avanzada
+
 - **FYNKUS**: Sistema de reservas con Hexagonal Architecture + DDD + CQRS
 
 ### 4. ERPs
+
 - **gestionominegocio**: Migración ERP legacy a SaaS moderno
 - **vitaliber**: Sistema full-stack de gran escala
 - **genesis**: Aplicación enterprise (4M líneas de código)
 
 ### 5. Herramientas
+
 - **streamlitGMN**: Simulador de modelo de negocio SaaS
 
 ### 6. Educación
+
 - **zend-laminas-tech-tests**: 10 pruebas técnicas para Laminas/Zend
 
 > **Nota**: Los repositorios son privados. Disponibles bajo solicitud para entrevistas técnicas.
@@ -190,6 +199,7 @@ Este portfolio showcase 10 proyectos reales organizados en 6 categorías:
 ## 🌐 i18n (Internacionalización)
 
 El sitio está completamente traducido a:
+
 - 🇪🇸 Español (idioma principal)
 - 🇬🇧 Inglés
 
@@ -201,14 +211,8 @@ El proyecto soporta modo claro y oscuro con paleta de colores cálidos (beige/ma
 
 ```css
 /* Light mode - Warm neutrals */
---background: #faf8f5
---foreground: #2d2520
---accent: #d4733f
-
-/* Dark mode - Brown tones */
---background: #1c1410
---foreground: #f5f1eb
---accent: #e88556
+--background: #faf8f5 --foreground: #2d2520 --accent: #d4733f /* Dark mode - Brown tones */
+  --background: #1c1410 --foreground: #f5f1eb --accent: #e88556;
 ```
 
 ## 🤝 Contribuciones

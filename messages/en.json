@@ -1,1 +1,60 @@
-{}
+{
+  "metadata": {
+    "title": "{name} | {tagline}",
+    "description": "",
+    "ogImageAlt": "{name} - Professional Portfolio",
+    "keywords": []
+  },
+  "navigation": {
+    "brand": "Dev Portfolio",
+    "ariaLabel": "Main navigation",
+    "items": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "cta": "Let's talk →",
+    "theme": {
+      "toggle": "Toggle theme"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    },
+    "locale": {
+      "switch": "Switch language to {locale}"
+    }
+  },
+  "hero": {
+    "greeting": "Placeholder",
+    "location": "Placeholder",
+    "buttons": {}
+  },
+  "about": {
+    "eyebrow": "Placeholder",
+    "title": "Placeholder"
+  },
+  "skills": {
+    "eyebrow": "Placeholder",
+    "title": "Placeholder"
+  },
+  "projects": {
+    "title": "Placeholder",
+    "subtitle": "Placeholder"
+  },
+  "contact": {
+    "title": "Placeholder",
+    "subtitle": "Placeholder",
+    "form": {},
+    "validation": {},
+    "messages": {}
+  },
+  "footer": {
+    "tagline": "I build things",
+    "findMe": "Find me",
+    "copyright": "All rights reserved"
+  },
+  "personal": {},
+  "career": {}
+}

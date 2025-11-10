@@ -1,1 +1,60 @@
-{}
+{
+  "metadata": {
+    "title": "{name} | {tagline}",
+    "description": "",
+    "ogImageAlt": "{name} - Portfolio Profesional",
+    "keywords": []
+  },
+  "navigation": {
+    "brand": "Dev Portfolio",
+    "ariaLabel": "Navegación principal",
+    "items": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "contact": "Contacto"
+    },
+    "cta": "Hablemos →",
+    "theme": {
+      "toggle": "Cambiar tema"
+    },
+    "menu": {
+      "open": "Abrir menú",
+      "close": "Cerrar menú"
+    },
+    "locale": {
+      "switch": "Cambiar idioma a {locale}"
+    }
+  },
+  "hero": {
+    "greeting": "Placeholder",
+    "location": "Placeholder",
+    "buttons": {}
+  },
+  "about": {
+    "eyebrow": "Placeholder",
+    "title": "Placeholder"
+  },
+  "skills": {
+    "eyebrow": "Placeholder",
+    "title": "Placeholder"
+  },
+  "projects": {
+    "title": "Placeholder",
+    "subtitle": "Placeholder"
+  },
+  "contact": {
+    "title": "Placeholder",
+    "subtitle": "Placeholder",
+    "form": {},
+    "validation": {},
+    "messages": {}
+  },
+  "footer": {
+    "tagline": "Desarrollo cosas",
+    "findMe": "Encuéntrame",
+    "copyright": "Todos los derechos reservados"
+  },
+  "personal": {},
+  "career": {}
+}

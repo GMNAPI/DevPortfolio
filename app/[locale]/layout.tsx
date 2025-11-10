@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
-import './globals.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import '../globals.css';
 import { Providers } from './providers';
 import { Navigation } from '@/shared/components/layout/Navigation';
 import { Footer } from '@/shared/components/layout/Footer';
 import { personalInfo } from '@/shared/constants/personal';
+import { routing } from '@/i18n/routing';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -15,6 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 // TODO: Update with real domain when available
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://angelhidalgo.dev';
 
+// TODO: Convert to generateMetadata in Issue #29 for locale-specific metadata
 export const metadata: Metadata = {
   title: {
     default: `${personalInfo.name} | ${personalInfo.tagline}`,
@@ -107,19 +112,37 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+
+  // Ensure the incoming `locale` is valid
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  // Get messages for the current locale
+  const messages = await getMessages();
+
   return (
-    <html lang="es" suppressHydrationWarning className={jetbrainsMono.variable}>
+    <html lang={locale} suppressHydrationWarning className={jetbrainsMono.variable}>
       <body>
-        <Providers>
-          <Navigation />
-          <main>{children}</main>
-          <Footer />
-        </Providers>
+        <NextIntlClientProvider messages={messages}>
+          <Providers>
+            <Navigation />
+            <main>{children}</main>
+            <Footer />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

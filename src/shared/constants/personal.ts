@@ -52,19 +52,19 @@ export const personalInfo: PersonalInfo = {
     full: 'Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps. Apasionado por crear soluciones técnicas robustas que resuelvan problemas reales de negocio.',
   },
 
-  avatar: '/images/avatar.jpg', // TODO: Añadir imagen real
-  cvUrl: '/documents/cv-angel-hidalgo-barreiro.pdf', // TODO: Añadir CV real
+  avatar: '/images/avatar-placeholder.svg',
+  cvUrl: '/documents/cv-angel-hidalgo-barreiro.pdf',
 
   social: {
-    email: 'angel.hidalgo@example.com', // TODO: Actualizar con email real
-    linkedin: 'https://www.linkedin.com/in/angel-hidalgo-barreiro', // TODO: Actualizar con LinkedIn real
+    email: 'angel@gestionominegocio.es',
+    linkedin: 'https://www.linkedin.com/in/angel-hidalgo-barreiro',
     github: 'https://github.com/GMNAPI',
     // twitter: 'https://twitter.com/angelhibarreiro', // Opcional
     // website: 'https://angelhidalgo.dev', // Opcional
   },
 
   contact: {
-    email: 'angel.hidalgo@example.com', // TODO: Actualizar con email real
+    email: 'angel@gestionominegocio.es',
     // phone: '+34 XXX XXX XXX', // Opcional
   },
 };

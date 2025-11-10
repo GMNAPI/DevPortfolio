@@ -14,6 +14,14 @@ describe('About Section', () => {
       expect(screen.getByText(/desarrollador/i)).toBeInTheDocument();
     });
 
+    it('should render GitHub stats block', () => {
+      render(<About />);
+      expect(screen.getByRole('heading', { name: /actividad reciente/i })).toBeInTheDocument();
+      expect(
+        screen.getByText((content) => content.replace(/\D/g, '').includes('1706'))
+      ).toBeInTheDocument();
+    });
+
     it('should render tech stack heading', () => {
       render(<About />);
       expect(screen.getByRole('heading', { name: /stack tecnológico/i })).toBeInTheDocument();

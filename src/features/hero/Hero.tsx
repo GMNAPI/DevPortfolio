@@ -7,8 +7,12 @@
 
 'use client';
 
+import Image from 'next/image';
+import { m } from 'framer-motion';
+
 import { Button } from '@/shared/components/ui/Button';
 import { personalInfo, availability } from '@/shared/constants/personal';
+import { fadeInUp, fadeIn, staggerContainer } from '@/shared/utils/motion';
 
 export function Hero() {
   const scrollToProjects = () => {
@@ -26,19 +30,21 @@ export function Hero() {
   };
 
   const downloadCV = () => {
-    // TODO: Implement actual CV download when file is ready
-    window.open(personalInfo.cvUrl, '_blank');
+    window.open(personalInfo.cvUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section
+    <m.section
       id="hero"
       className="min-h-screen flex items-center justify-center px-6 py-20 animate-fade-in"
+      initial="hidden"
+      animate="visible"
+      variants={staggerContainer(0.15, 0.15)}
     >
-      <div className="max-w-5xl mx-auto">
-        <div className="space-y-8 md:space-y-10">
+      <m.div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,320px)] md:gap-16">
+        <m.div className="space-y-8 md:space-y-10" variants={staggerContainer(0.1)}>
           {/* Name and Location */}
-          <div className="space-y-3 animate-slide-up">
+          <m.div className="space-y-3" variants={fadeInUp}>
             <p className="text-sm md:text-base text-accent font-medium">👋 Hola, soy</p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground">
               {personalInfo.name}
@@ -46,43 +52,62 @@ export function Hero() {
             <p className="text-base md:text-lg text-foreground-secondary">
               📍 {personalInfo.location.city}, {personalInfo.location.country}
             </p>
-          </div>
+          </m.div>
 
           {/* Tagline */}
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground-secondary animate-slide-up [animation-delay:100ms]">
+          <m.h2
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground-secondary"
+            variants={fadeInUp}
+          >
             {personalInfo.tagline}
-          </h2>
+          </m.h2>
 
           {/* Bio */}
-          <p className="text-lg md:text-xl text-foreground-secondary max-w-3xl leading-relaxed animate-slide-up [animation-delay:200ms]">
+          <m.p
+            className="text-lg md:text-xl text-foreground-secondary max-w-3xl leading-relaxed"
+            variants={fadeInUp}
+          >
             {personalInfo.bio.full}
-          </p>
+          </m.p>
 
           {/* Availability Badge */}
           {availability.isAvailable && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full animate-slide-up [animation-delay:300ms]">
+            <m.div
+              className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full"
+              variants={fadeInUp}
+            >
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
               <span className="text-sm font-medium text-accent">{availability.status}</span>
-            </div>
+            </m.div>
           )}
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-slide-up [animation-delay:400ms]">
-            <Button size="lg" onClick={scrollToProjects} data-scroll-to="projects">
-              Ver proyectos →
-            </Button>
+          <m.div
+            className="flex flex-col sm:flex-row gap-4 pt-4"
+            variants={fadeInUp}
+            transition={{ staggerChildren: 0.08 }}
+          >
+            <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" onClick={scrollToProjects} data-scroll-to="projects">
+                Ver proyectos →
+              </Button>
+            </m.div>
 
-            <Button size="lg" variant="outline" onClick={downloadCV}>
-              📄 Descargar CV
-            </Button>
+            <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" variant="outline" onClick={downloadCV}>
+                📄 Descargar CV
+              </Button>
+            </m.div>
 
-            <Button size="lg" variant="ghost" onClick={scrollToContact}>
-              Contactar
-            </Button>
-          </div>
+            <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+              <Button size="lg" variant="ghost" onClick={scrollToContact}>
+                Contactar
+              </Button>
+            </m.div>
+          </m.div>
 
           {/* Quick Links */}
-          <div className="flex gap-6 pt-4 animate-slide-up [animation-delay:500ms]">
+          <m.div className="flex gap-6 pt-4" variants={fadeInUp}>
             <a
               href={personalInfo.social.github}
               target="_blank"
@@ -131,9 +156,28 @@ export function Hero() {
                 />
               </svg>
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
+          </m.div>
+        </m.div>
+
+        <m.figure
+          className="relative mx-auto flex w-full max-w-[320px] justify-center md:justify-end"
+          variants={fadeIn}
+        >
+          <m.div
+            className="relative overflow-hidden rounded-3xl border border-border/60 bg-background-secondary shadow-lg shadow-accent/10"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Image
+              src={personalInfo.avatar}
+              alt={`Retrato profesional de ${personalInfo.name}`}
+              width={320}
+              height={400}
+              priority
+              className="h-auto w-full object-cover"
+            />
+          </m.div>
+        </m.figure>
+      </m.div>
+    </m.section>
   );
 }

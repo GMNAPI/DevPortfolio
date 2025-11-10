@@ -23,6 +23,8 @@ Este proyecto no solo sirve como mi portfolio profesional, sino también como de
 - 🌙 **Dark Mode**: Modo oscuro/claro con persistencia
 - 📊 **10 Proyectos Destacados**: Portfolio completo con categorización
 - 📧 **Contacto Funcional**: API serverless para formulario de contacto
+- 🧠 **Skills Interactivas**: Visualización de habilidades con porcentajes y años de experiencia
+- 📈 **Estadísticas GitHub**: Métricas de contribuciones privadas y repositorios activos
 
 ## 🏗️ Arquitectura
 
@@ -37,6 +39,7 @@ Este proyecto sigue una **arquitectura limpia simplificada** (Clean Architecture
 ├── /features          # 📦 Features Layer - Implementación vertical
 │   ├── /hero          # Sección Hero con presentación
 │   ├── /about         # Timeline de experiencia profesional
+│   ├── /skills        # Visualización de skills y métricas técnicas
 │   ├── /projects      # Showcase de 10 proyectos con categorías
 │   └── /contact       # Formulario con API serverless
 │
@@ -194,7 +197,7 @@ Este portfolio showcase 10 proyectos reales organizados en 6 categorías:
 
 - **zend-laminas-tech-tests**: 10 pruebas técnicas para Laminas/Zend
 
-> **Nota**: Los repositorios son privados. Disponibles bajo solicitud para entrevistas técnicas.
+> **Nota**: Los repositorios son privados. Cada card incluye el enlace para solicitar acceso o demo.
 
 ## 🌐 i18n (Internacionalización)
 

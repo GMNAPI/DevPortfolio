@@ -13,6 +13,7 @@ describe('Project Entity', () => {
           github: 'https://github.com/user/portfolio',
           demo: 'https://portfolio.dev',
         },
+        categoryId: 'gestion-servicios',
       });
 
       expect(project.id).toBe('1');
@@ -21,6 +22,7 @@ describe('Project Entity', () => {
       expect(project.tech).toEqual(['Next.js', 'TypeScript', 'Tailwind']);
       expect(project.links.github).toBe('https://github.com/user/portfolio');
       expect(project.links.demo).toBe('https://portfolio.dev');
+      expect(project.detailSlug).toBe('1');
     });
 
     it('should throw error if title is empty', () => {
@@ -31,6 +33,7 @@ describe('Project Entity', () => {
           description: 'Test',
           tech: ['React'],
           links: { github: 'https://github.com' },
+          categoryId: 'gestion-servicios',
         });
       }).toThrow('Title is required');
     });
@@ -43,6 +46,7 @@ describe('Project Entity', () => {
           description: 'Test',
           tech: [],
           links: { github: 'https://github.com' },
+          categoryId: 'gestion-servicios',
         });
       }).toThrow('At least one technology is required');
     });
@@ -54,6 +58,7 @@ describe('Project Entity', () => {
         description: 'REST API',
         tech: ['Node.js'],
         links: { github: 'https://github.com/user/api' },
+        categoryId: 'gestion-servicios',
       });
 
       expect(project.links.demo).toBeUndefined();
@@ -68,6 +73,7 @@ describe('Project Entity', () => {
         description: 'Full stack app',
         tech: ['React', 'Node.js', 'PostgreSQL'],
         links: { github: 'https://github.com' },
+        categoryId: 'gestion-servicios',
       });
 
       expect(project.hasTech('React')).toBe(true);
@@ -81,6 +87,7 @@ describe('Project Entity', () => {
         description: 'Test',
         tech: ['TypeScript'],
         links: { github: 'https://github.com' },
+        categoryId: 'gestion-servicios',
       });
 
       expect(project.hasTech('typescript')).toBe(true);
@@ -94,6 +101,8 @@ describe('Project Entity', () => {
         description: 'Description',
         tech: ['React'],
         links: { github: 'https://github.com' },
+        categoryId: 'gestion-servicios',
+        detailSlug: 'test',
       };
 
       const project = new Project(projectData);

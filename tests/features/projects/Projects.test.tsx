@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Projects } from '@/features/projects/Projects';
+import { PROJECTS } from '@/shared/constants/projects';
 
 describe('Projects Section', () => {
   describe('Rendering', () => {
@@ -12,22 +13,24 @@ describe('Projects Section', () => {
     it('should render multiple project cards', () => {
       render(<Projects />);
       const cards = screen.getAllByRole('article');
-      expect(cards.length).toBeGreaterThan(0);
+      expect(cards.length).toBe(PROJECTS.length);
     });
 
-    it('should render portfolio project as first project', () => {
+    it('should render first project title', () => {
       render(<Projects />);
-      expect(screen.getByText(/Personal Portfolio/i)).toBeInTheDocument();
+      expect(screen.getByText(PROJECTS[0].title)).toBeInTheDocument();
     });
 
     it('should display project titles', () => {
       render(<Projects />);
-      expect(screen.getByText('Personal Portfolio')).toBeInTheDocument();
+      PROJECTS.forEach((project) => {
+        expect(screen.getByText(project.title)).toBeInTheDocument();
+      });
     });
 
     it('should display project descriptions', () => {
       render(<Projects />);
-      expect(screen.getByText(/arquitectura limpia/i)).toBeInTheDocument();
+      expect(screen.getByText(/Sistema completo de facturación electrónica/i)).toBeInTheDocument();
     });
 
     it('should display tech stack for each project', () => {
@@ -48,8 +51,14 @@ describe('Projects Section', () => {
 
     it('should render demo links when available', () => {
       render(<Projects />);
-      const demoLinks = screen.getAllByRole('link', { name: /demo/i });
-      expect(demoLinks.length).toBeGreaterThan(0);
+      const demoLinks = screen.queryAllByRole('link', { name: /demo/i });
+      const hasDemo = PROJECTS.some((project) => Boolean(project.links.demo));
+
+      if (hasDemo) {
+        expect(demoLinks.length).toBeGreaterThan(0);
+      } else {
+        expect(demoLinks.length).toBe(0);
+      }
     });
 
     it('should have proper href attributes', () => {
@@ -64,6 +73,18 @@ describe('Projects Section', () => {
       const link = screen.getAllByRole('link')[0];
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('should render private repository notice', () => {
+      render(<Projects />);
+      const notices = screen.getAllByText(/repositorio privado/i);
+      expect(notices.length).toBeGreaterThan(0);
+    });
+
+    it('should render detail links for projects', () => {
+      render(<Projects />);
+      const detailLinks = screen.getAllByRole('link', { name: /ver detalle/i });
+      expect(detailLinks.length).toBeGreaterThan(0);
     });
   });
 

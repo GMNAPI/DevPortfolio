@@ -8,9 +8,11 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { AnimatePresence, m } from 'framer-motion';
+
 import { Input } from '@/shared/components/ui/Input';
 import { Button } from '@/shared/components/ui/Button';
-import { Contact as ContactEntity } from '@/core/entities/Contact';
+import { fadeInUp, staggerContainer } from '@/shared/utils/motion';
 
 interface FormErrors {
   name?: string;
@@ -27,6 +29,7 @@ export function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -64,6 +67,7 @@ export function Contact() {
     e.preventDefault();
     setErrors({});
     setSubmitSuccess(false);
+    setSubmitError(null);
 
     if (!validateForm()) {
       return;
@@ -71,36 +75,67 @@ export function Contact() {
 
     setIsSubmitting(true);
 
-    // Simulate API call (frontend only for now)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
+      const result = (await response.json().catch(() => ({}))) as { message?: string };
 
-    // Clear form
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-    });
+      if (!response.ok) {
+        throw new Error(result?.message ?? 'No se pudo enviar el mensaje. Intenta de nuevo.');
+      }
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000);
+      setSubmitSuccess(true);
+
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Ha ocurrido un error al enviar el mensaje. Intenta de nuevo más tarde.';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="contact" className="min-h-screen py-20 px-6">
+    <m.section
+      id="contact"
+      className="min-h-screen py-20 px-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={staggerContainer(0.18)}
+    >
       <div className="max-w-2xl mx-auto space-y-12">
         {/* Header */}
-        <div className="space-y-4">
+        <m.div className="space-y-4" variants={fadeInUp}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground">Contacto</h2>
           <p className="text-lg text-foreground-secondary">
             ¿Tienes un proyecto en mente? Hablemos
           </p>
-        </div>
+        </m.div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} aria-label="contact form" className="space-y-6">
+        <m.form
+          onSubmit={handleSubmit}
+          aria-label="contact form"
+          className="space-y-6"
+          variants={fadeInUp}
+        >
           <Input
             label="Nombre"
             type="text"
@@ -128,20 +163,40 @@ export function Contact() {
             disabled={isSubmitting}
           />
 
-          <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
-            {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
-          </Button>
+          <m.div whileHover={{ scale: isSubmitting ? 1 : 1.02 }} whileTap={{ scale: 0.97 }}>
+            <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+              {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+            </Button>
+          </m.div>
 
-          {submitSuccess && (
-            <div
-              className="p-4 bg-accent/10 border border-accent rounded-md text-accent"
-              role="alert"
-            >
-              ✓ Mensaje enviado correctamente. Te responderé pronto!
-            </div>
-          )}
-        </form>
+          <AnimatePresence>
+            {submitError && (
+              <m.div
+                className="p-4 border border-destructive/40 bg-destructive/10 text-destructive rounded-md text-sm"
+                role="alert"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              >
+                {submitError}
+              </m.div>
+            )}
+            {submitSuccess && (
+              <m.div
+                className="p-4 bg-accent/10 border border-accent rounded-md text-accent"
+                role="alert"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                ✓ Mensaje enviado correctamente. Te responderé pronto!
+              </m.div>
+            )}
+          </AnimatePresence>
+        </m.form>
       </div>
-    </section>
+    </m.section>
   );
 }

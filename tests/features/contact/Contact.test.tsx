@@ -1,9 +1,25 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Contact } from '@/features/contact/Contact';
 
 describe('Contact Section', () => {
+  const mockFetch = vi.fn();
+const originalFetch = global.fetch;
+
+  beforeEach(() => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockResolvedValue({ success: true }),
+    });
+    global.fetch = mockFetch as unknown as typeof fetch;
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  global.fetch = originalFetch;
+  });
+
   describe('Rendering', () => {
     it('should render section heading', () => {
       render(<Contact />);
@@ -114,6 +130,10 @@ describe('Contact Section', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
+        expect(mockFetch).toHaveBeenCalledWith(
+          '/api/contact',
+          expect.objectContaining({ method: 'POST' })
+        );
         expect(screen.getByText(/mensaje enviado/i)).toBeInTheDocument();
       });
     });
@@ -137,6 +157,29 @@ describe('Contact Section', () => {
         expect(nameInput.value).toBe('');
         expect(emailInput.value).toBe('');
         expect(messageInput.value).toBe('');
+      });
+    });
+
+    it('should show error message when API fails', async () => {
+      const user = userEvent.setup();
+      mockFetch.mockResolvedValueOnce({
+        ok: false,
+        json: vi.fn().mockResolvedValue({ message: 'API error' }),
+      });
+
+      render(<Contact />);
+
+      await user.type(screen.getByLabelText(/nombre/i), 'John Doe');
+      await user.type(screen.getByLabelText(/email/i), 'john@example.com');
+      await user.type(
+        screen.getByLabelText(/mensaje/i),
+        'This is a test message for the contact form'
+      );
+
+      await user.click(screen.getByRole('button', { name: /enviar mensaje/i }));
+
+      await waitFor(() => {
+        expect(screen.getByRole('alert')).toHaveTextContent(/api error/i);
       });
     });
   });

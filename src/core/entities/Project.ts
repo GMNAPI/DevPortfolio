@@ -19,12 +19,22 @@ export interface ProjectLinks {
   demo?: string;
 }
 
+export type ProjectCategoryId =
+  | 'facturacion-compliance'
+  | 'gestion-servicios'
+  | 'arquitectura-avanzada'
+  | 'erp-transformacion'
+  | 'herramientas'
+  | 'educacion';
+
 export interface ProjectData {
   id: string;
   title: string;
   description: string;
   tech: string[];
   links: ProjectLinks;
+  categoryId: ProjectCategoryId;
+  detailSlug?: string;
 }
 
 export class Project {
@@ -33,6 +43,8 @@ export class Project {
   readonly description: string;
   readonly tech: string[];
   readonly links: ProjectLinks;
+  readonly categoryId: ProjectCategoryId;
+  readonly detailSlug: string;
 
   constructor(data: ProjectData) {
     this.validate(data);
@@ -42,6 +54,8 @@ export class Project {
     this.description = data.description;
     this.tech = data.tech;
     this.links = data.links;
+    this.categoryId = data.categoryId;
+    this.detailSlug = data.detailSlug ?? data.id;
   }
 
   /**
@@ -55,6 +69,10 @@ export class Project {
 
     if (!data.tech || data.tech.length === 0) {
       throw new Error('At least one technology is required');
+    }
+
+    if (!data.categoryId) {
+      throw new Error('Category is required');
     }
   }
 
@@ -75,6 +93,8 @@ export class Project {
       description: this.description,
       tech: [...this.tech],
       links: { ...this.links },
+      categoryId: this.categoryId,
+      detailSlug: this.detailSlug,
     };
   }
 }

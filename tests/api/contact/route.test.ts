@@ -86,5 +86,3 @@ describe('POST /api/contact', () => {
     expect(sendMailMock).not.toHaveBeenCalled();
   });
 });
-
-

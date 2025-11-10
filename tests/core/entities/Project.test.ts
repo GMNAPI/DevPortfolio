@@ -101,7 +101,7 @@ describe('Project Entity', () => {
         description: 'Description',
         tech: ['React'],
         links: { github: 'https://github.com' },
-        categoryId: 'gestion-servicios',
+        categoryId: 'gestion-servicios' as const,
         detailSlug: 'test',
       };
 

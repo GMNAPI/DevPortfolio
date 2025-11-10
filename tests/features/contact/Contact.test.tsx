@@ -5,7 +5,7 @@ import { Contact } from '@/features/contact/Contact';
 
 describe('Contact Section', () => {
   const mockFetch = vi.fn();
-const originalFetch = global.fetch;
+  const originalFetch = global.fetch;
 
   beforeEach(() => {
     mockFetch.mockResolvedValue({
@@ -17,7 +17,7 @@ const originalFetch = global.fetch;
 
   afterEach(() => {
     vi.restoreAllMocks();
-  global.fetch = originalFetch;
+    global.fetch = originalFetch;
   });
 
   describe('Rendering', () => {

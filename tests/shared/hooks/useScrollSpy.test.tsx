@@ -68,13 +68,13 @@ describe('useScrollSpy Hook', () => {
 
       // Simulate intersection
       act(() => {
-        observerCallback(
+        observerCallback!(
           [
             {
               target: section,
               isIntersecting: true,
               intersectionRatio: 0.6,
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver
         );
@@ -92,13 +92,13 @@ describe('useScrollSpy Hook', () => {
 
       // Simulate no intersection
       act(() => {
-        observerCallback(
+        observerCallback!(
           [
             {
               target: section,
               isIntersecting: false,
               intersectionRatio: 0,
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver
         );
@@ -119,13 +119,13 @@ describe('useScrollSpy Hook', () => {
 
       // First section is active
       act(() => {
-        observerCallback(
+        observerCallback!(
           [
             {
               target: section1,
               isIntersecting: true,
               intersectionRatio: 0.6,
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver
         );
@@ -134,18 +134,18 @@ describe('useScrollSpy Hook', () => {
 
       // Scroll to second section
       act(() => {
-        observerCallback(
+        observerCallback!(
           [
             {
               target: section1,
               isIntersecting: false,
               intersectionRatio: 0,
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
             {
               target: section2,
               isIntersecting: true,
               intersectionRatio: 0.6,
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver
         );

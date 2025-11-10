@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI
+CLAUDE.md
+
+# Personal files
+gptPrompt.md
+
+# Temporary files and helpers
+/temp

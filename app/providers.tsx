@@ -2,6 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ReactNode } from 'react';
+import { MotionProvider } from '@/shared/providers/MotionProvider';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -19,7 +20,7 @@ export function Providers({ children }: ProvidersProps) {
       enableSystem
       disableTransitionOnChange={false}
     >
-      {children}
+      <MotionProvider>{children}</MotionProvider>
     </NextThemesProvider>
   );
 }

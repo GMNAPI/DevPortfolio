@@ -16,10 +16,11 @@
 
 import { useState } from 'react';
 import { useTheme } from 'next-themes';
-import { Button } from '@/shared/components/ui/Button';
+import { AnimatePresence, m } from 'framer-motion';
 import { NAV_ITEMS, BRAND_NAME } from '@/shared/constants/navigation';
 import { useScrollSpy } from '@/shared/hooks/useScrollSpy';
 import { cn } from '@/shared/utils/cn';
+import { fadeInUp } from '@/shared/utils/motion';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -48,14 +49,17 @@ export function Navigation() {
   };
 
   return (
-    <nav
+    <m.nav
       className="sticky top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
       aria-label="Navegación principal"
+      initial={{ y: -48, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Brand Name */}
-          <div className="flex-shrink-0">
+          <m.div className="flex-shrink-0" whileHover={{ scale: 1.02 }}>
             <a
               href="#hero"
               className="text-xl font-bold font-mono text-foreground hover:text-accent transition-colors"
@@ -63,10 +67,16 @@ export function Navigation() {
             >
               {BRAND_NAME}
             </a>
-          </div>
+          </m.div>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-8" role="list">
+          <m.ul
+            className="hidden md:flex items-center space-x-8"
+            role="list"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+          >
             {NAV_ITEMS.map((item) => (
               <li key={item.sectionId}>
                 <a
@@ -83,7 +93,7 @@ export function Navigation() {
                 </a>
               </li>
             ))}
-          </ul>
+          </m.ul>
 
           {/* Right Side: CTA + Theme Toggle + Mobile Menu */}
           <div className="flex items-center space-x-4">
@@ -140,39 +150,48 @@ export function Navigation() {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 animate-slide-down" role="menu">
-            <ul className="flex flex-col space-y-3" role="list">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.sectionId}>
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <m.div
+              className="md:hidden mt-4 pb-4"
+              role="menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+            >
+              <ul className="flex flex-col space-y-3" role="list">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.sectionId}>
+                    <a
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.sectionId)}
+                      className={cn(
+                        'block px-4 py-2 rounded-md text-sm font-mono transition-colors',
+                        activeSection === item.sectionId
+                          ? 'bg-accent/10 text-accent'
+                          : 'text-foreground-secondary hover:bg-background-secondary hover:text-foreground'
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+                {/* CTA in Mobile Menu */}
+                <li>
                   <a
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.sectionId)}
-                    className={cn(
-                      'block px-4 py-2 rounded-md text-sm font-mono transition-colors',
-                      activeSection === item.sectionId
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-foreground-secondary hover:bg-background-secondary hover:text-foreground'
-                    )}
+                    href="#contact"
+                    onClick={(e) => handleNavClick(e, 'contact')}
+                    className="block px-4 py-2 rounded-md text-sm font-mono bg-accent text-background hover:bg-accent-hover transition-colors text-center"
                   >
-                    {item.label}
+                    Hablemos →
                   </a>
                 </li>
-              ))}
-              {/* CTA in Mobile Menu */}
-              <li>
-                <a
-                  href="#contact"
-                  onClick={(e) => handleNavClick(e, 'contact')}
-                  className="block px-4 py-2 rounded-md text-sm font-mono bg-accent text-background hover:bg-accent-hover transition-colors text-center"
-                >
-                  Hablemos →
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
+              </ul>
+            </m.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </m.nav>
   );
 }

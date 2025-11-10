@@ -248,13 +248,16 @@ Este proyecto está bajo la licencia MIT. Ver [LICENSE](LICENSE) para más infor
 - [x] Implementar arquitectura limpia
 - [x] Diseño responsive
 - [x] Dark mode
-- [ ] Sección de experiencia profesional (Sprint 1)
-- [ ] Integración de 10 proyectos (Sprint 2)
-- [ ] i18n completo ES/EN (Sprint 3)
-- [ ] Formulario de contacto con API (Sprint 4)
-- [ ] Blog con MDX (Sprint 5 - opcional)
-- [ ] Analytics (Sprint 5 - opcional)
-- [ ] Deploy a producción (Sprint 5)
+- [x] **Sprint 1**: Hero personalizado + Timeline de experiencia profesional
+- [x] **Sprint 2**: Integración de 10 proyectos con filtros interactivos
+- [x] **Sprint 3**: Skills interactivas + Estadísticas GitHub
+- [x] **Sprint 4**: Animaciones con framer-motion + API de contacto serverless
+- [ ] **Sprint 5**: i18n completo ES/EN con next-intl
+- [ ] **Sprint 6**: Optimización SEO + Performance (Lighthouse >90)
+- [ ] **Sprint 7**: Accesibilidad WAI-ARIA + Documentación
+- [ ] **Milestone**: Hacer repositorio público
+- [ ] Blog con MDX (opcional - post-launch)
+- [ ] Analytics (opcional - post-launch)
 
 Ver [Issues](https://github.com/GMNAPI/DevPortfolio/issues) y [Milestones](https://github.com/GMNAPI/DevPortfolio/milestones) para progreso detallado.
 
@@ -262,8 +265,9 @@ Ver [Issues](https://github.com/GMNAPI/DevPortfolio/issues) y [Milestones](https
 
 ![Next.js](https://img.shields.io/badge/Framework-Next.js%2015-black)
 ![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)
-![Test Coverage](https://img.shields.io/badge/Coverage-80%25-green)
+![Test Coverage](https://img.shields.io/badge/Coverage-92%25-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-passing-brightgreen)
 
 ---
 

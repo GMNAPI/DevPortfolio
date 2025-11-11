@@ -3,18 +3,25 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 import { Project, type ProjectData } from '@/core/entities/Project';
+import { routing } from '@/i18n/routing';
+import { PROJECT_SLUGS } from '@/shared/constants/project-slugs';
 
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateStaticParams() {
-  const t = await getTranslations('projects');
-  const projectsData = t.raw('items') as ProjectData[];
+  // Generate static params for all locale + slug combinations
+  // This runs at build time without request context, so we use constants
+  const params: { locale: string; slug: string }[] = [];
 
-  return projectsData.map((project) => ({
-    slug: project.detailSlug ?? project.id,
-  }));
+  for (const locale of routing.locales) {
+    for (const slug of PROJECT_SLUGS) {
+      params.push({ locale, slug });
+    }
+  }
+
+  return params;
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {

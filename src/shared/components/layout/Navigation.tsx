@@ -14,10 +14,14 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { AnimatePresence, m } from 'framer-motion';
-import { NAV_ITEMS, BRAND_NAME } from '@/shared/constants/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
+
+import { defaultLocale, locales, type Locale } from '@/i18n/config';
+import { NAV_SECTIONS } from '@/shared/constants/navigation';
 import { useScrollSpy } from '@/shared/hooks/useScrollSpy';
 import { cn } from '@/shared/utils/cn';
 import { fadeInUp } from '@/shared/utils/motion';
@@ -25,9 +29,21 @@ import { fadeInUp } from '@/shared/utils/motion';
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const locale = useLocale() as Locale;
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Get section IDs from nav items
-  const sectionIds = NAV_ITEMS.map((item) => item.sectionId);
+  const tNavigation = useTranslations('navigation');
+  const navItems = useMemo(
+    () =>
+      NAV_SECTIONS.map((section) => ({
+        ...section,
+        label: tNavigation(`items.${section.key}` as const),
+      })),
+    [tNavigation]
+  );
+
+  const sectionIds = useMemo(() => navItems.map((item) => item.sectionId), [navItems]);
   const activeSection = useScrollSpy(sectionIds);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -44,6 +60,56 @@ export function Navigation() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const localeOptions = useMemo(
+    () =>
+      locales.map((code) => ({
+        code,
+        label: tNavigation(`locale.options.${code}` as const),
+      })),
+    [tNavigation]
+  );
+
+  const buildLocalizedPath = (targetLocale: Locale) => {
+    if (targetLocale === locale) {
+      return pathname;
+    }
+
+    if (locale === defaultLocale && targetLocale !== defaultLocale) {
+      const suffix = pathname === '/' ? '' : pathname;
+      return `/${targetLocale}${suffix}`;
+    }
+
+    if (locale !== defaultLocale && targetLocale === defaultLocale) {
+      const prefix = `/${locale}`;
+      if (pathname === prefix) {
+        return '/';
+      }
+      if (pathname.startsWith(`${prefix}/`)) {
+        return pathname.replace(prefix, '');
+      }
+    }
+
+    if (locale !== defaultLocale && targetLocale !== defaultLocale) {
+      const currentPrefix = `/${locale}`;
+      if (pathname.startsWith(currentPrefix)) {
+        return pathname.replace(currentPrefix, `/${targetLocale}`);
+      }
+    }
+
+    const suffix = pathname === '/' ? '' : pathname;
+    return `/${targetLocale}${suffix}`;
+  };
+
+  const handleLocaleChange = (nextLocale: Locale) => {
+    if (nextLocale === locale) return;
+    const targetPath = buildLocalizedPath(nextLocale);
+    const hash = typeof window !== 'undefined' ? window.location.hash : '';
+    router.replace(`${targetPath}${hash}`);
+    setIsMobileMenuOpen(false);
+  };
+
+  const localeLabel = tNavigation(`locale.options.${locale}` as const);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -51,7 +117,7 @@ export function Navigation() {
   return (
     <m.nav
       className="sticky top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
-      aria-label="Navegación principal"
+      aria-label={tNavigation('ariaLabel')}
       initial={{ y: -48, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
@@ -65,7 +131,7 @@ export function Navigation() {
               className="text-xl font-bold font-mono text-foreground hover:text-accent transition-colors"
               onClick={(e) => handleNavClick(e, 'hero')}
             >
-              {BRAND_NAME}
+              {tNavigation('brand')}
             </a>
           </m.div>
 
@@ -77,7 +143,7 @@ export function Navigation() {
             initial="hidden"
             animate="visible"
           >
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.sectionId}>
                 <a
                   href={item.href}
@@ -103,14 +169,32 @@ export function Navigation() {
               className="hidden md:inline-flex items-center justify-center rounded-md font-mono font-medium text-sm px-4 py-2 bg-accent text-background hover:bg-accent-hover transition-colors"
               onClick={(e) => handleNavClick(e, 'contact')}
             >
-              Hablemos →
+              {tNavigation('cta')}
             </a>
+
+            {/* Locale Switcher */}
+            <label className="sr-only" htmlFor="locale-switcher-desktop">
+              {tNavigation('locale.label')}
+            </label>
+            <select
+              id="locale-switcher-desktop"
+              value={locale}
+              onChange={(event) => handleLocaleChange(event.target.value as Locale)}
+              aria-label={tNavigation('locale.label')}
+              className="hidden md:inline-flex items-center rounded-md border border-border bg-background-secondary px-3 py-2 text-xs font-mono text-foreground-secondary hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent"
+            >
+              {localeOptions.map((option) => (
+                <option key={option.code} value={option.code}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
 
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors px-3 py-2 bg-transparent text-foreground hover:bg-background-secondary"
-              aria-label="Cambiar tema"
+              aria-label={tNavigation('theme.toggle')}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
@@ -119,7 +203,7 @@ export function Navigation() {
             <button
               onClick={toggleMobileMenu}
               className="md:hidden inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors px-3 py-2 bg-transparent text-foreground hover:bg-background-secondary"
-              aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-label={isMobileMenuOpen ? tNavigation('menu.close') : tNavigation('menu.open')}
               aria-expanded={isMobileMenuOpen}
             >
               <svg
@@ -161,7 +245,7 @@ export function Navigation() {
               transition={{ duration: 0.25, ease: 'easeOut' }}
             >
               <ul className="flex flex-col space-y-3" role="list">
-                {NAV_ITEMS.map((item) => (
+                {navItems.map((item) => (
                   <li key={item.sectionId}>
                     <a
                       href={item.href}
@@ -177,6 +261,27 @@ export function Navigation() {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <label
+                    htmlFor="locale-switcher-mobile"
+                    className="block px-4 text-xs font-mono text-foreground-secondary"
+                  >
+                    {tNavigation('locale.current', { locale: localeLabel })}
+                  </label>
+                  <select
+                    id="locale-switcher-mobile"
+                    value={locale}
+                    onChange={(event) => handleLocaleChange(event.target.value as Locale)}
+                    aria-label={tNavigation('locale.label')}
+                    className="mt-1 block w-full rounded-md border border-border bg-background px-4 py-2 text-sm font-mono text-foreground-secondary focus:outline-none focus:ring-2 focus:ring-accent"
+                  >
+                    {localeOptions.map((option) => (
+                      <option key={option.code} value={option.code}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </li>
                 {/* CTA in Mobile Menu */}
                 <li>
                   <a
@@ -184,7 +289,7 @@ export function Navigation() {
                     onClick={(e) => handleNavClick(e, 'contact')}
                     className="block px-4 py-2 rounded-md text-sm font-mono bg-accent text-background hover:bg-accent-hover transition-colors text-center"
                   >
-                    Hablemos →
+                    {tNavigation('cta')}
                   </a>
                 </li>
               </ul>

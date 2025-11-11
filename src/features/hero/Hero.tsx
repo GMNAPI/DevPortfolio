@@ -7,14 +7,17 @@
 
 'use client';
 
-import Image from 'next/image';
 import { m } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/Button';
 import { personalInfo, availability } from '@/shared/constants/personal';
 import { fadeInUp, fadeIn, staggerContainer } from '@/shared/utils/motion';
 
 export function Hero() {
+  const tHero = useTranslations('hero');
+  const tPersonal = useTranslations('personal');
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -33,6 +36,32 @@ export function Hero() {
     window.open(personalInfo.cvUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const asciiLines = [
+    '         .----------------------.',
+    '         |  Ángel H. Barreiro  |',
+    '         |   full-stack dev    |',
+    ' .____.  |---------------------|',
+    ' | __ )  |   hair:  ~~~~~~~    |',
+    ' |  _ \\  |  face:  ( ^_^)      |',
+    ' | |_) | |  stack: {PHP, JS}   |',
+    ' |____/  |   SaaS · Symfony    |',
+    "         '---------------------'",
+  ];
+
+  const terminalContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const lineVariant = {
+    hidden: { opacity: 0, y: 4 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <m.section
       id="hero"
@@ -45,12 +74,15 @@ export function Hero() {
         <m.div className="space-y-8 md:space-y-10" variants={staggerContainer(0.1)}>
           {/* Name and Location */}
           <m.div className="space-y-3" variants={fadeInUp}>
-            <p className="text-sm md:text-base text-accent font-medium">👋 Hola, soy</p>
+            <p className="text-sm md:text-base text-accent font-medium">{tHero('greeting')}</p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground">
               {personalInfo.name}
             </h1>
             <p className="text-base md:text-lg text-foreground-secondary">
-              📍 {personalInfo.location.city}, {personalInfo.location.country}
+              {tHero('location', {
+                city: tPersonal('location.city'),
+                country: tPersonal('location.country'),
+              })}
             </p>
           </m.div>
 
@@ -59,7 +91,7 @@ export function Hero() {
             className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground-secondary"
             variants={fadeInUp}
           >
-            {personalInfo.tagline}
+            {tPersonal('tagline')}
           </m.h2>
 
           {/* Bio */}
@@ -67,7 +99,7 @@ export function Hero() {
             className="text-lg md:text-xl text-foreground-secondary max-w-3xl leading-relaxed"
             variants={fadeInUp}
           >
-            {personalInfo.bio.full}
+            {tPersonal('bio.full')}
           </m.p>
 
           {/* Availability Badge */}
@@ -77,7 +109,9 @@ export function Hero() {
               variants={fadeInUp}
             >
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium text-accent">{availability.status}</span>
+              <span className="text-sm font-medium text-accent">
+                {tPersonal('availability.open')}
+              </span>
             </m.div>
           )}
 
@@ -89,19 +123,19 @@ export function Hero() {
           >
             <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
               <Button size="lg" onClick={scrollToProjects} data-scroll-to="projects">
-                Ver proyectos →
+                {tHero('buttons.projects')}
               </Button>
             </m.div>
 
             <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
               <Button size="lg" variant="outline" onClick={downloadCV}>
-                📄 Descargar CV
+                {tHero('buttons.cv')}
               </Button>
             </m.div>
 
             <m.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
               <Button size="lg" variant="ghost" onClick={scrollToContact}>
-                Contactar
+                {tHero('buttons.contact')}
               </Button>
             </m.div>
           </m.div>
@@ -164,17 +198,31 @@ export function Hero() {
           variants={fadeIn}
         >
           <m.div
-            className="relative overflow-hidden rounded-3xl border border-border/60 bg-background-secondary shadow-lg shadow-accent/10"
+            className="relative w-full max-w-[360px] overflow-hidden rounded-3xl border border-border/40 bg-background-secondary shadow-lg shadow-accent/10"
             whileHover={{ scale: 1.02 }}
           >
-            <Image
-              src={personalInfo.avatar}
-              alt={`Retrato profesional de ${personalInfo.name}`}
-              width={320}
-              height={400}
-              priority
-              className="h-auto w-full object-cover"
-            />
+            <div className="flex flex-col rounded-[22px] border border-border/30 bg-[#0f1117] text-[#d4f1ff]">
+              <div className="flex items-center gap-2 border-b border-border/20 bg-[#1c1f2b] px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#6b7a99]">
+                <span className="inline-flex h-3 w-3 rounded-full bg-[#ff5f56]" />
+                <span className="inline-flex h-3 w-3 rounded-full bg-[#ffbd2e]" />
+                <span className="inline-flex h-3 w-3 rounded-full bg-[#27c93f]" />
+                <span className="ml-2">terminal</span>
+              </div>
+              <m.pre
+                role="img"
+                aria-label={tHero('asciiAlt', { name: personalInfo.name })}
+                className="font-mono text-sm leading-[1.35] whitespace-pre px-6 py-6"
+                initial="hidden"
+                animate="visible"
+                variants={terminalContainer}
+              >
+                {asciiLines.map((line, index) => (
+                  <m.span key={index} className="block" variants={lineVariant}>
+                    {line}
+                  </m.span>
+                ))}
+              </m.pre>
+            </div>
           </m.div>
         </m.figure>
       </m.div>

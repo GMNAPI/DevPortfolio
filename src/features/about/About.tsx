@@ -8,54 +8,57 @@
 'use client';
 
 import { m } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { experiences, certifications } from '@/shared/constants/career';
-import { SKILL_SUMMARY } from '@/shared/constants/skills';
+import type { CertificationItem, ExperienceItem } from '@/shared/constants/career';
+import type { SkillSummary } from '@/shared/constants/skills';
 import { fadeInUp, staggerContainer } from '@/shared/utils/motion';
 
-const technologies = [
-  'Next.js',
-  'React',
-  'TypeScript',
-  'Tailwind CSS',
-  'Node.js',
-  'Git',
-  'Vitest',
-  'Clean Architecture',
-];
-
 export function About() {
-  const accountCreatedAt = new Date(SKILL_SUMMARY.accountCreatedAt);
-  const formattedAccountCreatedAt = accountCreatedAt.toLocaleDateString('es-ES', {
+  const tAbout = useTranslations('about');
+  const tSkills = useTranslations('skills');
+  const locale = useLocale();
+  const numberLocale = locale === 'es' ? 'es-ES' : 'en-US';
+
+  const technologies = tAbout.raw('technologies') as string[];
+  const experiences = tAbout.raw('career.experiences') as ExperienceItem[];
+  const certifications = tAbout.raw('career.certifications') as CertificationItem[];
+  const skillsSummary = tSkills.raw('summary') as SkillSummary;
+
+  const accountCreatedAt = new Date(skillsSummary.accountCreatedAt);
+  const accountCreatedFormatter = new Intl.DateTimeFormat(numberLocale, {
     year: 'numeric',
     month: 'long',
   });
+  const formattedAccountCreatedAt = accountCreatedFormatter.format(accountCreatedAt);
 
   const stats = [
     {
-      label: 'Contribuciones último año',
-      value: SKILL_SUMMARY.contributionsLastYear.toLocaleString('es-ES'),
-      detail: 'Commits, PRs y actividad privada en GitHub',
+      label: tAbout('stats.contributions.label'),
+      value: skillsSummary.contributionsLastYear.toLocaleString(numberLocale),
+      detail: tAbout('stats.contributions.detail'),
     },
     {
-      label: 'Repositorios analizados',
-      value: SKILL_SUMMARY.totalRepositoriesAnalysed.toString(),
-      detail: 'Portafolio privado entre SaaS, herramientas y documentación',
+      label: tAbout('stats.repositoriesAnalysed.label'),
+      value: skillsSummary.totalRepositories.toLocaleString(numberLocale),
+      detail: tAbout('stats.repositoriesAnalysed.detail'),
     },
     {
-      label: 'Repositorios activos',
-      value: SKILL_SUMMARY.activeRepositories.toString(),
-      detail: 'Proyectos con mantenimiento y roadmap en curso',
+      label: tAbout('stats.repositoriesActive.label'),
+      value: skillsSummary.activeRepositories.toLocaleString(numberLocale),
+      detail: tAbout('stats.repositoriesActive.detail'),
     },
     {
-      label: 'Repositorios con stars',
-      value: SKILL_SUMMARY.repositoriesWithStars.toString(),
-      detail: 'Repos destacados con feedback de la comunidad',
+      label: tAbout('stats.repositoriesWithStars.label'),
+      value: skillsSummary.repositoriesWithStars.toLocaleString(numberLocale),
+      detail: tAbout('stats.repositoriesWithStars.detail'),
     },
     {
-      label: 'Cuenta creada',
+      label: tAbout('stats.accountCreated.label'),
       value: formattedAccountCreatedAt,
-      detail: 'Desde abril de 2024 contribuyendo en proyectos open/private',
+      detail: tAbout('stats.accountCreated.detail', {
+        detailDate: formattedAccountCreatedAt,
+      }),
     },
   ];
 
@@ -71,19 +74,17 @@ export function About() {
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Header */}
         <m.header className="space-y-4" variants={fadeInUp}>
-          <p className="text-sm uppercase tracking-[0.3em] text-accent/80">Experiencia</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">Sobre mí</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-accent/80">{tAbout('eyebrow')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">{tAbout('title')}</h2>
           <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed">
-            Desarrollador enfocado en crear soluciones robustas y escalables. Apasionado por el
-            código limpio, las buenas prácticas y la arquitectura de software. Cada proyecto es una
-            oportunidad para aprender y mejorar.
+            {tAbout('intro')}
           </p>
         </m.header>
 
         {/* Experience Timeline */}
         <m.section className="space-y-8" variants={fadeInUp}>
           <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
-            Timeline profesional
+            {tAbout('sections.timeline')}
           </h3>
           <div className="relative pl-6 md:pl-10">
             <div
@@ -133,7 +134,9 @@ export function About() {
 
         {/* GitHub Stats */}
         <m.section className="space-y-6" variants={fadeInUp}>
-          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">Actividad reciente</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+            {tAbout('sections.activity')}
+          </h3>
           <div className="grid gap-4 md:grid-cols-2">
             {stats.map((stat) => (
               <m.article
@@ -153,7 +156,9 @@ export function About() {
 
         {/* Certifications */}
         <m.section className="space-y-6" variants={fadeInUp}>
-          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">Certificaciones</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+            {tAbout('sections.certifications')}
+          </h3>
           <div className="grid gap-4 md:grid-cols-2">
             {certifications.map((certification) => (
               <m.article
@@ -187,7 +192,9 @@ export function About() {
 
         {/* Tech Stack */}
         <m.section className="space-y-6" variants={fadeInUp}>
-          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">Stack tecnológico</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+            {tAbout('sections.techStack')}
+          </h3>
           <ul className="flex flex-wrap gap-3">
             {technologies.map((tech) => (
               <m.li

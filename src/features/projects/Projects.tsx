@@ -10,6 +10,7 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { m } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 
 import {
   Card,
@@ -20,12 +21,29 @@ import {
 } from '@/shared/components/ui/Card';
 import { Button } from '@/shared/components/ui/Button';
 import { Project } from '@/core/entities/Project';
-import { PROJECTS, PROJECT_CATEGORIES, PROJECT_CATEGORY_LIST } from '@/shared/constants/projects';
+import type { ProjectCategory, ProjectMessageItem } from '@/shared/constants/projects';
 import { personalInfo } from '@/shared/constants/personal';
 import { fadeInUp, staggerContainer } from '@/shared/utils/motion';
 
 export function Projects() {
-  const projects = useMemo(() => PROJECTS.map((data) => new Project(data)), []);
+  const locale = useLocale();
+  const tProjects = useTranslations('projects');
+
+  const rawProjects = useMemo(() => tProjects.raw('items') as ProjectMessageItem[], [tProjects]);
+  const projects = useMemo(() => rawProjects.map((data) => new Project(data)), [rawProjects]);
+
+  const categories = useMemo(() => tProjects.raw('categories') as ProjectCategory[], [tProjects]);
+  const categoriesById = useMemo(
+    () =>
+      categories.reduce<Record<Project['categoryId'], ProjectCategory>>(
+        (acc, category) => {
+          acc[category.id] = category;
+          return acc;
+        },
+        {} as Record<Project['categoryId'], ProjectCategory>
+      ),
+    [categories]
+  );
   const [activeCategory, setActiveCategory] = useState<'all' | Project['categoryId']>('all');
 
   const categoryCounts = useMemo(() => {
@@ -58,11 +76,8 @@ export function Projects() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <m.div className="space-y-4" variants={fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">Proyectos</h2>
-          <p className="text-lg text-foreground-secondary max-w-3xl">
-            Selección de productos SaaS, herramientas internas y documentación técnica desarrollada
-            para clientes y proyectos propios. Organizados en 6 categorías estratégicas.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">{tProjects('title')}</h2>
+          <p className="text-lg text-foreground-secondary max-w-3xl">{tProjects('subtitle')}</p>
         </m.div>
 
         {/* Filters */}
@@ -72,9 +87,9 @@ export function Projects() {
             size="sm"
             onClick={() => setActiveCategory('all')}
           >
-            Todas ({projects.length})
+            {tProjects('filters.all', { count: projects.length })}
           </Button>
-          {PROJECT_CATEGORY_LIST.map((category) => (
+          {categories.map((category) => (
             <Button
               key={category.id}
               variant={activeCategory === category.id ? 'default' : 'outline'}
@@ -88,7 +103,7 @@ export function Projects() {
 
         {/* Category overview */}
         <m.div className="grid grid-cols-1 gap-4 md:grid-cols-2" variants={fadeInUp}>
-          {PROJECT_CATEGORY_LIST.map((category) => (
+          {categories.map((category) => (
             <div
               key={category.id}
               className="rounded-lg border border-border bg-background p-4 shadow-sm"
@@ -107,7 +122,7 @@ export function Projects() {
           variants={staggerContainer(0.12, 0.2)}
         >
           {filteredProjects.map((project) => {
-            const category = PROJECT_CATEGORIES[project.categoryId];
+            const category = categoriesById[project.categoryId];
 
             return (
               <m.article
@@ -132,7 +147,7 @@ export function Projects() {
                   </CardHeader>
                   <CardContent className="flex flex-1 flex-col justify-between gap-6 pt-6">
                     {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2" aria-label="Tecnologías utilizadas">
+                    <div className="flex flex-wrap gap-2" aria-label={tProjects('aria.tech')}>
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
@@ -152,7 +167,7 @@ export function Projects() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center rounded-md border border-accent px-4 py-2 font-mono text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-background"
                         >
-                          GitHub
+                          {tProjects('labels.github')}
                         </a>
                       )}
                       {project.links.demo && (
@@ -162,28 +177,32 @@ export function Projects() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 font-mono text-sm font-medium text-background transition-colors hover:bg-accent-hover"
                         >
-                          Demo →
+                          {tProjects('labels.demo')}
                         </a>
                       )}
                       <Link
                         href={`/projects/${project.detailSlug}`}
                         className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 font-mono text-sm font-medium text-foreground-secondary transition-colors hover:border-accent hover:text-accent"
                       >
-                        Ver detalle
+                        {tProjects('labels.detail')}
                       </Link>
                     </div>
                     <p className="flex flex-wrap items-center gap-1 text-xs text-foreground-secondary/80">
                       <span aria-hidden="true">🔒</span>
                       <span>
-                        Repositorio privado — solicita acceso en{' '}
-                        <a
-                          href={personalInfo.social.linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent underline-offset-2 hover:underline"
-                        >
-                          LinkedIn
-                        </a>
+                        {tProjects.rich('privateNotice.text', {
+                          linkLabel: tProjects('privateNotice.linkLabel'),
+                          link: (chunks) => (
+                            <a
+                              href={personalInfo.social.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-accent underline-offset-2 hover:underline"
+                            >
+                              {chunks}
+                            </a>
+                          ),
+                        })}
                       </span>
                     </p>
                   </CardContent>

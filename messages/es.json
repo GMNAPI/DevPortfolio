@@ -1,9 +1,28 @@
 {
   "metadata": {
     "title": "{name} | {tagline}",
-    "description": "",
+    "description": "Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps.",
     "ogImageAlt": "{name} - Portfolio Profesional",
-    "keywords": []
+    "keywords": [
+      "Ángel Hidalgo Barreiro",
+      "desarrollador full stack",
+      "Barcelona",
+      "SaaS",
+      "microservicios",
+      "DevOps",
+      "PHP",
+      "Symfony",
+      "Node.js",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Clean Architecture",
+      "DDD",
+      "portfolio",
+      "arquitecturas escalables",
+      "modernización legacy",
+      "API Platform"
+    ]
   },
   "navigation": {
     "brand": "Dev Portfolio",
@@ -589,11 +608,36 @@
     ]
   },
   "contact": {
-    "title": "Placeholder",
-    "subtitle": "Placeholder",
-    "form": {},
-    "validation": {},
-    "messages": {}
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? Hablemos",
+    "form": {
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Tu nombre"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "tu@email.com"
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntame sobre tu proyecto..."
+      }
+    },
+    "validation": {
+      "nameRequired": "El nombre es requerido",
+      "emailInvalid": "Un email válido es requerido",
+      "messageRequired": "El mensaje es requerido",
+      "messageMinLength": "El mensaje debe tener al menos 10 caracteres"
+    },
+    "buttons": {
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando..."
+    },
+    "messages": {
+      "success": "Mensaje enviado correctamente. ¡Te responderé pronto!",
+      "error": "No se pudo enviar el mensaje. Intenta de nuevo."
+    }
   },
   "footer": {
     "tagline": "Desarrollo cosas",

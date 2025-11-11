@@ -8,6 +8,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { useTranslations } from 'next-intl';
 import { AnimatePresence, m } from 'framer-motion';
 
 import { Input } from '@/shared/components/ui/Input';
@@ -21,6 +22,8 @@ interface FormErrors {
 }
 
 export function Contact() {
+  const t = useTranslations('contact');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,19 +47,19 @@ export function Contact() {
 
     // Validate name
     if (!trimmedData.name || trimmedData.name.length === 0) {
-      newErrors.name = 'El nombre es requerido';
+      newErrors.name = t('validation.nameRequired');
     }
 
     // Validate email
     if (!trimmedData.email || !EMAIL_REGEX.test(trimmedData.email)) {
-      newErrors.email = 'Un email válido es requerido';
+      newErrors.email = t('validation.emailInvalid');
     }
 
     // Validate message
     if (!trimmedData.message || trimmedData.message.length === 0) {
-      newErrors.message = 'El mensaje es requerido';
+      newErrors.message = t('validation.messageRequired');
     } else if (trimmedData.message.length < MIN_MESSAGE_LENGTH) {
-      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+      newErrors.message = t('validation.messageMinLength');
     }
 
     setErrors(newErrors);
@@ -87,7 +90,7 @@ export function Contact() {
       const result = (await response.json().catch(() => ({}))) as { message?: string };
 
       if (!response.ok) {
-        throw new Error(result?.message ?? 'No se pudo enviar el mensaje. Intenta de nuevo.');
+        throw new Error(result?.message ?? t('messages.error'));
       }
 
       setSubmitSuccess(true);
@@ -101,10 +104,7 @@ export function Contact() {
 
       setTimeout(() => setSubmitSuccess(false), 5000);
     } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : 'Ha ocurrido un error al enviar el mensaje. Intenta de nuevo más tarde.';
+      const message = error instanceof Error ? error.message : t('messages.error');
       setSubmitError(message);
     } finally {
       setIsSubmitting(false);
@@ -123,22 +123,21 @@ export function Contact() {
       <div className="max-w-2xl mx-auto space-y-12">
         {/* Header */}
         <m.div className="space-y-4" variants={fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">Contacto</h2>
-          <p className="text-lg text-foreground-secondary">
-            ¿Tienes un proyecto en mente? Hablemos
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">{t('title')}</h2>
+          <p className="text-lg text-foreground-secondary">{t('subtitle')}</p>
         </m.div>
 
         {/* Form */}
         <m.form
           onSubmit={handleSubmit}
-          aria-label="contact form"
+          aria-label={t('title')}
           className="space-y-6"
           variants={fadeInUp}
         >
           <Input
-            label="Nombre"
+            label={t('form.name.label')}
             type="text"
+            placeholder={t('form.name.placeholder')}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             error={errors.name}
@@ -146,8 +145,9 @@ export function Contact() {
           />
 
           <Input
-            label="Email"
+            label={t('form.email.label')}
             type="text"
+            placeholder={t('form.email.placeholder')}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             error={errors.email}
@@ -155,7 +155,8 @@ export function Contact() {
           />
 
           <Input
-            label="Mensaje"
+            label={t('form.message.label')}
+            placeholder={t('form.message.placeholder')}
             multiline
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -165,7 +166,7 @@ export function Contact() {
 
           <m.div whileHover={{ scale: isSubmitting ? 1 : 1.02 }} whileTap={{ scale: 0.97 }}>
             <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
-              {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+              {isSubmitting ? t('buttons.submitting') : t('buttons.submit')}
             </Button>
           </m.div>
 
@@ -191,7 +192,7 @@ export function Contact() {
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
               >
-                ✓ Mensaje enviado correctamente. Te responderé pronto!
+                ✓ {t('messages.success')}
               </m.div>
             )}
           </AnimatePresence>

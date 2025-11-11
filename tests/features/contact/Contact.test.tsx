@@ -1,7 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { NextIntlClientProvider } from 'next-intl';
+
+import esMessages from '../../../messages/es.json';
 import { Contact } from '@/features/contact/Contact';
+
+function renderContact() {
+  return render(
+    <NextIntlClientProvider locale="es" messages={esMessages}>
+      <Contact />
+    </NextIntlClientProvider>
+  );
+}
 
 describe('Contact Section', () => {
   const mockFetch = vi.fn();
@@ -22,19 +33,19 @@ describe('Contact Section', () => {
 
   describe('Rendering', () => {
     it('should render section heading', () => {
-      render(<Contact />);
+      renderContact();
       expect(screen.getByRole('heading', { name: /contacto/i })).toBeInTheDocument();
     });
 
     it('should render all form fields', () => {
-      render(<Contact />);
+      renderContact();
       expect(screen.getByLabelText(/nombre/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/mensaje/i)).toBeInTheDocument();
     });
 
     it('should render submit button', () => {
-      render(<Contact />);
+      renderContact();
       expect(screen.getByRole('button', { name: /enviar mensaje/i })).toBeInTheDocument();
     });
   });
@@ -42,7 +53,7 @@ describe('Contact Section', () => {
   describe('Validation', () => {
     it('should show error when name is empty', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const submitButton = screen.getByRole('button', { name: /enviar mensaje/i });
       await user.click(submitButton);
@@ -54,7 +65,7 @@ describe('Contact Section', () => {
 
     it('should show error when email is invalid', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const nameInput = screen.getByLabelText(/nombre/i);
       const emailInput = screen.getByLabelText(/email/i);
@@ -74,7 +85,7 @@ describe('Contact Section', () => {
 
     it('should show error when message is too short', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const nameInput = screen.getByLabelText(/nombre/i);
       const emailInput = screen.getByLabelText(/email/i);
@@ -94,7 +105,7 @@ describe('Contact Section', () => {
 
     it('should not show errors with valid data', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const nameInput = screen.getByLabelText(/nombre/i);
       const emailInput = screen.getByLabelText(/email/i);
@@ -116,7 +127,7 @@ describe('Contact Section', () => {
   describe('Form Submission', () => {
     it('should show success message after valid submission', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const nameInput = screen.getByLabelText(/nombre/i);
       const emailInput = screen.getByLabelText(/email/i);
@@ -140,7 +151,7 @@ describe('Contact Section', () => {
 
     it('should clear form after successful submission', async () => {
       const user = userEvent.setup();
-      render(<Contact />);
+      renderContact();
 
       const nameInput = screen.getByLabelText(/nombre/i) as HTMLInputElement;
       const emailInput = screen.getByLabelText(/email/i) as HTMLInputElement;
@@ -167,7 +178,7 @@ describe('Contact Section', () => {
         json: vi.fn().mockResolvedValue({ message: 'API error' }),
       });
 
-      render(<Contact />);
+      renderContact();
 
       await user.type(screen.getByLabelText(/nombre/i), 'John Doe');
       await user.type(screen.getByLabelText(/email/i), 'john@example.com');
@@ -186,7 +197,7 @@ describe('Contact Section', () => {
 
   describe('Structure', () => {
     it('should have section id for navigation', () => {
-      const { container } = render(<Contact />);
+      const { container } = renderContact();
       const section = container.querySelector('#contact');
       expect(section).toBeInTheDocument();
     });
@@ -194,13 +205,13 @@ describe('Contact Section', () => {
 
   describe('Accessibility', () => {
     it('should have proper heading hierarchy', () => {
-      render(<Contact />);
+      renderContact();
       const heading = screen.getByRole('heading', { name: /contacto/i });
       expect(heading.tagName).toBe('H2');
     });
 
     it('should have proper form element', () => {
-      render(<Contact />);
+      renderContact();
       const form = screen.getByRole('form');
       expect(form).toBeInTheDocument();
     });

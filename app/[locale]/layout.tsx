@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 import { Providers } from './providers';
@@ -19,98 +19,103 @@ const jetbrainsMono = JetBrains_Mono({
 // TODO: Update with real domain when available
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://angelhidalgo.dev';
 
-// TODO: Convert to generateMetadata in Issue #29 for locale-specific metadata
-export const metadata: Metadata = {
-  title: {
-    default: `${personalInfo.name} | ${personalInfo.tagline}`,
-    template: `%s | ${personalInfo.name}`,
-  },
-  description: personalInfo.bio.full,
-  keywords: [
-    'Ángel Hidalgo Barreiro',
-    'desarrollador full stack',
-    'Barcelona',
-    'SaaS',
-    'microservicios',
-    'DevOps',
-    'PHP',
-    'Symfony',
-    'Node.js',
-    'React',
-    'Next.js',
-    'TypeScript',
-    'Clean Architecture',
-    'DDD',
-    'portfolio',
-    'arquitecturas escalables',
-    'modernización legacy',
-    'API Platform',
-  ],
-  authors: [
-    {
-      name: personalInfo.name,
-      url: personalInfo.social.github,
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('metadata');
+
+  const ogLocaleMap: Record<string, string> = {
+    es: 'es_ES',
+    en: 'en_US',
+  };
+
+  const canonicalUrl = locale === 'es' ? '/' : `/${locale}`;
+  const title = t('title', {
+    name: personalInfo.name,
+    tagline: personalInfo.tagline,
+  });
+  const description = t('description');
+  const ogImageAlt = t('ogImageAlt', {
+    name: personalInfo.name,
+  });
+  const keywords = t.raw('keywords') as string[];
+
+  return {
+    title: {
+      default: title,
+      template: `%s | ${personalInfo.name}`,
     },
-  ],
-  creator: personalInfo.name,
-  publisher: personalInfo.name,
-  metadataBase: new URL(SITE_URL),
-  alternates: {
-    canonical: '/',
-    languages: {
-      es: '/',
-      en: '/en',
-    },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'es_ES',
-    url: SITE_URL,
-    title: `${personalInfo.name} | ${personalInfo.tagline}`,
-    description: personalInfo.bio.full,
-    siteName: personalInfo.name,
-    images: [
+    description,
+    keywords,
+    authors: [
       {
-        url: '/og-image.jpg', // TODO: Create OG image with personal branding
-        width: 1200,
-        height: 630,
-        alt: `${personalInfo.name} - Portfolio Profesional`,
+        name: personalInfo.name,
+        url: personalInfo.social.github,
       },
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${personalInfo.name} | ${personalInfo.tagline}`,
-    description: personalInfo.bio.full,
-    images: ['/og-image.jpg'],
-    creator: personalInfo.social.twitter
-      ? `@${new URL(personalInfo.social.twitter).pathname.slice(1)}`
-      : undefined,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    creator: personalInfo.name,
+    publisher: personalInfo.name,
+    metadataBase: new URL(SITE_URL),
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        es: '/',
+        en: '/en',
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: ogLocaleMap[locale] || 'es_ES',
+      url: SITE_URL,
+      title,
+      description,
+      siteName: personalInfo.name,
+      images: [
+        {
+          url: '/og-image.jpg', // TODO: Create OG image with personal branding
+          width: 1200,
+          height: 630,
+          alt: ogImageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.jpg'],
+      creator: personalInfo.social.twitter
+        ? `@${new URL(personalInfo.social.twitter).pathname.slice(1)}`
+        : undefined,
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-  verification: {
-    // TODO: Add Google Search Console verification code when site is deployed
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
-  },
-  category: 'technology',
-  classification: 'Portfolio Personal',
-  other: {
-    'application-name': `${personalInfo.name} Portfolio`,
-    'apple-mobile-web-app-title': personalInfo.name,
-    'apple-mobile-web-app-capable': 'yes',
-    'apple-mobile-web-app-status-bar-style': 'default',
-  },
-};
+    verification: {
+      // TODO: Add Google Search Console verification code when site is deployed
+      google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    },
+    category: 'technology',
+    classification: 'Portfolio Personal',
+    other: {
+      'application-name': `${personalInfo.name} Portfolio`,
+      'apple-mobile-web-app-title': personalInfo.name,
+      'apple-mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-status-bar-style': 'default',
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

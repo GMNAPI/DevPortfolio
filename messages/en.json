@@ -1,9 +1,28 @@
 {
   "metadata": {
     "title": "{name} | {tagline}",
-    "description": "",
+    "description": "Full-stack developer with extensive experience building SaaS, microservices and scalable architectures. Specialized in legacy system modernization, Clean Architecture implementation and DevOps.",
     "ogImageAlt": "{name} - Professional Portfolio",
-    "keywords": []
+    "keywords": [
+      "Angel Hidalgo Barreiro",
+      "full-stack developer",
+      "Barcelona",
+      "SaaS",
+      "microservices",
+      "DevOps",
+      "PHP",
+      "Symfony",
+      "Node.js",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Clean Architecture",
+      "DDD",
+      "portfolio",
+      "scalable architectures",
+      "legacy modernization",
+      "API Platform"
+    ]
   },
   "navigation": {
     "brand": "Dev Portfolio",
@@ -589,11 +608,36 @@
     ]
   },
   "contact": {
-    "title": "Placeholder",
-    "subtitle": "Placeholder",
-    "form": {},
-    "validation": {},
-    "messages": {}
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let's talk",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your@email.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell me about your project..."
+      }
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailInvalid": "A valid email is required",
+      "messageRequired": "Message is required",
+      "messageMinLength": "Message must be at least 10 characters"
+    },
+    "buttons": {
+      "submit": "Send message",
+      "submitting": "Sending..."
+    },
+    "messages": {
+      "success": "Message sent successfully. I'll get back to you soon!",
+      "error": "Could not send message. Please try again."
+    }
   },
   "footer": {
     "tagline": "I build things",

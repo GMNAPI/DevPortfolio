@@ -74,8 +74,6 @@ export const personalInfo: PersonalInfo = {
  */
 export const availability = {
   isAvailable: true,
-  status: 'Abierto a nuevas oportunidades',
-  statusEn: 'Open to new opportunities',
 } as const;
 
 /**

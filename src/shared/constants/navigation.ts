@@ -5,63 +5,38 @@
  * used in Navigation and Footer components.
  */
 
-export interface NavItem {
-  label: string;
+export interface NavSection {
+  key: 'home' | 'about' | 'projects' | 'contact';
   sectionId: string;
   href: string;
 }
 
-export interface SocialLink {
-  label: string;
-  url: string;
-  ariaLabel: string;
-}
-
-/**
- * Main navigation items
- * These link to different sections of the page
- */
-export const NAV_ITEMS: NavItem[] = [
+export const NAV_SECTIONS: NavSection[] = [
   {
-    label: 'Inicio',
+    key: 'home',
     sectionId: 'hero',
     href: '#hero',
   },
   {
-    label: 'Sobre mí',
+    key: 'about',
     sectionId: 'about',
     href: '#about',
   },
   {
-    label: 'Proyectos',
+    key: 'projects',
     sectionId: 'projects',
     href: '#projects',
   },
   {
-    label: 'Contacto',
+    key: 'contact',
     sectionId: 'contact',
     href: '#contact',
   },
 ];
 
-/**
- * Social media links
- * Used in Footer component
- */
-export const SOCIAL_LINKS: SocialLink[] = [
-  {
-    label: 'GitHub',
-    url: 'https://github.com/usuario',
-    ariaLabel: 'Visita mi perfil de GitHub',
-  },
-  {
-    label: 'LinkedIn',
-    url: 'https://linkedin.com/in/usuario',
-    ariaLabel: 'Visita mi perfil de LinkedIn',
-  },
-];
+export const SOCIAL_LINK_URLS = {
+  github: 'https://github.com/usuario',
+  linkedin: 'https://linkedin.com/in/usuario',
+} as const;
 
-/**
- * Brand name used in Navigation and Footer
- */
-export const BRAND_NAME = 'Dev Portfolio';
+export type SocialLinkKey = keyof typeof SOCIAL_LINK_URLS;

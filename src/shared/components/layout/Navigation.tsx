@@ -18,9 +18,9 @@ import { useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { AnimatePresence, m } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
 
-import { defaultLocale, locales, type Locale } from '@/i18n/config';
+import { locales, type Locale } from '@/i18n/config';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { NAV_SECTIONS } from '@/shared/constants/navigation';
 import { useScrollSpy } from '@/shared/hooks/useScrollSpy';
 import { cn } from '@/shared/utils/cn';
@@ -69,42 +69,17 @@ export function Navigation() {
     [tNavigation]
   );
 
-  const buildLocalizedPath = (targetLocale: Locale) => {
-    if (targetLocale === locale) {
-      return pathname;
-    }
-
-    if (locale === defaultLocale && targetLocale !== defaultLocale) {
-      const suffix = pathname === '/' ? '' : pathname;
-      return `/${targetLocale}${suffix}`;
-    }
-
-    if (locale !== defaultLocale && targetLocale === defaultLocale) {
-      const prefix = `/${locale}`;
-      if (pathname === prefix) {
-        return '/';
-      }
-      if (pathname.startsWith(`${prefix}/`)) {
-        return pathname.replace(prefix, '');
-      }
-    }
-
-    if (locale !== defaultLocale && targetLocale !== defaultLocale) {
-      const currentPrefix = `/${locale}`;
-      if (pathname.startsWith(currentPrefix)) {
-        return pathname.replace(currentPrefix, `/${targetLocale}`);
-      }
-    }
-
-    const suffix = pathname === '/' ? '' : pathname;
-    return `/${targetLocale}${suffix}`;
-  };
-
   const handleLocaleChange = (nextLocale: Locale) => {
     if (nextLocale === locale) return;
-    const targetPath = buildLocalizedPath(nextLocale);
+
+    // Get current hash for preservation
     const hash = typeof window !== 'undefined' ? window.location.hash : '';
-    router.replace(`${targetPath}${hash}`);
+
+    // router.replace from next-intl automatically handles locale prefixes
+    // based on the localePrefix: 'as-needed' configuration
+    const targetPath = `${pathname}${hash}`;
+    router.replace(targetPath, { locale: nextLocale });
+
     setIsMobileMenuOpen(false);
   };
 

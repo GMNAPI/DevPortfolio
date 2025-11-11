@@ -19,14 +19,16 @@ vi.mock('next-themes', () => ({
   useTheme: () => mockUseTheme(),
 }));
 
-// Mock next/navigation router helpers
+// Mock @/i18n/navigation router helpers
 const mockReplace = vi.fn();
 const mockUseRouter = vi.fn();
 const mockUsePathname = vi.fn();
 
-vi.mock('next/navigation', () => ({
+vi.mock('@/i18n/navigation', () => ({
   useRouter: () => mockUseRouter(),
   usePathname: () => mockUsePathname(),
+  Link: vi.fn(),
+  redirect: vi.fn(),
 }));
 
 function renderNavigation() {
@@ -353,7 +355,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en');
+      expect(mockReplace).toHaveBeenCalledWith('/', { locale: 'en' });
     });
 
     it('should change locale from es to en and preserve hash', async () => {
@@ -372,7 +374,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en#about');
+      expect(mockReplace).toHaveBeenCalledWith('/#about', { locale: 'en' });
     });
 
     it('should handle locale change in mobile menu', async () => {
@@ -391,7 +393,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(mobileLocaleSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en');
+      expect(mockReplace).toHaveBeenCalledWith('/', { locale: 'en' });
     });
 
     it('should close mobile menu after locale change', async () => {
@@ -417,7 +419,7 @@ describe('Navigation Component', () => {
     });
   });
 
-  describe('buildLocalizedPath Logic', () => {
+  describe('Locale Switching with Paths', () => {
     it('should handle path when switching from default locale to en', async () => {
       const user = userEvent.setup();
 
@@ -430,7 +432,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en/projects');
+      expect(mockReplace).toHaveBeenCalledWith('/projects', { locale: 'en' });
     });
 
     it('should handle root path when switching from default locale', async () => {
@@ -445,13 +447,13 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en');
+      expect(mockReplace).toHaveBeenCalledWith('/', { locale: 'en' });
     });
 
     it('should handle switching from en to default locale (es)', async () => {
       const user = userEvent.setup();
 
-      mockUsePathname.mockReturnValue('/en/projects');
+      mockUsePathname.mockReturnValue('/projects');
 
       render(
         <NextIntlClientProvider locale="en" messages={esMessages}>
@@ -465,13 +467,13 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'es');
 
-      expect(mockReplace).toHaveBeenCalledWith('/projects');
+      expect(mockReplace).toHaveBeenCalledWith('/projects', { locale: 'es' });
     });
 
     it('should handle switching from en root to default locale', async () => {
       const user = userEvent.setup();
 
-      mockUsePathname.mockReturnValue('/en');
+      mockUsePathname.mockReturnValue('/');
 
       render(
         <NextIntlClientProvider locale="en" messages={esMessages}>
@@ -485,7 +487,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'es');
 
-      expect(mockReplace).toHaveBeenCalledWith('/');
+      expect(mockReplace).toHaveBeenCalledWith('/', { locale: 'es' });
     });
 
     it('should handle same locale selection (no-op)', async () => {
@@ -502,29 +504,7 @@ describe('Navigation Component', () => {
       expect(mockReplace).not.toHaveBeenCalled();
     });
 
-    it('should handle edge case with unexpected pathname format', async () => {
-      const user = userEvent.setup();
-
-      // Set an unexpected pathname that doesn't match normal patterns
-      mockUsePathname.mockReturnValue('/unexpected');
-
-      render(
-        <NextIntlClientProvider locale="en" messages={esMessages}>
-          <Navigation />
-        </NextIntlClientProvider>
-      );
-
-      const localeSelect = screen.getByLabelText(/idioma/i, {
-        selector: 'select#locale-switcher-desktop',
-      });
-
-      await user.selectOptions(localeSelect, 'es');
-
-      // Fallback adds target locale prefix to unexpected path
-      expect(mockReplace).toHaveBeenCalledWith('/es/unexpected');
-    });
-
-    it('should handle switching from default to non-default with custom path', async () => {
+    it('should handle switching with custom path', async () => {
       const user = userEvent.setup();
 
       mockUsePathname.mockReturnValue('/custom/path');
@@ -536,7 +516,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en/custom/path');
+      expect(mockReplace).toHaveBeenCalledWith('/custom/path', { locale: 'en' });
     });
 
     it('should preserve hash when switching with custom path', async () => {
@@ -557,7 +537,7 @@ describe('Navigation Component', () => {
 
       await user.selectOptions(localeSelect, 'en');
 
-      expect(mockReplace).toHaveBeenCalledWith('/en/about#section');
+      expect(mockReplace).toHaveBeenCalledWith('/about#section', { locale: 'en' });
     });
   });
 });

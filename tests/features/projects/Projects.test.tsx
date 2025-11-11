@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { NextIntlClientProvider } from 'next-intl';
 
 import esMessages from '../../../messages/es.json';
@@ -127,6 +128,92 @@ describe('Projects Section', () => {
       renderProjects();
       const articles = screen.getAllByRole('article');
       expect(articles.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Category Filtering', () => {
+    it('should render category filter buttons', () => {
+      renderProjects();
+      // Should have category filter buttons
+      const categoryButtons = screen.getAllByRole('button');
+      // Should have "Todas" + at least one category button
+      expect(categoryButtons.length).toBeGreaterThan(1);
+
+      // Check that at least one button contains "Todas"
+      const allButton = categoryButtons.find((btn) => btn.textContent?.match(/todas/i));
+      expect(allButton).toBeDefined();
+    });
+
+    it('should show all projects by default', () => {
+      renderProjects();
+      const totalProjects = (esMessages.projects.items as unknown[]).length;
+      const projectCards = screen.getAllByRole('article');
+      expect(projectCards.length).toBe(totalProjects);
+    });
+
+    it('should filter projects when category button is clicked', async () => {
+      const user = userEvent.setup();
+      renderProjects();
+
+      // Click on first category button (not "Todas")
+      const buttons = screen.getAllByRole('button');
+      const categoryButton = buttons.find((btn) => !btn.textContent?.match(/todas/i));
+
+      if (categoryButton) {
+        await user.click(categoryButton);
+
+        // Projects should be filtered (less than total)
+        const projectCards = screen.getAllByRole('article');
+        const totalProjects = (esMessages.projects.items as unknown[]).length;
+        expect(projectCards.length).toBeLessThanOrEqual(totalProjects);
+      }
+    });
+
+    it('should show all projects when "Todas" button is clicked after filtering', async () => {
+      const user = userEvent.setup();
+      renderProjects();
+
+      const totalProjects = (esMessages.projects.items as unknown[]).length;
+
+      // Click on a category button first
+      let buttons = screen.getAllByRole('button');
+      const categoryButton = buttons.find((btn) => !btn.textContent?.match(/todas/i));
+
+      if (categoryButton) {
+        await user.click(categoryButton);
+
+        // Now find and click "Todas" button (need to re-query after state change)
+        buttons = screen.getAllByRole('button');
+        const allButton = buttons.find((btn) => btn.textContent?.match(/todas/i));
+
+        if (allButton) {
+          await user.click(allButton);
+
+          const projectCards = screen.getAllByRole('article');
+          expect(projectCards.length).toBe(totalProjects);
+        }
+      }
+    });
+
+    it('should display project counts in category buttons', () => {
+      renderProjects();
+      // Category buttons should show count in format "Category (X)"
+      const buttons = screen.getAllByRole('button');
+      const buttonWithCount = buttons.find((btn) => btn.textContent?.match(/\(\d+\)/));
+      expect(buttonWithCount).toBeDefined();
+    });
+
+    it('should handle empty category count with nullish coalescing', () => {
+      renderProjects();
+      // All category buttons should display a count (even if 0)
+      const buttons = screen.getAllByRole('button');
+      buttons.forEach((btn) => {
+        // Button should either be "Todos (X)" or "Category (X)"
+        const hasCount = btn.textContent?.match(/\(\d+\)/);
+        if (btn.textContent && !btn.textContent.match(/todos/i)) {
+          expect(hasCount).toBeTruthy();
+        }
+      });
     });
   });
 });

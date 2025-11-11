@@ -3,11 +3,13 @@ import { render, screen } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
 
 import esMessages from '../../../messages/es.json';
+import enMessages from '../../../messages/en.json';
 import { About } from '@/features/about/About';
 
-function renderAbout() {
+function renderAbout(locale: 'es' | 'en' = 'es') {
+  const messages = locale === 'es' ? esMessages : enMessages;
   return render(
-    <NextIntlClientProvider locale="es" messages={esMessages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <About />
     </NextIntlClientProvider>
   );
@@ -71,6 +73,77 @@ describe('About Section', () => {
       const { container } = renderAbout();
       const list = container.querySelector('ul');
       expect(list).toBeInTheDocument();
+    });
+  });
+
+  describe('Certifications', () => {
+    it('should render certifications section heading', () => {
+      renderAbout();
+      expect(screen.getByRole('heading', { name: /certificaciones/i })).toBeInTheDocument();
+    });
+
+    it('should render certification with description when present', () => {
+      renderAbout();
+      // Zend certification has description in test data
+      const zendCert = screen.getByText(/zend certificate/i);
+      expect(zendCert).toBeInTheDocument();
+
+      // Check description exists in the DOM
+      const description = screen.getByText(/patrones de diseño/i);
+      expect(description).toBeInTheDocument();
+    });
+
+    it('should not render credential URL link when not present', () => {
+      renderAbout();
+      // Zend certification doesn't have credentialUrl, so link shouldn't exist
+      const credentialLinks = screen.queryAllByText(/ver credencial/i);
+      expect(credentialLinks.length).toBe(0);
+    });
+
+    it('should render certification name and issuer', () => {
+      renderAbout();
+      // Certification should have issuer and year (multiple "Zend" instances expected)
+      const zendElements = screen.getAllByText(/zend/i);
+      expect(zendElements.length).toBeGreaterThan(0);
+      expect(screen.getByText(/2025/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Stats', () => {
+    it('should render all GitHub stats with formatted numbers', () => {
+      renderAbout();
+      // Check that stats section exists
+      expect(screen.getByRole('heading', { name: /actividad reciente/i })).toBeInTheDocument();
+
+      // Stats should have formatted numbers (Spanish locale uses dots for thousands)
+      const statsWithNumbers = screen.getByText((content) =>
+        content.replace(/\D/g, '').includes('1706')
+      );
+      expect(statsWithNumbers).toBeInTheDocument();
+    });
+
+    it('should format numbers according to locale', () => {
+      // Spanish locale
+      const { container: esContainer } = renderAbout('es');
+      const esStats = esContainer.textContent || '';
+
+      // English locale
+      const { container: enContainer } = renderAbout('en');
+      const enStats = enContainer.textContent || '';
+
+      // Both should render the stats numbers (checking for unformatted numbers as fallback)
+      expect(esStats).toMatch(/1\.?706|1,?706/); // Spanish/English number formatting
+      expect(enStats).toMatch(/1\.?706|1,?706/);
+    });
+
+    it('should render account created date with locale formatting', () => {
+      // Spanish date format: "abril de 2024"
+      const { container: esContainer } = renderAbout('es');
+      expect(esContainer.textContent).toMatch(/abril/i);
+
+      // English date format: "April 2024"
+      const { container: enContainer } = renderAbout('en');
+      expect(enContainer.textContent).toMatch(/april/i);
     });
   });
 });

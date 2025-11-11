@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import esMessages from '../../../messages/es.json';
 import enMessages from '../../../messages/en.json';
 import { Skills } from '@/features/skills/Skills';
-import type { SkillData } from '@/shared/constants/skills';
+import type { SkillItem } from '@/shared/constants/skills';
 
 function renderSkills(locale: 'es' | 'en' = 'es') {
   const messages = locale === 'es' ? esMessages : enMessages;
@@ -57,7 +57,7 @@ describe('Skills Section', () => {
     it('should render usage percentage label when skill has usagePercentage', () => {
       renderSkills();
       // Find skills with usagePercentage defined
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const skillWithUsage = skillsData.find((skill) => skill.usagePercentage !== undefined);
 
       if (skillWithUsage) {
@@ -77,7 +77,7 @@ describe('Skills Section', () => {
 
     it('should render experience years when skill has experienceYears', () => {
       renderSkills();
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const skillWithYears = skillsData.find((skill) => skill.experienceYears !== undefined);
 
       if (skillWithYears) {
@@ -89,7 +89,7 @@ describe('Skills Section', () => {
 
     it('should render experience projects when skill has experienceProjects', () => {
       renderSkills();
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const skillWithProjects = skillsData.find((skill) => skill.experienceProjects !== undefined);
 
       if (skillWithProjects) {
@@ -101,7 +101,7 @@ describe('Skills Section', () => {
 
     it('should render all metadata when skill has all fields', () => {
       renderSkills();
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const fullSkill = skillsData.find(
         (skill) =>
           skill.usagePercentage !== undefined &&
@@ -123,7 +123,7 @@ describe('Skills Section', () => {
       const { container } = renderSkills();
 
       // Count how many skills have metadata sections
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const skillsWithMetadata = skillsData.filter(
         (skill) =>
           skill.usagePercentage !== undefined ||
@@ -140,14 +140,14 @@ describe('Skills Section', () => {
   describe('Keywords', () => {
     it('should render keywords when skill has keywords array', () => {
       renderSkills();
-      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillData[];
+      const skillsData = esMessages.skills.categories.flatMap((cat) => cat.skills) as SkillItem[];
       const skillWithKeywords = skillsData.find(
         (skill) => skill.keywords && skill.keywords.length > 0
       );
 
       if (skillWithKeywords) {
         // Should render the keyword badges
-        skillWithKeywords.keywords?.forEach((keyword) => {
+        skillWithKeywords.keywords?.forEach((keyword: string) => {
           const keywordElements = screen.queryAllByText(keyword);
           expect(keywordElements.length).toBeGreaterThan(0);
         });

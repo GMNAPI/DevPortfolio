@@ -23,25 +23,570 @@
       "close": "Cerrar menú"
     },
     "locale": {
-      "switch": "Cambiar idioma a {locale}"
+      "label": "Idioma",
+      "switchTo": "Cambiar idioma a {locale}",
+      "current": "Idioma actual: {locale}",
+      "options": {
+        "es": "Español",
+        "en": "Inglés"
+      }
     }
   },
   "hero": {
-    "greeting": "Placeholder",
-    "location": "Placeholder",
-    "buttons": {}
+    "greeting": "👋 Hola, soy",
+    "location": "📍 {city}, {country}",
+    "asciiAlt": "Retrato profesional de {name} en arte ASCII con estilo terminal",
+    "buttons": {
+      "projects": "Ver proyectos →",
+      "cv": "📄 Descargar CV",
+      "contact": "Contactar"
+    }
   },
   "about": {
-    "eyebrow": "Placeholder",
-    "title": "Placeholder"
+    "eyebrow": "Experiencia",
+    "title": "Sobre mí",
+    "intro": "Desarrollador enfocado en crear soluciones robustas y escalables. Apasionado por el código limpio, las buenas prácticas y la arquitectura de software. Cada proyecto es una oportunidad para aprender y mejorar.",
+    "sections": {
+      "timeline": "Timeline profesional",
+      "activity": "Actividad reciente",
+      "certifications": "Certificaciones",
+      "techStack": "Stack tecnológico"
+    },
+    "stats": {
+      "contributions": {
+        "label": "Contribuciones último año",
+        "detail": "Commits, PRs y actividad privada en GitHub"
+      },
+      "repositoriesAnalysed": {
+        "label": "Repositorios analizados",
+        "detail": "Portafolio privado entre SaaS, herramientas y documentación"
+      },
+      "repositoriesActive": {
+        "label": "Repositorios activos",
+        "detail": "Proyectos con mantenimiento y roadmap en curso"
+      },
+      "repositoriesWithStars": {
+        "label": "Repositorios con stars",
+        "detail": "Repos destacados con feedback de la comunidad"
+      },
+      "accountCreated": {
+        "label": "Cuenta creada",
+        "detail": "Desde {detailDate} contribuyendo en proyectos open/private"
+      }
+    },
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Git",
+      "Vitest",
+      "Clean Architecture"
+    ],
+    "career": {
+      "experiences": [
+        {
+          "role": "Cofundador & Lead Dev",
+          "company": "GestionoMiNegocio",
+          "period": { "start": "2020", "end": "Actualidad" },
+          "headline": "Migración ERP legacy a SaaS moderno sobre Symfony 7 con foco en resiliencia.",
+          "achievements": [
+            "Reducción del 70% en incidencias de producción tras automatizar CI/CD.",
+            "Activación de más de 8 usuarios beta y adopción progresiva del nuevo flujo SaaS.",
+            "Diseño de arquitectura escalable con despliegues automatizados."
+          ]
+        },
+        {
+          "role": "Especialista de programa",
+          "company": "Vita Liber S.L.U.",
+          "period": { "start": "2021", "end": "Actualidad" },
+          "headline": "Modernización de plataforma a stack Next.js + Symfony con foco en integraciones.",
+          "achievements": [
+            "Construcción de APIs REST con API Platform 4.1 e integración con MariaDB.",
+            "Implantación de estrategia de testing con Jest, Playwright y PHPUnit.",
+            "Liderazgo de roadmap técnico garantizando entregas iterativas."
+          ]
+        },
+        {
+          "role": "Consultor & Tech Lead",
+          "company": "Fastbyte SL",
+          "period": { "start": "2019", "end": "Actualidad" },
+          "headline": "Transformación de sistemas PHP legacy hacia microservicios con Symfony/Next.js.",
+          "achievements": [
+            "Definición de arquitecturas escalables y asesoría DevOps continua.",
+            "Automatización de despliegues y observabilidad para servicios críticos."
+          ]
+        },
+        {
+          "role": "Developer",
+          "company": "240dots",
+          "period": { "start": "2020", "end": "2023" },
+          "headline": "Desarrollo de soluciones headless combinando WordPress y Symfony.",
+          "achievements": [
+            "Construcción de plugins conectados con APIs personalizadas.",
+            "Optimización de rendimiento y pipelines de contenido."
+          ]
+        },
+        {
+          "role": "Webmaster",
+          "company": "Seedstockers (BCG)",
+          "period": { "start": "2023", "end": "2024" },
+          "headline": "Gestión de e-commerce multilingüe en PrestaShop con foco en conversión.",
+          "achievements": [
+            "Implementación de módulos de pago y logística a medida.",
+            "Mantenimiento de catálogo en múltiples idiomas con automatizaciones."
+          ]
+        },
+        {
+          "role": "AI Projects",
+          "company": "Autónomo",
+          "period": { "start": "2023", "end": "Actualidad" },
+          "headline": "Investigación y entrega de soluciones IA aplicadas a procesos de negocio.",
+          "achievements": [
+            "Diseño de sistemas RAG y workflows con n8n para automatización inteligente.",
+            "Experimentación con modelos locales e integración con OpenAI Platform."
+          ]
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Zend Certificate of E-Learning – PHP OOP & Software Patterns",
+          "issuer": "Zend",
+          "year": "2025",
+          "description": "Programa avanzado sobre patrones de diseño orientados a objetos aplicados en PHP."
+        }
+      ]
+    }
   },
   "skills": {
-    "eyebrow": "Placeholder",
-    "title": "Placeholder"
+    "eyebrow": "Stack principal",
+    "title": "Habilidades técnicas",
+    "intro": "Panorama basado en el análisis de 35 repositorios privados y contribuciones recientes. Destaca tecnologías con mayor adopción, años de experiencia y foco actual en automatización inteligente.",
+    "languages": {
+      "title": "Lenguajes más utilizados"
+    },
+    "visualization": {
+      "title": "Distribución del stack",
+      "subtitle": "Participación relativa por lenguaje en los repositorios analizados",
+      "centerLabel": "Repos analizados",
+      "legendLabel": "{percentage}% del stack"
+    },
+    "stats": {
+      "contributions": {
+        "label": "Contribuciones anuales",
+        "value": "{count} commits y PRs privados"
+      },
+      "activeRepositories": {
+        "label": "Repositorios activos",
+        "value": "{count} repos en mantenimiento continuo"
+      }
+    },
+    "experienceLabel": "{years}+ años",
+    "usageLabel": "{percentage}% uso repos",
+    "projectsLabel": "{count} proyectos",
+    "categories": [
+      {
+        "id": "backend",
+        "name": "Backend",
+        "summary": "Migraciones ERP a SaaS, APIs REST y plataformas de servicios con foco en resiliencia y dominio del negocio.",
+        "experienceYears": 6,
+        "skills": [
+          {
+            "name": "PHP",
+            "description": "Lenguaje principal en 11 repositorios con foco en arquitectura limpia.",
+            "usagePercentage": 31,
+            "experienceYears": 6,
+            "experienceProjects": 18,
+            "keywords": ["Symfony", "Laravel", "OOP", "DDD"]
+          },
+          {
+            "name": "Symfony 7",
+            "description": "Framework estrella para APIs y backoffice multi-tenant.",
+            "usagePercentage": 31,
+            "experienceYears": 5,
+            "experienceProjects": 12,
+            "keywords": ["API Platform", "Messenger", "Hexagonal"]
+          },
+          {
+            "name": "Node.js",
+            "description": "Servicios suplementarios, workers y automatización con TypeScript.",
+            "usagePercentage": 20,
+            "experienceYears": 4,
+            "experienceProjects": 8,
+            "keywords": ["Express", "Serverless", "Workers"]
+          },
+          {
+            "name": "API Platform",
+            "description": "Contratos REST enriquecidos para ecosistemas B2B.",
+            "usagePercentage": 14,
+            "experienceYears": 4,
+            "experienceProjects": 6,
+            "keywords": ["OpenAPI", "JWT", "HATEOAS"]
+          }
+        ]
+      },
+      {
+        "id": "frontend",
+        "name": "Frontend",
+        "summary": "Interfaces empresariales con Next.js 15/React 19, componentes a medida y rendimiento optimizado.",
+        "experienceYears": 5,
+        "skills": [
+          {
+            "name": "JavaScript / TypeScript",
+            "description": "Uso combinado en stack moderno para tipado estricto y DX superior.",
+            "usagePercentage": 29,
+            "experienceYears": 5,
+            "experienceProjects": 15,
+            "keywords": ["TypeScript", "ESNext", "monorepos"]
+          },
+          {
+            "name": "React 18/19",
+            "description": "SPA/SSR con hooks avanzados, Suspense y patrones RSC.",
+            "usagePercentage": 20,
+            "experienceYears": 5,
+            "experienceProjects": 12,
+            "keywords": ["Hooks", "Context", "RSC", "RHF"]
+          },
+          {
+            "name": "Next.js 15",
+            "description": "App Router, ISR y layouts anidados para portfolio y productos SaaS.",
+            "usagePercentage": 14,
+            "experienceYears": 4,
+            "experienceProjects": 9,
+            "keywords": ["App Router", "ISR", "SEO", "next-intl"]
+          },
+          {
+            "name": "Tailwind CSS / shadcn/ui",
+            "description": "Design system minimalista con componentes accesibles.",
+            "usagePercentage": 14,
+            "experienceYears": 4,
+            "experienceProjects": 9,
+            "keywords": ["Design tokens", "Dark mode", "Framer Motion"]
+          }
+        ]
+      },
+      {
+        "id": "databases",
+        "name": "Bases de Datos",
+        "summary": "Modelado y optimización para sistemas de alta disponibilidad con reporting y ETL.",
+        "experienceYears": 5,
+        "skills": [
+          {
+            "name": "MariaDB / MySQL",
+            "description": "Motores principales en soluciones ERP y plataformas SaaS.",
+            "usagePercentage": 28,
+            "experienceYears": 5,
+            "experienceProjects": 14,
+            "keywords": ["Replication", "Query tuning", "Migrations"]
+          },
+          {
+            "name": "PostgreSQL",
+            "description": "Implementado en arquitecturas multi-servicio y analítica avanzada.",
+            "usagePercentage": 17,
+            "experienceYears": 4,
+            "experienceProjects": 7,
+            "keywords": ["JSONB", "PL/pgSQL", "Materialized views"]
+          },
+          {
+            "name": "MongoDB",
+            "description": "Soporte a microservicios y pipelines de ingesta flexible.",
+            "usagePercentage": 9,
+            "experienceYears": 3,
+            "experienceProjects": 4,
+            "keywords": ["Aggregation", "Atlas", "ODM"]
+          },
+          {
+            "name": "ElasticSearch",
+            "description": "Buscadores facetados y observabilidad de logs.",
+            "usagePercentage": 6,
+            "experienceYears": 3,
+            "experienceProjects": 3,
+            "keywords": ["Full-text", "Kibana", "Ingest pipelines"]
+          }
+        ]
+      },
+      {
+        "id": "devops",
+        "name": "DevOps & Cloud",
+        "summary": "Automatización de despliegues, infraestructura como código y observabilidad para SaaS.",
+        "experienceYears": 5,
+        "skills": [
+          {
+            "name": "Docker & Compose",
+            "description": "Empaquetado de servicios, pipelines de CI y entornos reproducibles.",
+            "usagePercentage": 40,
+            "experienceYears": 5,
+            "experienceProjects": 20,
+            "keywords": ["Multi-stage", "CI/CD", "Devcontainers"]
+          },
+          {
+            "name": "GitHub Actions",
+            "description": "Workflows CI/CD para lint, tests, build y despliegues.",
+            "usagePercentage": 34,
+            "experienceYears": 4,
+            "experienceProjects": 10,
+            "keywords": ["Matrix builds", "Secrets", "Artifacts"]
+          },
+          {
+            "name": "AWS / VPS",
+            "description": "Infraestructura híbrida con focos en coste, seguridad y monitoreo.",
+            "usagePercentage": 20,
+            "experienceYears": 4,
+            "experienceProjects": 6,
+            "keywords": ["EC2", "Lightsail", "S3", "Terraform"]
+          },
+          {
+            "name": "Terraform",
+            "description": "Provisionamiento declarativo para entornos multi-stage.",
+            "usagePercentage": 9,
+            "experienceYears": 3,
+            "experienceProjects": 3,
+            "keywords": ["IaC", "Modules", "State management"]
+          }
+        ]
+      },
+      {
+        "id": "ai-automation",
+        "name": "IA & Automatización",
+        "summary": "Integración de modelos y orquestación de workflows inteligentes para automatización de procesos.",
+        "experienceYears": 3,
+        "skills": [
+          {
+            "name": "OpenAI Platform",
+            "description": "Integraciones conversacionales y copilotos para soporte.",
+            "usagePercentage": 9,
+            "experienceYears": 3,
+            "experienceProjects": 5,
+            "keywords": ["GPT", "Embeddings", "Function calling"]
+          },
+          {
+            "name": "RAG Systems",
+            "description": "Diseño de pipelines Retrieval Augmented Generation para conocimiento interno.",
+            "usagePercentage": 6,
+            "experienceYears": 2,
+            "experienceProjects": 3,
+            "keywords": ["Vector stores", "Hybrid search", "Context windows"]
+          },
+          {
+            "name": "n8n Workflows",
+            "description": "Automatización de procesos de negocio con integraciones low-code.",
+            "usagePercentage": 6,
+            "experienceYears": 2,
+            "experienceProjects": 4,
+            "keywords": ["Automation", "Webhook", "Orchestration"]
+          }
+        ]
+      },
+      {
+        "id": "testing",
+        "name": "Testing & QA",
+        "summary": "Cobertura integral con suites unitarias, de integración y end-to-end para asegurar calidad continua.",
+        "experienceYears": 5,
+        "skills": [
+          {
+            "name": "PHPUnit",
+            "description": "Testing para dominios complejos en Symfony y servicios backend.",
+            "usagePercentage": 20,
+            "experienceYears": 5,
+            "experienceProjects": 10,
+            "keywords": ["TDD", "Mockery", "Integration tests"]
+          },
+          {
+            "name": "Vitest",
+            "description": "Pruebas unitarias y de componentes en frontend con TypeScript.",
+            "usagePercentage": 9,
+            "experienceYears": 2,
+            "experienceProjects": 5,
+            "keywords": ["RTL", "Snapshots", "Monorepo"]
+          },
+          {
+            "name": "Jest",
+            "description": "Legacy y servicios Node.js con mocks avanzados.",
+            "usagePercentage": 9,
+            "experienceYears": 3,
+            "experienceProjects": 6,
+            "keywords": ["Mocks", "Coverage", "Watch mode"]
+          },
+          {
+            "name": "Playwright",
+            "description": "End-to-end para flujos críticos con CI y reporting visual.",
+            "usagePercentage": 6,
+            "experienceYears": 2,
+            "experienceProjects": 3,
+            "keywords": ["Trace viewer", "CI pipelines", "Cross-browser"]
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "totalRepositories": 35,
+      "mainLanguagesShare": [
+        { "language": "PHP", "usagePercentage": 31.4 },
+        { "language": "JavaScript", "usagePercentage": 20.0 },
+        { "language": "Twig", "usagePercentage": 14.3 },
+        { "language": "TypeScript", "usagePercentage": 8.6 },
+        { "language": "Python", "usagePercentage": 2.9 }
+      ],
+      "contributionsLastYear": 1706,
+      "activeRepositories": 9,
+      "repositoriesWithStars": 3,
+      "accountCreatedAt": "2024-04-22"
+    }
   },
   "projects": {
-    "title": "Placeholder",
-    "subtitle": "Placeholder"
+    "title": "Proyectos",
+    "subtitle": "Selección de productos SaaS, herramientas internas y documentación técnica desarrollada para clientes y proyectos propios. Organizados en 6 categorías estratégicas.",
+    "filters": {
+      "all": "Todas ({count})"
+    },
+    "aria": {
+      "tech": "Tecnologías utilizadas"
+    },
+    "labels": {
+      "github": "GitHub",
+      "demo": "Demo →",
+      "detail": "Ver detalle",
+      "categoryFallback": "Proyecto"
+    },
+    "privateNotice": {
+      "text": "Repositorio privado — solicita acceso en <link>{linkLabel}</link>",
+      "linkLabel": "LinkedIn"
+    },
+    "categories": [
+      {
+        "id": "facturacion-compliance",
+        "name": "Facturación & Compliance",
+        "description": "Soluciones fiscales y documentación técnica para entornos VeriFactu y ERP."
+      },
+      {
+        "id": "gestion-servicios",
+        "name": "Gestión de Servicios",
+        "description": "Aplicaciones SaaS para automatizar reservas, operaciones y backoffice."
+      },
+      {
+        "id": "arquitectura-avanzada",
+        "name": "Arquitectura Avanzada",
+        "description": "Plataformas con enfoque en arquitectura hexagonal, DDD y escalabilidad."
+      },
+      {
+        "id": "erp-transformacion",
+        "name": "ERP & Transformación Digital",
+        "description": "Modernización de sistemas legacy a infraestructuras SaaS mantenibles."
+      },
+      {
+        "id": "herramientas",
+        "name": "Herramientas & Automatización",
+        "description": "Productos internos para analítica, automatización y soporte inteligente."
+      },
+      {
+        "id": "educacion",
+        "name": "Educación & Comunidad",
+        "description": "Material formativo y pruebas técnicas para compartir conocimiento."
+      }
+    ],
+    "items": [
+      {
+        "id": "verifactur-gmn",
+        "title": "VerifacturGMN",
+        "description": "Sistema completo de facturación electrónica compatible con VeriFactu/AEAT con flujos SaaS y automatización fiscal.",
+        "tech": ["Symfony 7", "API Platform", "PostgreSQL", "Docker", "CI/CD"],
+        "links": {
+          "github": "https://github.com/GMNAPI/VerifacturGMN"
+        },
+        "categoryId": "facturacion-compliance"
+      },
+      {
+        "id": "facturae-docusaurus",
+        "title": "FacturaeDocusaurus",
+        "description": "Portal de documentación técnica para VeriFactu y Facturae con guías, ejemplos y despliegue automatizado.",
+        "tech": ["Docusaurus", "TypeScript", "MDX", "GitHub Actions"],
+        "links": {
+          "github": "https://github.com/GMNAPI/FacturaeDocusaurus"
+        },
+        "categoryId": "facturacion-compliance"
+      },
+      {
+        "id": "apigns",
+        "title": "apiGns",
+        "description": "API REST moderna para la gestión integral de servicios con autenticación avanzada y paneles externos.",
+        "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Redis", "Docker"],
+        "links": {
+          "github": "https://github.com/GMNAPI/apiGns"
+        },
+        "categoryId": "gestion-servicios"
+      },
+      {
+        "id": "frontend-json",
+        "title": "FrontendJson",
+        "description": "Frontend empresarial en Next.js 15 con arquitectura limpia, tipado estricto y diseño atómico.",
+        "tech": ["Next.js 15", "TypeScript", "Tailwind CSS", "Clean Architecture"],
+        "links": {
+          "github": "https://github.com/GMNAPI/FrontendJson"
+        },
+        "categoryId": "gestion-servicios"
+      },
+      {
+        "id": "fynkus",
+        "title": "FYNKUS",
+        "description": "Plataforma de reservas deportivas con arquitectura hexagonal, DDD y CQRS, enfocada en escalabilidad.",
+        "tech": ["PHP 8.2", "Symfony 5.4", "CQRS", "React 18", "Docker"],
+        "links": {
+          "github": "https://github.com/GMNAPI/FYNKUS"
+        },
+        "categoryId": "arquitectura-avanzada"
+      },
+      {
+        "id": "gestiono-mi-negocio",
+        "title": "GestiónoMiNegocio",
+        "description": "Migración de ERP legacy a SaaS modular con multi-tenant, automatización de facturación y paneles analíticos.",
+        "tech": ["Symfony 7", "Next.js", "RabbitMQ", "PostgreSQL", "Terraform"],
+        "links": {
+          "github": "https://github.com/GMNAPI/gestionominegocio"
+        },
+        "categoryId": "erp-transformacion"
+      },
+      {
+        "id": "vita-liber",
+        "title": "Vita Liber Platform",
+        "description": "Plataforma full-stack para gestión logística y académica con integración Symfony + Next.js.",
+        "tech": ["Next.js 14", "Symfony 6", "MariaDB", "API Platform", "Jest"],
+        "links": {
+          "github": "https://github.com/GMNAPI/vitaliber"
+        },
+        "categoryId": "erp-transformacion"
+      },
+      {
+        "id": "genesis-enterprise",
+        "title": "Genesis Enterprise",
+        "description": "Ecosistema enterprise (4M LOC) modernizado hacia microservicios con Symfony, mensajería y DevOps.",
+        "tech": ["Symfony", "RabbitMQ", "Microservices", "Docker", "CI/CD"],
+        "links": {
+          "github": "https://github.com/GMNAPI/genesis"
+        },
+        "categoryId": "erp-transformacion"
+      },
+      {
+        "id": "streamlit-gmn",
+        "title": "Streamlit GMN",
+        "description": "Simulador de modelos de negocio SaaS con analítica en tiempo real y dashboards interactivos.",
+        "tech": ["Python", "Streamlit", "Pandas", "Plotly"],
+        "links": {
+          "github": "https://github.com/GMNAPI/streamlitGMN"
+        },
+        "categoryId": "herramientas"
+      },
+      {
+        "id": "zend-laminas-tech-tests",
+        "title": "Zend Laminas Tech Tests",
+        "description": "Colección de 10 pruebas técnicas realistas para Laminas MVC y Mezzio orientadas a formación profesional.",
+        "tech": ["Laminas", "PHP", "Mezzio", "Docker", "Testing"],
+        "links": {
+          "github": "https://github.com/GMNAPI/zend-laminas-tech-tests"
+        },
+        "categoryId": "educacion"
+      }
+    ]
   },
   "contact": {
     "title": "Placeholder",
@@ -53,8 +598,42 @@
   "footer": {
     "tagline": "Desarrollo cosas",
     "findMe": "Encuéntrame",
+    "socialLabel": "Sígueme en {network}",
     "copyright": "Todos los derechos reservados"
   },
-  "personal": {},
+  "social": {
+    "github": {
+      "label": "GitHub",
+      "aria": "Visita mi perfil de GitHub"
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "aria": "Visita mi perfil de LinkedIn"
+    }
+  },
+  "personal": {
+    "location": {
+      "city": "Barcelona",
+      "country": "España"
+    },
+    "tagline": "Desarrollador de cosas | SaaS | Node.js | React | PHP/Symfony",
+    "bio": {
+      "short": "Desarrollador full-stack especializado en SaaS, arquitecturas escalables y DevOps.",
+      "full": "Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps. Apasionado por crear soluciones técnicas robustas que resuelvan problemas reales de negocio."
+    },
+    "availability": {
+      "open": "Abierto a nuevas oportunidades"
+    },
+    "focusAreas": [
+      "SaaS Development",
+      "Clean Architecture",
+      "Microservices",
+      "Legacy Modernization",
+      "DevOps & CI/CD",
+      "API Design",
+      "Domain-Driven Design",
+      "Full-Stack Development"
+    ]
+  },
   "career": {}
 }

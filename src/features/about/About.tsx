@@ -66,9 +66,9 @@ export function About() {
     <m.section
       id="about"
       className="min-h-screen py-20 px-6 bg-background"
-      initial="hidden"
+      initial={{ opacity: 1 }}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={staggerContainer(0.18)}
     >
       <div className="max-w-5xl mx-auto space-y-16">

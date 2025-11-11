@@ -29,11 +29,14 @@
     border-color: var(--border);
   }
 
+  html,
   body {
     @apply bg-background text-foreground font-mono;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   /* Smooth transitions for theme switching */

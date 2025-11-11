@@ -79,9 +79,9 @@ export function Skills() {
     <m.section
       id="skills"
       className="min-h-screen bg-background py-20 px-6"
-      initial="hidden"
+      initial={{ opacity: 1 }}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={staggerContainer(0.16)}
     >
       <div className="mx-auto max-w-6xl space-y-12">

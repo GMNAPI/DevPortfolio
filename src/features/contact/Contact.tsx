@@ -115,9 +115,9 @@ export function Contact() {
     <m.section
       id="contact"
       className="min-h-screen py-20 px-6"
-      initial="hidden"
+      initial={{ opacity: 1 }}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={staggerContainer(0.18)}
     >
       <div className="max-w-2xl mx-auto space-y-12">

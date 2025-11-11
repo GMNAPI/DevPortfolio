@@ -63,7 +63,14 @@ describe('Hero Section', () => {
     it('should be centered on screen', () => {
       const { container } = renderHero();
       const section = container.firstChild as HTMLElement;
-      expect(section).toHaveClass('min-h-screen');
+      // Mobile: 85vh, Desktop: full screen
+      expect(section).toHaveClass('min-h-[85vh]', 'md:min-h-screen');
+    });
+
+    it('should have relative positioning for scroll indicator', () => {
+      const { container } = renderHero();
+      const section = container.firstChild as HTMLElement;
+      expect(section).toHaveClass('relative');
     });
   });
 

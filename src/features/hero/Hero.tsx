@@ -65,7 +65,7 @@ export function Hero() {
   return (
     <m.section
       id="hero"
-      className="min-h-screen flex items-center justify-center px-6 py-20 animate-fade-in"
+      className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center px-6 py-20 animate-fade-in"
       initial="hidden"
       animate="visible"
       variants={staggerContainer(0.15, 0.15)}
@@ -225,6 +225,29 @@ export function Hero() {
             </div>
           </m.div>
         </m.figure>
+      </m.div>
+
+      {/* Mobile Scroll Indicator */}
+      <m.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 md:hidden"
+        variants={fadeIn}
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <svg
+          className="w-6 h-6 text-accent"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
       </m.div>
     </m.section>
   );

@@ -12,19 +12,21 @@ vi.mock('@/shared/hooks/useScrollSpy', () => ({
 }));
 
 // Mock next-themes
+const mockSetTheme = vi.fn();
+const mockUseTheme = vi.fn();
+
 vi.mock('next-themes', () => ({
-  useTheme: () => ({
-    theme: 'light',
-    setTheme: vi.fn(),
-  }),
+  useTheme: () => mockUseTheme(),
 }));
 
 // Mock next/navigation router helpers
+const mockReplace = vi.fn();
+const mockUseRouter = vi.fn();
+const mockUsePathname = vi.fn();
+
 vi.mock('next/navigation', () => ({
-  useRouter: () => ({
-    replace: vi.fn(),
-  }),
-  usePathname: () => '/es',
+  useRouter: () => mockUseRouter(),
+  usePathname: () => mockUsePathname(),
 }));
 
 function renderNavigation() {
@@ -38,6 +40,26 @@ function renderNavigation() {
 describe('Navigation Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+
+    // Set default mock return values
+    mockUseTheme.mockReturnValue({
+      theme: 'light',
+      setTheme: mockSetTheme,
+    });
+
+    mockUseRouter.mockReturnValue({
+      replace: mockReplace,
+    });
+
+    // Default locale (es) uses '/' as pathname (no locale prefix)
+    mockUsePathname.mockReturnValue('/');
+
+    // Reset window.location.hash
+    Object.defineProperty(window, 'location', {
+      value: { hash: '' },
+      writable: true,
+      configurable: true,
+    });
   });
 
   describe('Rendering', () => {
@@ -205,6 +227,62 @@ describe('Navigation Component', () => {
 
       document.body.removeChild(section);
     });
+
+    it('should scroll to hero when brand name is clicked', async () => {
+      const user = userEvent.setup();
+      const heroSection = document.createElement('section');
+      heroSection.id = 'hero';
+      heroSection.scrollIntoView = vi.fn();
+      document.body.appendChild(heroSection);
+
+      renderNavigation();
+
+      const brandLink = screen.getByText(/Dev Portfolio/i);
+      await user.click(brandLink);
+
+      expect(heroSection.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+      document.body.removeChild(heroSection);
+    });
+
+    it('should scroll to contact when CTA button is clicked', async () => {
+      const user = userEvent.setup();
+      const contactSection = document.createElement('section');
+      contactSection.id = 'contact';
+      contactSection.scrollIntoView = vi.fn();
+      document.body.appendChild(contactSection);
+
+      renderNavigation();
+
+      const ctaButton = screen.getByRole('link', { name: /hablemos/i });
+      await user.click(ctaButton);
+
+      expect(contactSection.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+      document.body.removeChild(contactSection);
+    });
+
+    it('should scroll to contact when mobile CTA is clicked', async () => {
+      const user = userEvent.setup();
+      const contactSection = document.createElement('section');
+      contactSection.id = 'contact';
+      contactSection.scrollIntoView = vi.fn();
+      document.body.appendChild(contactSection);
+
+      renderNavigation();
+
+      // Open mobile menu
+      const menuButton = screen.getByLabelText(/abrir menú/i);
+      await user.click(menuButton);
+
+      // Click mobile CTA
+      const mobileCta = screen.getAllByRole('link', { name: /hablemos/i })[1];
+      await user.click(mobileCta);
+
+      expect(contactSection.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+
+      document.body.removeChild(contactSection);
+    });
   });
 
   describe('Accessibility', () => {
@@ -227,6 +305,259 @@ describe('Navigation Component', () => {
     it('should have aria-label for theme toggle', () => {
       renderNavigation();
       expect(screen.getByLabelText(/cambiar tema/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Theme Toggle', () => {
+    it('should toggle theme from light to dark when clicked', async () => {
+      const user = userEvent.setup();
+
+      mockUseTheme.mockReturnValue({
+        theme: 'light',
+        setTheme: mockSetTheme,
+      });
+
+      renderNavigation();
+      const themeButton = screen.getByLabelText(/cambiar tema/i);
+
+      await user.click(themeButton);
+
+      expect(mockSetTheme).toHaveBeenCalledWith('dark');
+    });
+
+    it('should toggle theme from dark to light when clicked', async () => {
+      const user = userEvent.setup();
+
+      mockUseTheme.mockReturnValue({
+        theme: 'dark',
+        setTheme: mockSetTheme,
+      });
+
+      renderNavigation();
+      const themeButton = screen.getByLabelText(/cambiar tema/i);
+
+      await user.click(themeButton);
+
+      expect(mockSetTheme).toHaveBeenCalledWith('light');
+    });
+  });
+
+  describe('Locale Switching', () => {
+    it('should change locale from es to en via desktop selector', async () => {
+      const user = userEvent.setup();
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en');
+    });
+
+    it('should change locale from es to en and preserve hash', async () => {
+      const user = userEvent.setup();
+
+      // Mock window.location.hash
+      Object.defineProperty(window, 'location', {
+        value: { hash: '#about' },
+        writable: true,
+      });
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en#about');
+    });
+
+    it('should handle locale change in mobile menu', async () => {
+      const user = userEvent.setup();
+
+      renderNavigation();
+
+      // Open mobile menu
+      const menuButton = screen.getByLabelText(/abrir menú/i);
+      await user.click(menuButton);
+
+      // Change locale in mobile menu
+      const mobileLocaleSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-mobile',
+      });
+
+      await user.selectOptions(mobileLocaleSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en');
+    });
+
+    it('should close mobile menu after locale change', async () => {
+      const user = userEvent.setup();
+
+      renderNavigation();
+
+      // Open mobile menu
+      const menuButton = screen.getByLabelText(/abrir menú/i);
+      await user.click(menuButton);
+
+      expect(screen.getByRole('menu')).toBeInTheDocument();
+
+      // Change locale
+      const mobileLocaleSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-mobile',
+      });
+
+      await user.selectOptions(mobileLocaleSelect, 'en');
+
+      // Menu should be closed
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('buildLocalizedPath Logic', () => {
+    it('should handle path when switching from default locale to en', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/projects');
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en/projects');
+    });
+
+    it('should handle root path when switching from default locale', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/');
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en');
+    });
+
+    it('should handle switching from en to default locale (es)', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/en/projects');
+
+      render(
+        <NextIntlClientProvider locale="en" messages={esMessages}>
+          <Navigation />
+        </NextIntlClientProvider>
+      );
+
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'es');
+
+      expect(mockReplace).toHaveBeenCalledWith('/projects');
+    });
+
+    it('should handle switching from en root to default locale', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/en');
+
+      render(
+        <NextIntlClientProvider locale="en" messages={esMessages}>
+          <Navigation />
+        </NextIntlClientProvider>
+      );
+
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'es');
+
+      expect(mockReplace).toHaveBeenCalledWith('/');
+    });
+
+    it('should handle same locale selection (no-op)', async () => {
+      const user = userEvent.setup();
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'es');
+
+      // Should not call replace since locale hasn't changed
+      expect(mockReplace).not.toHaveBeenCalled();
+    });
+
+    it('should handle edge case with unexpected pathname format', async () => {
+      const user = userEvent.setup();
+
+      // Set an unexpected pathname that doesn't match normal patterns
+      mockUsePathname.mockReturnValue('/unexpected');
+
+      render(
+        <NextIntlClientProvider locale="en" messages={esMessages}>
+          <Navigation />
+        </NextIntlClientProvider>
+      );
+
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'es');
+
+      // Fallback adds target locale prefix to unexpected path
+      expect(mockReplace).toHaveBeenCalledWith('/es/unexpected');
+    });
+
+    it('should handle switching from default to non-default with custom path', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/custom/path');
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en/custom/path');
+    });
+
+    it('should preserve hash when switching with custom path', async () => {
+      const user = userEvent.setup();
+
+      mockUsePathname.mockReturnValue('/about');
+
+      Object.defineProperty(window, 'location', {
+        value: { hash: '#section' },
+        writable: true,
+        configurable: true,
+      });
+
+      renderNavigation();
+      const localeSelect = screen.getByLabelText(/idioma/i, {
+        selector: 'select#locale-switcher-desktop',
+      });
+
+      await user.selectOptions(localeSelect, 'en');
+
+      expect(mockReplace).toHaveBeenCalledWith('/en/about#section');
     });
   });
 });

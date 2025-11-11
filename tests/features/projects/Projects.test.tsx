@@ -1,42 +1,55 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { NextIntlClientProvider } from 'next-intl';
+
+import esMessages from '../../../messages/es.json';
 import { Projects } from '@/features/projects/Projects';
-import { PROJECTS } from '@/shared/constants/projects';
+
+function renderProjects() {
+  return render(
+    <NextIntlClientProvider locale="es" messages={esMessages}>
+      <Projects />
+    </NextIntlClientProvider>
+  );
+}
 
 describe('Projects Section', () => {
   describe('Rendering', () => {
     it('should render section heading', () => {
-      render(<Projects />);
+      renderProjects();
       expect(screen.getByRole('heading', { name: /proyectos/i })).toBeInTheDocument();
     });
 
     it('should render multiple project cards', () => {
-      render(<Projects />);
+      renderProjects();
       const cards = screen.getAllByRole('article');
-      expect(cards.length).toBe(PROJECTS.length);
+      expect(cards.length).toBe((esMessages.projects.items as unknown[]).length);
     });
 
     it('should render first project title', () => {
-      render(<Projects />);
-      expect(screen.getByText(PROJECTS[0].title)).toBeInTheDocument();
+      renderProjects();
+      const firstTitle = esMessages.projects.items[0].title;
+      expect(screen.getByText(firstTitle)).toBeInTheDocument();
     });
 
     it('should display project titles', () => {
-      render(<Projects />);
-      PROJECTS.forEach((project) => {
+      renderProjects();
+      esMessages.projects.items.forEach((project) => {
         expect(screen.getByText(project.title)).toBeInTheDocument();
       });
     });
 
     it('should display project descriptions', () => {
-      render(<Projects />);
-      expect(screen.getByText(/Sistema completo de facturación electrónica/i)).toBeInTheDocument();
+      renderProjects();
+      expect(
+        screen.getByText(esMessages.projects.items[0].description)
+      ).toBeInTheDocument();
     });
 
     it('should display tech stack for each project', () => {
-      render(<Projects />);
-      const nextjsTags = screen.getAllByText('Next.js');
-      const typescriptTags = screen.getAllByText('TypeScript');
+      renderProjects();
+      const nextjsTags = screen.getAllByText(/Next\.js/i);
+      const typescriptTags = screen.getAllByText(/TypeScript/i);
       expect(nextjsTags.length).toBeGreaterThan(0);
       expect(typescriptTags.length).toBeGreaterThan(0);
     });
@@ -44,15 +57,15 @@ describe('Projects Section', () => {
 
   describe('Links', () => {
     it('should render GitHub links for projects', () => {
-      render(<Projects />);
+      renderProjects();
       const githubLinks = screen.getAllByRole('link', { name: /github/i });
       expect(githubLinks.length).toBeGreaterThan(0);
     });
 
     it('should render demo links when available', () => {
-      render(<Projects />);
+      renderProjects();
       const demoLinks = screen.queryAllByRole('link', { name: /demo/i });
-      const hasDemo = PROJECTS.some((project) => Boolean(project.links.demo));
+      const hasDemo = esMessages.projects.items.some((project) => Boolean(project.links.demo));
 
       if (hasDemo) {
         expect(demoLinks.length).toBeGreaterThan(0);
@@ -62,27 +75,27 @@ describe('Projects Section', () => {
     });
 
     it('should have proper href attributes', () => {
-      render(<Projects />);
+      renderProjects();
       const link = screen.getAllByRole('link', { name: /github/i })[0];
       expect(link).toHaveAttribute('href');
       expect(link.getAttribute('href')).toContain('github.com');
     });
 
     it('should open links in new tab', () => {
-      render(<Projects />);
+      renderProjects();
       const link = screen.getAllByRole('link')[0];
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('should render private repository notice', () => {
-      render(<Projects />);
+      renderProjects();
       const notices = screen.getAllByText(/repositorio privado/i);
       expect(notices.length).toBeGreaterThan(0);
     });
 
     it('should render detail links for projects', () => {
-      render(<Projects />);
+      renderProjects();
       const detailLinks = screen.getAllByRole('link', { name: /ver detalle/i });
       expect(detailLinks.length).toBeGreaterThan(0);
     });
@@ -90,13 +103,13 @@ describe('Projects Section', () => {
 
   describe('Structure', () => {
     it('should have section id for navigation', () => {
-      const { container } = render(<Projects />);
+      const { container } = renderProjects();
       const section = container.querySelector('#projects');
       expect(section).toBeInTheDocument();
     });
 
     it('should use Card components', () => {
-      render(<Projects />);
+      renderProjects();
       // Cards should be article elements
       const cards = screen.getAllByRole('article');
       expect(cards[0]).toBeInTheDocument();
@@ -105,13 +118,13 @@ describe('Projects Section', () => {
 
   describe('Accessibility', () => {
     it('should have proper heading hierarchy', () => {
-      render(<Projects />);
+      renderProjects();
       const heading = screen.getByRole('heading', { name: /proyectos/i });
       expect(heading.tagName).toBe('H2');
     });
 
     it('should have semantic article elements for projects', () => {
-      render(<Projects />);
+      renderProjects();
       const articles = screen.getAllByRole('article');
       expect(articles.length).toBeGreaterThan(0);
     });

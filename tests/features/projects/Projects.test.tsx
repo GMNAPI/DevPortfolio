@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import esMessages from '../../../messages/es.json';
 import { Projects } from '@/features/projects/Projects';
+import type { ProjectData } from '@/core/entities/Project';
 
 function renderProjects() {
   return render(
@@ -41,9 +42,7 @@ describe('Projects Section', () => {
 
     it('should display project descriptions', () => {
       renderProjects();
-      expect(
-        screen.getByText(esMessages.projects.items[0].description)
-      ).toBeInTheDocument();
+      expect(screen.getByText(esMessages.projects.items[0].description)).toBeInTheDocument();
     });
 
     it('should display tech stack for each project', () => {
@@ -65,7 +64,8 @@ describe('Projects Section', () => {
     it('should render demo links when available', () => {
       renderProjects();
       const demoLinks = screen.queryAllByRole('link', { name: /demo/i });
-      const hasDemo = esMessages.projects.items.some((project) => Boolean(project.links.demo));
+      const projectsData = esMessages.projects.items as unknown as ProjectData[];
+      const hasDemo = projectsData.some((project) => Boolean(project.links.demo));
 
       if (hasDemo) {
         expect(demoLinks.length).toBeGreaterThan(0);

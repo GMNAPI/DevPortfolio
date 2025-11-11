@@ -1,22 +1,28 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
-import { Project } from '@/core/entities/Project';
-import { PROJECTS } from '@/shared/constants/projects';
+import { Project, type ProjectData } from '@/core/entities/Project';
 
 interface ProjectDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateStaticParams() {
-  return PROJECTS.map((project) => ({
+  const t = await getTranslations('projects');
+  const projectsData = t.raw('items') as ProjectData[];
+
+  return projectsData.map((project) => ({
     slug: project.detailSlug ?? project.id,
   }));
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { slug } = await params;
-  const projectData = PROJECTS.find((project) => (project.detailSlug ?? project.id) === slug);
+  const t = await getTranslations('projects');
+  const projectsData = t.raw('items') as ProjectData[];
+
+  const projectData = projectsData.find((project) => (project.detailSlug ?? project.id) === slug);
 
   if (!projectData) {
     notFound();

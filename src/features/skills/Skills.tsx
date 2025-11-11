@@ -40,7 +40,11 @@ export function Skills() {
   let cumulative = 0;
   const segments = languages.map((language, index) => {
     const rawNormalized =
-      totalUsage > 0 ? (language.usagePercentage / totalUsage) * 100 : languages.length > 0 ? 100 / languages.length : 0;
+      totalUsage > 0
+        ? (language.usagePercentage / totalUsage) * 100
+        : languages.length > 0
+          ? 100 / languages.length
+          : 0;
     const normalized = Number(rawNormalized.toFixed(2));
     const start = cumulative;
     cumulative += normalized;
@@ -60,7 +64,9 @@ export function Skills() {
     .map((segment) => `${segment.color} ${segment.start}% ${segment.end}%`)
     .join(', ');
   const donutBackground =
-    segments.length > 0 ? `conic-gradient(${gradientStops})` : 'conic-gradient(#38bdf8 0deg, #38bdf8 360deg)';
+    segments.length > 0
+      ? `conic-gradient(${gradientStops})`
+      : 'conic-gradient(#38bdf8 0deg, #38bdf8 360deg)';
 
   const contributionsValue = tSkills('stats.contributions.value', {
     count: summary.contributionsLastYear.toLocaleString(numberLocale),

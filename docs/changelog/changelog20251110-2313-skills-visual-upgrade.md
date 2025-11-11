@@ -29,4 +29,3 @@
 
 - Evaluar una librería ligera de charts si se requiere interactividad adicional (tooltips o filtros) en futuras iteraciones.
 - Actualizar los enlaces reales de GitHub/LinkedIn cuando se disponga de las URLs definitivas en producción.
-

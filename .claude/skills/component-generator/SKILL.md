@@ -13,9 +13,11 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 ## Component Types
 
 ### 1. Feature Components
+
 **Location**: `src/features/[feature-name]/`
 **Purpose**: Main feature sections (Hero, About, Skills, Projects, Contact, Blog)
 **Characteristics**:
+
 - `'use client'` directive (uses hooks)
 - Framer Motion animations
 - next-intl translations
@@ -23,9 +25,11 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 - Imports from `@/core` and `@/shared`
 
 ### 2. UI Components
+
 **Location**: `src/shared/components/ui/`
 **Purpose**: Reusable atomic components (Button, Card, Input, Modal)
 **Characteristics**:
+
 - Variant support (primary, secondary, outline)
 - Size support (sm, md, lg)
 - Fully typed with TypeScript
@@ -34,9 +38,11 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 - NO feature-specific logic
 
 ### 3. Layout Components
+
 **Location**: `src/shared/components/layout/`
 **Purpose**: Layout elements (Navigation, Footer, Header)
 **Characteristics**:
+
 - Used across multiple pages
 - Responsive design
 - Translation support
@@ -49,6 +55,7 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 ### Step 1: Understand Requirements
 
 **Questions to Ask**:
+
 1. What type of component? (Feature / UI / Layout)
 2. What is the purpose/functionality?
 3. What props are needed?
@@ -57,6 +64,7 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 6. Does it need translations?
 
 **Example**:
+
 ```
 User: "Generate a Modal component"
 
@@ -177,6 +185,7 @@ export const [Component] = forwardRef<HTML[Element]Element, [Component]Props>(
 ### Step 3: Generate Translation Keys
 
 **Spanish (messages/es.json)**:
+
 ```json
 {
   "[feature]": {
@@ -189,6 +198,7 @@ export const [Component] = forwardRef<HTML[Element]Element, [Component]Props>(
 ```
 
 **English (messages/en.json)**:
+
 ```json
 {
   "[feature]": {
@@ -365,12 +375,13 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
 ```
 
 **Usage**:
+
 ```tsx
 const [isOpen, setIsOpen] = useState(false);
 
 <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Settings" size="md">
   <p>Modal content here</p>
-</Modal>
+</Modal>;
 ```
 
 ---
@@ -432,15 +443,14 @@ export function CardContent({ className, children, ...props }: ComponentPropsWit
 ```
 
 **Usage**:
+
 ```tsx
 <Card>
   <CardHeader>
     <CardTitle>Project Title</CardTitle>
     <CardDescription>Project description</CardDescription>
   </CardHeader>
-  <CardContent>
-    Content here
-  </CardContent>
+  <CardContent>Content here</CardContent>
 </Card>
 ```
 
@@ -484,12 +494,8 @@ export function Blog() {
     >
       <div className="max-w-6xl mx-auto space-y-12">
         <m.div className="space-y-4" variants={fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-foreground-secondary max-w-3xl">
-            {t('subtitle')}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">{t('title')}</h2>
+          <p className="text-lg text-foreground-secondary max-w-3xl">{t('subtitle')}</p>
         </m.div>
 
         <m.div className="flex flex-wrap gap-3" variants={fadeInUp}>
@@ -500,7 +506,7 @@ export function Blog() {
           >
             {t('allPosts', { count: blogPosts.length })}
           </Button>
-          {allTags.map(tag => (
+          {allTags.map((tag) => (
             <Button
               key={tag}
               variant={selectedTag === tag ? 'default' : 'outline'}
@@ -593,13 +599,15 @@ When generating components, always include translation keys:
 ### Responsive Design
 
 ```tsx
-<div className="
+<div
+  className="
   px-4 py-6              // Mobile
   sm:px-6 sm:py-8        // Tablet
   md:px-8 md:py-10       // Desktop
   lg:px-10 lg:py-12      // Large
   xl:px-12 xl:py-16      // XL
-">
+"
+>
   Content
 </div>
 ```
@@ -607,11 +615,13 @@ When generating components, always include translation keys:
 ### Dark Mode
 
 ```tsx
-<div className="
+<div
+  className="
   bg-gray-100 dark:bg-gray-900
   text-gray-900 dark:text-gray-100
   border-gray-300 dark:border-gray-700
-">
+"
+>
   Content
 </div>
 ```
@@ -619,12 +629,14 @@ When generating components, always include translation keys:
 ### Hover States
 
 ```tsx
-<button className="
+<button
+  className="
   bg-accent text-white
   hover:bg-accent/90
   hover:shadow-lg
   transition-all duration-200
-">
+"
+>
   Button
 </button>
 ```
@@ -632,12 +644,14 @@ When generating components, always include translation keys:
 ### Focus States
 
 ```tsx
-<button className="
+<button
+  className="
   focus-visible:outline-none
   focus-visible:ring-2
   focus-visible:ring-accent
   focus-visible:ring-offset-2
-">
+"
+>
   Button
 </button>
 ```
@@ -658,7 +672,7 @@ import { motion as m } from 'framer-motion';
   transition={{ duration: 0.6 }}
 >
   Content
-</m.div>
+</m.div>;
 ```
 
 ### Stagger Children
@@ -671,15 +685,13 @@ import { staggerContainer, fadeInUp } from '@/shared/utils/motion';
   <m.div variants={fadeInUp}>Child 1</m.div>
   <m.div variants={fadeInUp}>Child 2</m.div>
   <m.div variants={fadeInUp}>Child 3</m.div>
-</m.div>
+</m.div>;
 ```
 
 ### Hover Animation
 
 ```tsx
-<m.div whileHover={{ scale: 1.05, y: -5 }}>
-  Card content
-</m.div>
+<m.div whileHover={{ scale: 1.05, y: -5 }}>Card content</m.div>
 ```
 
 ---

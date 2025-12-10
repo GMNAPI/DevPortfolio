@@ -18,6 +18,7 @@ export const routing = defineRouting({
 ```
 
 **URLs resultantes**:
+
 - Español (default): `/`, `/projects`, `/projects/devportfolio`
 - Inglés: `/en`, `/en/projects`, `/en/projects/devportfolio`
 
@@ -30,6 +31,7 @@ export const routing = defineRouting({
 ```
 
 **Estructura de archivos**:
+
 ```json
 {
   "hero": {
@@ -223,6 +225,7 @@ export function ProjectsSection() {
 ```
 
 **Estructura JSON correspondiente**:
+
 ```json
 {
   "projects": {
@@ -288,6 +291,7 @@ export function ContactForm() {
 ```
 
 **Estructura JSON**:
+
 ```json
 {
   "contact": {
@@ -336,6 +340,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 ```
 
 **Estructura JSON**:
+
 ```json
 {
   "ui": {
@@ -389,6 +394,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 ```
 
 **Estructura JSON para proyectos**:
+
 ```json
 {
   "projects": {
@@ -528,7 +534,7 @@ describe('i18n Messages', () => {
   it('has all required sections', () => {
     const requiredSections = ['hero', 'about', 'projects', 'contact'];
 
-    requiredSections.forEach(section => {
+    requiredSections.forEach((section) => {
       expect(esMessages).toHaveProperty(section);
       expect(enMessages).toHaveProperty(section);
     });
@@ -548,6 +554,7 @@ describe('i18n Messages', () => {
 ### 1. Organización de Traducciones
 
 **DO**: Organizar por feature/section
+
 ```json
 {
   "hero": { ... },
@@ -558,6 +565,7 @@ describe('i18n Messages', () => {
 ```
 
 **DON'T**: Organizar por tipo de contenido
+
 ```json
 {
   "titles": { "hero": "...", "about": "..." },
@@ -568,12 +576,14 @@ describe('i18n Messages', () => {
 ### 2. Namespacing
 
 **DO**: Usar namespace específico por feature
+
 ```typescript
 const t = useTranslations('projects');
 return <h1>{t('title')}</h1>;
 ```
 
 **DON'T**: Usar namespace global
+
 ```typescript
 const t = useTranslations();
 return <h1>{t('projects.title')}</h1>; // Más verboso
@@ -582,6 +592,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 ### 3. Claves Descriptivas
 
 **DO**: Claves semánticas y jerárquicas
+
 ```json
 {
   "contact": {
@@ -597,6 +608,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 ```
 
 **DON'T**: Claves genéricas o planas
+
 ```json
 {
   "button1": "Enviar",
@@ -610,6 +622,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 **CRÍTICO**: Siempre actualizar ambos archivos (es.json y en.json) al mismo tiempo.
 
 **Workflow recomendado**:
+
 1. Actualizar `messages/es.json` (fuente de verdad)
 2. Actualizar `messages/en.json` con traducciones equivalentes
 3. Verificar que las claves coinciden
@@ -618,11 +631,13 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 ### 5. Evitar Hardcoded Strings
 
 **DO**: Usar traducciones
+
 ```typescript
 <button>{t('form.submit')}</button>
 ```
 
 **DON'T**: Hardcodear strings
+
 ```typescript
 <button>Enviar</button> // ❌ No traducible
 ```
@@ -630,6 +645,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 ### 6. Consistencia en Formato
 
 **DO**: Formato consistente con puntuación
+
 ```json
 {
   "validation": {
@@ -640,6 +656,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 ```
 
 **DON'T**: Formato inconsistente
+
 ```json
 {
   "validation": {
@@ -656,6 +673,7 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 **Causa**: Missing 'use client' directive en componente.
 
 **Solución**:
+
 ```typescript
 'use client'; // ← Agregar esta línea
 
@@ -667,6 +685,7 @@ import { useTranslations } from 'next-intl';
 **Causa**: Clave no existe en archivos JSON.
 
 **Solución**: Verificar que la clave existe en ambos `es.json` y `en.json`:
+
 ```json
 // messages/es.json
 {
@@ -681,6 +700,7 @@ import { useTranslations } from 'next-intl';
 **Causa**: Cache de Next.js.
 
 **Solución**:
+
 ```bash
 rm -rf .next
 npm run dev

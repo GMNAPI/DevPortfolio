@@ -9,20 +9,24 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 ## Skills Disponibles
 
 ### 1. feature-planner 🎯
+
 **Propósito**: Crear planes de implementación comprensivos para nuevas features
 
 **Cuándo usarlo**:
+
 - Necesitas planificar una nueva feature desde cero
 - Tienes documentación de requerimientos (PDF, MD, texto)
 - Quieres un roadmap detallado fase por fase
 
 **Output**: `feature-plan-[nombre].md` (500-1,000 líneas)
+
 - 8 fases de implementación
 - Ejemplos TypeScript/React completos
 - Checklists de archivos a crear
 - Estimaciones de tiempo por fase
 
 **Invocación**:
+
 ```
 "Create implementation plan for blog feature"
 "Plan the testimonials section from these requirements"
@@ -31,20 +35,24 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 ---
 
 ### 2. code-reviewer 🔍
+
 **Propósito**: Validar implementaciones contra los estándares del proyecto
 
 **Cuándo usarlo**:
+
 - Completaste una feature y quieres validar calidad
 - Necesitas review antes de merge
 - Quieres identificar violaciones de arquitectura
 
 **Output**: `validation-report-[branch]-[fecha].md` (600-1,000 líneas)
+
 - Compliance score (X/100)
 - Violaciones por capa (core, features, shared)
 - File:line references con fixes
 - Action items priorizados (Critical → Low)
 
 **Invocación**:
+
 ```
 "Review my implementation on feature/blog branch"
 "Validate the contact feature code quality"
@@ -53,14 +61,17 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 ---
 
 ### 3. component-generator ⚛️
+
 **Propósito**: Generar componentes React con estructura completa
 
 **Cuándo usarlo**:
+
 - Necesitas crear un nuevo componente rápidamente
 - Quieres scaffold completo (component + translations + tests)
 - Generar componentes siguiendo patrones del proyecto
 
 **Output**: Archivos generados automáticamente
+
 - Component files (.tsx)
 - TypeScript interfaces
 - Translation updates (es.json, en.json)
@@ -68,6 +79,7 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 - Framer Motion animations incluidas
 
 **Invocación**:
+
 ```
 "Generate a Modal component with animations"
 "Create BlogCard component for the blog feature"
@@ -76,14 +88,17 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 ---
 
 ### 4. test-writer 🧪
+
 **Propósito**: Generar test suites comprehensivos (80%+ coverage)
 
 **Cuándo usarlo**:
+
 - Necesitas tests para un feature/component nuevo
 - Coverage está bajo el 80%
 - Quieres template de tests siguiendo best practices
 
 **Output**: Test files (.test.ts, .test.tsx)
+
 - Entity tests (core layer)
 - Component tests (React Testing Library)
 - Accessibility tests
@@ -91,6 +106,7 @@ Este directorio contiene 4 skills especializados que asisten en el desarrollo de
 - Coverage estimate
 
 **Invocación**:
+
 ```
 "Write tests for the Skills component with 80%+ coverage"
 "Generate comprehensive tests for BlogPost entity"
@@ -198,6 +214,7 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 ```
 
 **Dependency Rule** (CRÍTICA):
+
 - `features` → puede importar de `core` y `shared`
 - `shared` → puede importar de `core`
 - `core` → NO puede importar de NADA (pure TypeScript)
@@ -207,12 +224,14 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 ## Estándares del Proyecto
 
 ### 1. Testing (ESTRICTO)
+
 - **80%+ coverage requerido** (lines, functions, branches, statements)
 - Vitest + React Testing Library
 - Tests deben seguir AAA pattern
 - Archivos: `tests/` mirror de `src/`
 
 ### 2. i18n (OBLIGATORIO)
+
 - **TODO texto visible debe usar traducciones**
 - Soportar ES (default) y EN
 - Client components: `useTranslations()`
@@ -220,12 +239,14 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 - Archivos: `messages/es.json`, `messages/en.json`
 
 ### 3. TypeScript (ESTRICTO)
+
 - Strict mode enabled
 - Interfaces para todas las props
 - No `any` types
 - Path aliases: `@/core`, `@/features`, `@/shared`
 
 ### 4. Styling
+
 - Tailwind CSS utility classes
 - Responsive design (mobile-first)
 - Dark mode support
@@ -238,9 +259,11 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 ### Desarrollo de Nueva Feature
 
 1. **Plan** → Usa `feature-planner`
+
    ```
    "Create implementation plan for [feature]"
    ```
+
    Output: Plan detallado de 8 fases
 
 2. **Implement** → Sigue el plan generado
@@ -250,19 +273,23 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
    - Escribir tests
 
 3. **Generate** → Usa `component-generator` para componentes específicos
+
    ```
    "Generate [ComponentName] component"
    ```
 
 4. **Test** → Usa `test-writer` para completar coverage
+
    ```
    "Write tests for [feature] with 80%+ coverage"
    ```
 
 5. **Review** → Usa `code-reviewer` antes de merge
+
    ```
    "Review my implementation on feature/[name]"
    ```
+
    Output: Validation report con violations
 
 6. **Fix** → Corregir violations críticas
@@ -276,12 +303,14 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 Los skills validan automáticamente:
 
 ### Core Layer ✅
+
 - ❌ NO framework imports (React, Next.js)
 - ✅ SOLO pure TypeScript
 - ✅ Entity validation en constructors
 - ✅ Use-cases como pure functions
 
 ### Features Layer ✅
+
 - ✅ Imports permitidos de `core/` y `shared/`
 - ✅ Uso correcto de `useTranslations()`
 - ✅ Framer Motion animations
@@ -289,18 +318,21 @@ Los skills validan automáticamente:
 - ❌ NO business logic extensa en components
 
 ### Shared Layer ✅
+
 - ✅ Componentes reutilizables
 - ✅ Custom hooks siguiendo rules of hooks
 - ✅ Utilities sin side effects
 - ✅ Constants exportadas correctamente
 
 ### Translation ✅
+
 - ❌ NO hardcoded strings (ES/EN)
 - ✅ TODO texto usa `t()` function
 - ✅ Ambos idiomas soportados
 - ✅ Keys consistentes entre locales
 
 ### Testing ✅
+
 - ✅ 80%+ coverage MÍNIMO
 - ✅ Tests para entities (core)
 - ✅ Tests para components (features)
@@ -313,24 +345,28 @@ Los skills validan automáticamente:
 ## Tips para Mejores Resultados
 
 ### Con feature-planner:
+
 1. Provee contexto claro de la feature
 2. Menciona requirements específicos
 3. Indica complejidad esperada
 4. Especifica si hay constraints técnicas
 
 ### Con code-reviewer:
+
 1. Asegúrate de estar en feature branch (no main/master)
 2. Haz commit de cambios antes de review
 3. Provee documentación de requirements si existe
 4. Ejecuta después de completar la feature
 
 ### Con component-generator:
+
 1. Describe el propósito del componente
 2. Menciona props esperadas
 3. Indica si es feature o UI component
 4. Especifica animations si las necesitas
 
 ### Con test-writer:
+
 1. Provee el archivo/feature a testear
 2. Menciona coverage target (80%+ default)
 3. Indica casos edge específicos si existen
@@ -341,21 +377,25 @@ Los skills validan automáticamente:
 ## Troubleshooting
 
 ### "Skill no se invoca automáticamente"
+
 - Usa keywords claras: "plan", "review", "generate", "write tests"
 - Menciona el nombre del skill explícitamente
 - Proporciona contexto suficiente
 
 ### "Output incompleto"
+
 - Los skills generan 500-2,000 líneas
 - Dale tiempo para completar
 - Pide continuación si se corta
 
 ### "Violations no son claras"
+
 - Los reports incluyen file:line references
 - Busca secciones "❌ WRONG → ✅ CORRECT"
 - Revisa "Time to Fix" estimates
 
 ### "Tests no pasan después de generar"
+
 - Verifica imports de traducciones
 - Asegura mocks están configurados
 - Revisa setup.ts configuration
@@ -365,14 +405,17 @@ Los skills validan automáticamente:
 ## Archivos de Referencia
 
 ### Architecture Guides
+
 - `.claude/architecture/clean-architecture.md` - Detalles de Clean Architecture
 - `.claude/architecture/testing-strategy.md` - Estrategia de testing 80%+
 - `.claude/architecture/i18n-patterns.md` - Patrones de next-intl
 
 ### Examples
+
 - `.claude/EXAMPLES.md` - Ejemplos completos de uso real
 
 ### Skills
+
 - `.claude/skills/feature-planner/SKILL.md` - Implementation planning
 - `.claude/skills/code-reviewer/SKILL.md` - Code validation
 - `.claude/skills/component-generator/SKILL.md` - Component generation

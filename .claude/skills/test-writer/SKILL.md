@@ -15,6 +15,7 @@ Generate comprehensive, production-ready test suites that achieve 80%+ coverage 
 ### Coverage Thresholds (CRITICAL)
 
 **Configured in `vitest.config.ts`**:
+
 ```typescript
 coverage: {
   provider: 'v8',
@@ -59,6 +60,7 @@ tests/
 **Coverage Target**: 90-100% (pure TypeScript, easy to test)
 
 **Template**:
+
 ```typescript
 // tests/core/entities/BlogPost.test.ts
 import { describe, it, expect } from 'vitest';
@@ -193,10 +195,12 @@ describe('BlogPost Entity', () => {
       const post = new BlogPost(validData);
       const json = post.toJSON();
 
-      expect(json).toEqual(expect.objectContaining({
-        id: '1',
-        title: 'Test Post',
-      }));
+      expect(json).toEqual(
+        expect.objectContaining({
+          id: '1',
+          title: 'Test Post',
+        })
+      );
       expect(json).not.toBe(validData); // New object, not reference
     });
   });
@@ -204,6 +208,7 @@ describe('BlogPost Entity', () => {
 ```
 
 **Coverage Checklist**:
+
 - [ ] Constructor with valid data
 - [ ] All validation rules (empty, too short, too long, invalid format)
 - [ ] Edge cases (whitespace, null, undefined)
@@ -220,6 +225,7 @@ describe('BlogPost Entity', () => {
 **Coverage Target**: 85-95% (pure functions, deterministic)
 
 **Template**:
+
 ```typescript
 // tests/core/use-cases/blogPosts.test.ts
 import { describe, it, expect } from 'vitest';
@@ -249,8 +255,18 @@ describe('Blog Post Use Cases', () => {
 
   const posts = [
     createPost({ id: '1', title: 'React Post', tags: ['React', 'Frontend'] }),
-    createPost({ id: '2', title: 'TypeScript Post', tags: ['TypeScript', 'Backend'], publishedAt: new Date('2025-01-10') }),
-    createPost({ id: '3', title: 'Node Post', tags: ['Node', 'Backend'], publishedAt: new Date('2024-12-01') }),
+    createPost({
+      id: '2',
+      title: 'TypeScript Post',
+      tags: ['TypeScript', 'Backend'],
+      publishedAt: new Date('2025-01-10'),
+    }),
+    createPost({
+      id: '3',
+      title: 'Node Post',
+      tags: ['Node', 'Backend'],
+      publishedAt: new Date('2024-12-01'),
+    }),
   ];
 
   describe('filterPostsByTag', () => {
@@ -374,6 +390,7 @@ describe('Blog Post Use Cases', () => {
 ```
 
 **Coverage Checklist**:
+
 - [ ] Happy path (normal inputs)
 - [ ] Edge cases (empty, null, whitespace)
 - [ ] Array immutability (original not mutated)
@@ -390,6 +407,7 @@ describe('Blog Post Use Cases', () => {
 **Coverage Target**: 80-90%
 
 **Template**:
+
 ```typescript
 // tests/features/blog/Blog.test.tsx
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -582,6 +600,7 @@ describe('Blog Component', () => {
 ```
 
 **Coverage Checklist**:
+
 - [ ] Rendering tests (all major elements)
 - [ ] User interaction tests (clicks, inputs, forms)
 - [ ] Translation tests (ES/EN rendering)
@@ -599,6 +618,7 @@ describe('Blog Component', () => {
 **Coverage Target**: 85-95%
 
 **Template**:
+
 ```typescript
 // tests/shared/hooks/useDebounce.test.tsx
 import { describe, it, expect, vi } from 'vitest';
@@ -620,10 +640,9 @@ describe('useDebounce Hook', () => {
   });
 
   it('debounces value changes', async () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useDebounce(value, 500),
-      { initialProps: { value: 'initial' } }
-    );
+    const { result, rerender } = renderHook(({ value }) => useDebounce(value, 500), {
+      initialProps: { value: 'initial' },
+    });
 
     expect(result.current).toBe('initial');
 
@@ -638,10 +657,9 @@ describe('useDebounce Hook', () => {
   });
 
   it('cancels previous timeout on new value', async () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useDebounce(value, 500),
-      { initialProps: { value: 'first' } }
-    );
+    const { result, rerender } = renderHook(({ value }) => useDebounce(value, 500), {
+      initialProps: { value: 'first' },
+    });
 
     rerender({ value: 'second' });
     vi.advanceTimersByTime(300);
@@ -655,10 +673,9 @@ describe('useDebounce Hook', () => {
   });
 
   it('uses custom delay', async () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => useDebounce(value, 1000),
-      { initialProps: { value: 'initial' } }
-    );
+    const { result, rerender } = renderHook(({ value }) => useDebounce(value, 1000), {
+      initialProps: { value: 'initial' },
+    });
 
     rerender({ value: 'updated' });
     vi.advanceTimersByTime(999);
@@ -682,6 +699,7 @@ describe('useDebounce Hook', () => {
 ```
 
 **Coverage Checklist**:
+
 - [ ] Initial state
 - [ ] State changes
 - [ ] Cleanup functions (useEffect return)
@@ -697,6 +715,7 @@ describe('useDebounce Hook', () => {
 **Coverage Target**: 90-100% (simple functions)
 
 **Template**:
+
 ```typescript
 // tests/shared/utils/cn.test.ts
 import { describe, it, expect } from 'vitest';
@@ -744,10 +763,7 @@ All tests should follow the AAA pattern:
 ```typescript
 it('filters posts by tag', () => {
   // Arrange - Setup test data
-  const posts = [
-    createPost({ tags: ['React'] }),
-    createPost({ tags: ['Vue'] }),
-  ];
+  const posts = [createPost({ tags: ['React'] }), createPost({ tags: ['Vue'] })];
 
   // Act - Execute the function
   const result = filterPostsByTag(posts, 'React');

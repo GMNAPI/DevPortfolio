@@ -9,6 +9,7 @@ Comprehensive examples demonstrating how to use the DevPortfolio Claude Code ski
 ### Example 1: Planning a Blog Feature from Requirements
 
 **User Request**:
+
 ```
 I want to add a blog section to my portfolio with the following requirements:
 - Display blog posts in a grid layout
@@ -23,7 +24,7 @@ Create an implementation plan following Clean Architecture.
 
 **Claude Response** (invokes feature-planner skill):
 
-```markdown
+````markdown
 # Feature Implementation Plan: Blog System
 
 ## Overview
@@ -40,15 +41,18 @@ Create an implementation plan following Clean Architecture.
 **Estimated Time**: 2 hours
 
 **Tasks**:
+
 1. Define `BlogPostData` interface - 20 min
 2. Create `BlogPost` entity class with validation - 1 hour
 3. Add business logic methods (hasTag, isRecent) - 30 min
 4. Document entity with JSDoc - 10 min
 
 **Files to Create**:
+
 - [ ] `src/core/entities/BlogPost.ts` - Domain entity class
 
 **Example Code**:
+
 ```typescript
 // src/core/entities/BlogPost.ts
 export interface BlogPostData {
@@ -86,10 +90,11 @@ export class BlogPost {
   }
 
   hasTag(tag: string): boolean {
-    return this.tags.some(t => t.toLowerCase() === tag.toLowerCase());
+    return this.tags.some((t) => t.toLowerCase() === tag.toLowerCase());
   }
 }
 ```
+````
 
 ---
 
@@ -98,6 +103,7 @@ export class BlogPost {
 **Estimated Time**: 3 hours
 
 **Tasks**:
+
 1. Create `filterPostsByTag()` function - 30 min
 2. Create `sortPostsByDate()` function - 30 min
 3. Create `getAllTags()` function - 30 min
@@ -105,27 +111,27 @@ export class BlogPost {
 5. Write unit tests for all use-cases - 30 min
 
 **Files to Create**:
+
 - [ ] `src/core/use-cases/blogPosts.ts` - Pure functions
 
 **Example Code**:
+
 ```typescript
 // src/core/use-cases/blogPosts.ts
 import { BlogPost } from '@/core/entities/BlogPost';
 
 export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
   if (!tag || tag.trim() === '') return posts;
-  return posts.filter(post => post.hasTag(tag));
+  return posts.filter((post) => post.hasTag(tag));
 }
 
 export function sortPostsByDate(posts: BlogPost[]): BlogPost[] {
-  return [...posts].sort((a, b) =>
-    b.publishedAt.getTime() - a.publishedAt.getTime()
-  );
+  return [...posts].sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
 }
 
 export function getAllTags(posts: BlogPost[]): string[] {
   const tagSet = new Set<string>();
-  posts.forEach(post => post.tags.forEach(tag => tagSet.add(tag)));
+  posts.forEach((post) => post.tags.forEach((tag) => tagSet.add(tag)));
   return Array.from(tagSet).sort();
 }
 ```
@@ -139,23 +145,28 @@ export function getAllTags(posts: BlogPost[]): string[] {
 ## Files Checklist
 
 ### Core Layer
+
 - [ ] `src/core/entities/BlogPost.ts` (150 lines)
 - [ ] `src/core/use-cases/blogPosts.ts` (100 lines)
 
 ### Features Layer
+
 - [ ] `src/features/blog/Blog.tsx` (120 lines)
 - [ ] `src/features/blog/BlogList.tsx` (60 lines)
 - [ ] `src/features/blog/BlogCard.tsx` (80 lines)
 
 ### App Router
+
 - [ ] `app/[locale]/blog/page.tsx` (40 lines)
 - [ ] `app/[locale]/blog/[slug]/page.tsx` (60 lines)
 
 ### Translations
+
 - [ ] `messages/es.json` (+18 keys)
 - [ ] `messages/en.json` (+18 keys)
 
 ### Tests
+
 - [ ] `tests/core/entities/BlogPost.test.ts` (180 lines, 15 tests)
 - [ ] `tests/core/use-cases/blogPosts.test.ts` (150 lines, 12 tests)
 - [ ] `tests/features/blog/Blog.test.tsx` (200 lines, 18 tests)
@@ -167,17 +178,17 @@ export function getAllTags(posts: BlogPost[]): string[] {
 
 ## Estimated Timeline
 
-| Phase | Time Estimate |
-|-------|---------------|
-| Phase 1: Entity & Type Design | 2 hours |
-| Phase 2: Core Layer | 3 hours |
-| Phase 3: Feature Layer | 4 hours |
-| Phase 4: UI Components | 2 hours |
-| Phase 5: Client Interactions | 2 hours |
-| Phase 6: Styling | 1 hour |
-| Phase 7: i18n & Translations | 1 hour |
-| Phase 8: Testing | 3 hours |
-| **Total** | **18 hours** |
+| Phase                         | Time Estimate |
+| ----------------------------- | ------------- |
+| Phase 1: Entity & Type Design | 2 hours       |
+| Phase 2: Core Layer           | 3 hours       |
+| Phase 3: Feature Layer        | 4 hours       |
+| Phase 4: UI Components        | 2 hours       |
+| Phase 5: Client Interactions  | 2 hours       |
+| Phase 6: Styling              | 1 hour        |
+| Phase 7: i18n & Translations  | 1 hour        |
+| Phase 8: Testing              | 3 hours       |
+| **Total**                     | **18 hours**  |
 
 ---
 
@@ -192,6 +203,7 @@ export function getAllTags(posts: BlogPost[]): string[] {
 - [ ] Responsive design (mobile, tablet, desktop)
 - [ ] Dark mode support
 - [ ] Accessibility verified
+
 ```
 
 **User**: "Perfect! Let's start implementing Phase 1"
@@ -202,8 +214,10 @@ export function getAllTags(posts: BlogPost[]): string[] {
 
 **User Request**:
 ```
+
 I have a PDF with requirements for a testimonials section.
 Here are the key points:
+
 - Display 6 testimonials from clients
 - Carousel with auto-rotate every 5 seconds
 - User can pause auto-rotate
@@ -211,6 +225,7 @@ Here are the key points:
 - Responsive (3 cols desktop, 2 cols tablet, 1 col mobile)
 
 Create an implementation plan.
+
 ```
 
 **Claude Response** (invokes feature-planner skill):
@@ -225,9 +240,11 @@ Generates a comprehensive 8-phase plan similar to Example 1, but focused on the 
 
 **User Request**:
 ```
+
 Review my blog feature implementation on the feature/blog branch.
 I've completed all the code and want to know if it's ready to merge.
-```
+
+````
 
 **Claude Response** (invokes code-reviewer skill):
 
@@ -262,29 +279,35 @@ I've completed all the code and want to know if it's ready to merge.
 **Base Branch**: `master`
 
 **Changed Files (12)**:
-```
+````
+
 Core Layer (2 files):
-  + src/core/entities/BlogPost.ts (ADDED, 152 lines)
-  + src/core/use-cases/blogPosts.ts (ADDED, 98 lines)
+
+- src/core/entities/BlogPost.ts (ADDED, 152 lines)
+- src/core/use-cases/blogPosts.ts (ADDED, 98 lines)
 
 Features Layer (3 files):
-  + src/features/blog/Blog.tsx (ADDED, 125 lines)
-  + src/features/blog/BlogList.tsx (ADDED, 62 lines)
-  + src/features/blog/BlogCard.tsx (ADDED, 85 lines)
+
+- src/features/blog/Blog.tsx (ADDED, 125 lines)
+- src/features/blog/BlogList.tsx (ADDED, 62 lines)
+- src/features/blog/BlogCard.tsx (ADDED, 85 lines)
 
 App Router (2 files):
-  + app/[locale]/blog/page.tsx (ADDED, 42 lines)
-  + app/[locale]/blog/[slug]/page.tsx (ADDED, 68 lines)
+
+- app/[locale]/blog/page.tsx (ADDED, 42 lines)
+- app/[locale]/blog/[slug]/page.tsx (ADDED, 68 lines)
 
 Translations (2 files):
-  M messages/es.json (MODIFIED, +18 keys)
-  M messages/en.json (MODIFIED, +15 keys) ⚠️ Missing 3 keys
+M messages/es.json (MODIFIED, +18 keys)
+M messages/en.json (MODIFIED, +15 keys) ⚠️ Missing 3 keys
 
 Tests (3 files):
-  + tests/core/entities/BlogPost.test.ts (ADDED, 180 lines)
-  + tests/features/blog/Blog.test.tsx (ADDED, 145 lines)
-  + tests/features/blog/BlogCard.test.tsx (ADDED, 95 lines)
-```
+
+- tests/core/entities/BlogPost.test.ts (ADDED, 180 lines)
+- tests/features/blog/Blog.test.tsx (ADDED, 145 lines)
+- tests/features/blog/BlogCard.test.tsx (ADDED, 95 lines)
+
+````
 
 ---
 
@@ -311,7 +334,7 @@ Add to `messages/en.json`:
     "postsCount": "{count} posts"
   }
 }
-```
+````
 
 **Time to Fix**: 5 minutes
 
@@ -334,6 +357,7 @@ export function BlogCard() {
 ```
 
 **Fix**:
+
 ```tsx
 // ✅ CORRECT
 'use client';
@@ -358,10 +382,12 @@ export function BlogCard() {
 **Gap**: 1.5%
 
 **Files with Insufficient Coverage**:
+
 - `src/features/blog/BlogList.tsx`: 75% (need +5%)
 - `src/features/blog/BlogCard.tsx`: 72% (need +8%)
 
 **Missing Tests**:
+
 - [ ] BlogList empty state test
 - [ ] BlogCard expanded state test
 - [ ] BlogCard accessibility tests
@@ -379,6 +405,7 @@ export function BlogCard() {
 **Score**: 9/10 ⭐⭐⭐⭐⭐
 
 ✅ **Passes (8/8)**:
+
 - NO framework dependencies
 - Entities have proper validation
 - Use-cases are pure functions
@@ -399,6 +426,7 @@ export function BlogCard() {
 **Score**: 7/10 ⭐⭐⭐⭐
 
 ✅ **Passes (10/12)**:
+
 - Component structure follows pattern
 - Props properly typed
 - Uses custom hooks from shared/
@@ -411,6 +439,7 @@ export function BlogCard() {
 - Clean component composition
 
 ❌ **Failures (2/12)**:
+
 1. **Missing 'use client'** (CRITICAL)
    - File: `BlogCard.tsx:1`
    - Impact: Production error
@@ -426,6 +455,7 @@ export function BlogCard() {
 **Score**: 8/10 ⭐⭐⭐⭐
 
 ✅ **Passes**:
+
 - Translation files exist (es.json, en.json)
 - Components use `useTranslations()`
 - Most keys defined in both locales
@@ -433,6 +463,7 @@ export function BlogCard() {
 - Rich text translations working
 
 ❌ **Failures**:
+
 - **Missing Keys** (CRITICAL)
   - 3 keys in ES but not in EN
   - Keys: filterByTag, clearFilter, postsCount
@@ -446,6 +477,7 @@ export function BlogCard() {
 **Score**: 7/10 ⭐⭐⭐⭐
 
 **Coverage Analysis**:
+
 ```
 File                              | Stmts | Branch | Funcs | Lines
 src/core/entities/BlogPost.ts     | 95.2% | 92.1%  | 100%  | 94.8%
@@ -458,6 +490,7 @@ Overall Coverage                  | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
 ```
 
 ⚠️ **Below 80% Threshold**:
+
 - Overall statements: 78.5% (need +1.5%)
 - Branch coverage: 75.8% (need +4.2%)
 
@@ -504,15 +537,15 @@ Overall Coverage                  | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
 
 ## Compliance Score Breakdown
 
-| Category | Score | Weight | Weighted Score |
-|----------|-------|--------|----------------|
-| Core Layer | 9/10 | 25% | 22.5/25 |
-| Features Layer | 7/10 | 20% | 14/20 |
-| Shared Layer | N/A | 10% | 10/10 |
-| Translations | 8/10 | 15% | 12/15 |
-| Testing | 7/10 | 20% | 14/20 |
-| Security & Performance | 10/10 | 10% | 10/10 |
-| **Overall** | **76/100** | | **76/100** |
+| Category               | Score      | Weight | Weighted Score |
+| ---------------------- | ---------- | ------ | -------------- |
+| Core Layer             | 9/10       | 25%    | 22.5/25        |
+| Features Layer         | 7/10       | 20%    | 14/20          |
+| Shared Layer           | N/A        | 10%    | 10/10          |
+| Translations           | 8/10       | 15%    | 12/15          |
+| Testing                | 7/10       | 20%    | 14/20          |
+| Security & Performance | 10/10      | 10%    | 10/10          |
+| **Overall**            | **76/100** |        | **76/100**     |
 
 ---
 
@@ -522,6 +555,7 @@ Overall Coverage                  | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
 
 **Recommendation**:
 Good implementation overall! Address 3 critical items (~51 minutes) before merging:
+
 1. Fix missing translations (5 min)
 2. Add 'use client' directive (1 min)
 3. Increase test coverage to 80%+ (45 min)
@@ -541,6 +575,7 @@ Once fixed, re-run validation to confirm 80%+ compliance score.
 
 **Report Generated**: 2025-12-10 15:30:00
 **Validation Time**: 2.3 seconds
+
 ```
 
 **User**: "Thanks! I'll fix those 3 issues now."
@@ -553,7 +588,9 @@ Once fixed, re-run validation to confirm 80%+ compliance score.
 
 **User Request**:
 ```
+
 Generate a Modal component with the following features:
+
 - Supports sizes: sm, md, lg
 - Fade and slide animation (Framer Motion)
 - Closes on Esc key
@@ -561,30 +598,33 @@ Generate a Modal component with the following features:
 - Portal rendering (no layout issues)
 - Accessible (focus trap, keyboard nav)
 - Dark mode support
+
 ```
 
 **Claude Response** (invokes component-generator skill):
 
 ```
+
 ✅ Component Generated: Modal
 
 Files Created:
-  ✅ src/shared/components/ui/Modal.tsx (145 lines)
-  ✅ tests/shared/components/ui/Modal.test.tsx (120 lines)
+✅ src/shared/components/ui/Modal.tsx (145 lines)
+✅ tests/shared/components/ui/Modal.test.tsx (120 lines)
 
 Component Features:
-  ✅ TypeScript interface (ModalProps)
-  ✅ Framer Motion animations (fade + slide)
-  ✅ Portal rendering with createPortal
-  ✅ Keyboard support (Esc to close)
-  ✅ Overlay click to close
-  ✅ Size variants (sm, md, lg)
-  ✅ Dark mode support
-  ✅ Focus trap (body scroll lock)
-  ✅ Accessibility (ARIA labels)
-  ✅ Test scaffold (12 test cases)
+✅ TypeScript interface (ModalProps)
+✅ Framer Motion animations (fade + slide)
+✅ Portal rendering with createPortal
+✅ Keyboard support (Esc to close)
+✅ Overlay click to close
+✅ Size variants (sm, md, lg)
+✅ Dark mode support
+✅ Focus trap (body scroll lock)
+✅ Accessibility (ARIA labels)
+✅ Test scaffold (12 test cases)
 
 Component Code:
+
 ```tsx
 // src/shared/components/ui/Modal.tsx
 'use client';
@@ -662,23 +702,21 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
 ```
 
 Usage Example:
+
 ```tsx
 const [isOpen, setIsOpen] = useState(false);
 
-<Modal
-  isOpen={isOpen}
-  onClose={() => setIsOpen(false)}
-  title="Settings"
-  size="md"
->
+<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Settings" size="md">
   <p>Modal content here</p>
-</Modal>
+</Modal>;
 ```
 
 Next Steps:
-  1. Import and use: import { Modal } from '@/shared/components/ui/Modal'
-  2. Run tests: npm test Modal.test.tsx
-  3. Customize styling as needed
+
+1. Import and use: import { Modal } from '@/shared/components/ui/Modal'
+2. Run tests: npm test Modal.test.tsx
+3. Customize styling as needed
+
 ```
 
 ---
@@ -687,12 +725,15 @@ Next Steps:
 
 **User Request**:
 ```
+
 Generate a Testimonials feature component with:
+
 - Display testimonials in cards
 - Show client photo, name, role, company, quote
 - Carousel with left/right navigation
 - Responsive grid (3 cols desktop, 2 tablet, 1 mobile)
 - Spanish/English translations
+
 ```
 
 **Claude Response** (invokes component-generator skill):
@@ -711,67 +752,50 @@ Generates:
 
 **User Request**:
 ```
+
 Write comprehensive tests for the Blog component to ensure 80%+ coverage.
 The component is at src/features/blog/Blog.tsx.
+
 ```
 
 **Claude Response** (invokes test-writer skill):
 
 ```
+
 ✅ Tests Generated: Blog Component
 
 Files Created:
-  ✅ tests/features/blog/Blog.test.tsx (210 lines, 22 test cases)
+✅ tests/features/blog/Blog.test.tsx (210 lines, 22 test cases)
 
 Test Suites:
-  ✓ Rendering (6 tests)
-    - Renders blog section with correct id
-    - Renders blog title
-    - Renders subtitle
-    - Renders all posts by default
-    - Renders tag filter buttons
-    - Renders post count
+✓ Rendering (6 tests) - Renders blog section with correct id - Renders blog title - Renders subtitle - Renders all posts by default - Renders tag filter buttons - Renders post count
 
-  ✓ Filtering (5 tests)
-    - Filters posts when tag is clicked
-    - Shows all posts when "Todos" is clicked
-    - Active filter button has correct styling
-    - Displays no posts message when filter is empty
-    - Maintains filter state on interaction
+✓ Filtering (5 tests) - Filters posts when tag is clicked - Shows all posts when "Todos" is clicked - Active filter button has correct styling - Displays no posts message when filter is empty - Maintains filter state on interaction
 
-  ✓ Translations (3 tests)
-    - Displays Spanish translations by default
-    - Displays English translations when locale is en
-    - Displays correct post count in filter button
+✓ Translations (3 tests) - Displays Spanish translations by default - Displays English translations when locale is en - Displays correct post count in filter button
 
-  ✓ Accessibility (5 tests)
-    - Has accessible heading with correct level
-    - Has semantic section element
-    - Supports keyboard navigation
-    - All interactive elements keyboard accessible
-    - Focus indicators visible
+✓ Accessibility (5 tests) - Has accessible heading with correct level - Has semantic section element - Supports keyboard navigation - All interactive elements keyboard accessible - Focus indicators visible
 
-  ✓ Animations (2 tests)
-    - Applies Framer Motion classes
-    - Stagger animation works on children
+✓ Animations (2 tests) - Applies Framer Motion classes - Stagger animation works on children
 
-  ✓ Responsive Design (1 test)
-    - Applies responsive classes
+✓ Responsive Design (1 test) - Applies responsive classes
 
 Coverage Estimate:
-  - Statements: 88%
-  - Branches: 85%
-  - Functions: 92%
-  - Lines: 87%
+
+- Statements: 88%
+- Branches: 85%
+- Functions: 92%
+- Lines: 87%
 
 Status: ✅ Exceeds 80% threshold
 
 Run Tests:
-  npm test Blog.test.tsx
+npm test Blog.test.tsx
 
 View Coverage:
-  npm run test:coverage
-```
+npm run test:coverage
+
+````
 
 **Generated Test File**:
 ```typescript
@@ -808,13 +832,14 @@ describe('Blog Component', () => {
     // ... 20 more tests
   });
 });
-```
+````
 
 ---
 
 ### Example 2: Generate Tests for Entity
 
 **User Request**:
+
 ```
 Write tests for the BlogPost entity in src/core/entities/BlogPost.ts.
 Focus on validation and business logic methods.
@@ -823,6 +848,7 @@ Focus on validation and business logic methods.
 **Claude Response** (invokes test-writer skill):
 
 Generates comprehensive entity tests with:
+
 - Constructor validation tests (9 tests)
 - Method tests (8 tests)
 - Edge case tests (5 tests)
@@ -916,24 +942,28 @@ Generates comprehensive entity tests with:
 ## Tips for Best Results
 
 ### For feature-planner:
+
 1. **Provide Clear Requirements**: The more detailed your requirements, the better the plan
 2. **Mention Complexity**: Indicate if it's a simple or complex feature
 3. **Specify Constraints**: Mention technical constraints upfront
 4. **Include Examples**: Show similar features as reference
 
 ### For code-reviewer:
+
 1. **Commit Your Code**: Ensure changes are committed (or staged)
 2. **Use Feature Branches**: Don't review on main/master
 3. **Provide Context**: Mention original requirements if available
 4. **Run After Completion**: Review when feature is fully implemented
 
 ### For component-generator:
+
 1. **Describe Purpose**: Explain what the component does
 2. **List Features**: Specify variants, sizes, behaviors
 3. **Mention Dependencies**: If it needs specific libraries
 4. **Request Accessibility**: Explicitly ask for a11y if critical
 
 ### For test-writer:
+
 1. **Specify Coverage Goal**: "80%+" or "comprehensive"
 2. **Mention File Path**: Provide exact file to test
 3. **Request Specific Tests**: "Include accessibility tests"
@@ -944,25 +974,33 @@ Generates comprehensive entity tests with:
 ## Troubleshooting
 
 ### "Skill didn't activate"
+
 **Solution**: Use clear keywords
+
 - ✅ "Create implementation plan for..."
 - ✅ "Review my code on branch..."
 - ✅ "Generate a Modal component"
 - ✅ "Write tests for..."
 
 ### "Output was incomplete"
+
 **Solution**: Skills generate 500-2,000 lines
+
 - Wait for completion
 - Ask to continue if cut off
 
 ### "Wrong skill activated"
+
 **Solution**: Be more specific
+
 - ❌ "Help with blog" (ambiguous)
 - ✅ "Create implementation plan for blog"
 - ✅ "Review blog feature code"
 
 ### "Tests don't pass"
+
 **Solution**: Common fixes
+
 - Verify translation files imported
 - Check mocks are configured
 - Ensure test setup.ts is correct

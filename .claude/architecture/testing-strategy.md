@@ -5,6 +5,7 @@
 **Meta de cobertura**: 80%+ (líneas, funciones, branches, statements)
 
 **Herramientas**:
+
 - **Vitest**: Test runner (reemplazo de Jest, más rápido)
 - **React Testing Library**: Testing de componentes
 - **@testing-library/user-event**: Simulación de interacciones de usuario
@@ -15,6 +16,7 @@
 ### Archivos de Configuración
 
 **vitest.config.ts**:
+
 ```typescript
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
@@ -29,13 +31,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'tests/',
-        '*.config.*',
-        '.next/',
-        'app/layout.tsx',
-      ],
+      exclude: ['node_modules/', 'tests/', '*.config.*', '.next/', 'app/layout.tsx'],
       thresholds: {
         lines: 80,
         functions: 80,
@@ -55,6 +51,7 @@ export default defineConfig({
 ```
 
 **tests/setup.ts**:
+
 ```typescript
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
@@ -168,9 +165,7 @@ describe('Project Entity', () => {
         category: 'frontend' as const,
       };
 
-      expect(() => new Project(invalidData)).toThrow(
-        'At least one technology is required'
-      );
+      expect(() => new Project(invalidData)).toThrow('At least one technology is required');
     });
 
     it('throws error for invalid GitHub URL', () => {
@@ -599,9 +594,7 @@ describe('useScrollSpy', () => {
     });
 
     // Simulate intersection
-    mockCallback([
-      { isIntersecting: true, target: { id: 'section-1' } },
-    ]);
+    mockCallback([{ isIntersecting: true, target: { id: 'section-1' } }]);
 
     expect(result.current).toBe('section-1');
   });

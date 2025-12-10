@@ -17,6 +17,7 @@ Analyze code implementations and generate comprehensive validation reports that 
 **DevPortfolio**: Personal portfolio website following Clean Architecture principles.
 
 **Tech Stack**:
+
 - **Framework**: Next.js 15 with App Router
 - **UI Library**: React 19
 - **Language**: TypeScript 5 (strict mode)
@@ -36,12 +37,14 @@ app/ → features/ → shared/ → core/ → NOTHING
 ```
 
 **Rules**:
+
 - ✅ `app/` → can import from `features/`, `shared/`, `core/`
 - ✅ `features/` → can import from `shared/` and `core/`
 - ✅ `shared/` → can import from `core/`
 - ❌ `core/` → CANNOT import from ANYWHERE (pure TypeScript only)
 
 **CRITICAL VIOLATIONS**:
+
 ```typescript
 // ❌ Framework import in core layer
 import { useState } from 'react'; // in src/core/entities/Project.ts
@@ -70,6 +73,7 @@ import { Button } from '@/shared/components/ui/Button'; // features → shared
 **ALL user-facing text MUST use next-intl translation system.**
 
 **CRITICAL VIOLATIONS**:
+
 ```tsx
 // ❌ Hardcoded text (any language)
 <h1>Welcome to my portfolio</h1>
@@ -88,6 +92,7 @@ const t = useTranslations('home');
 **Coverage Thresholds**: 80% minimum (lines, functions, branches, statements)
 
 **Test Structure**:
+
 ```
 tests/
 ├── core/entities/        # Entity tests
@@ -107,12 +112,14 @@ tests/
 **Purpose**: Identify changed files and ensure not validating on main/master.
 
 **Tasks**:
+
 1. Check current git branch
 2. Prevent validation on `main` or `master` branches
 3. Get list of changed files (committed + uncommitted)
 4. Categorize files by layer (core, features, shared, app)
 
 **Git Commands**:
+
 ```bash
 # Get current branch
 git branch --show-current
@@ -126,6 +133,7 @@ git diff --name-only --cached
 ```
 
 **Example Output**:
+
 ```
 Current Branch: feature/blog
 Files Changed (12):
@@ -145,12 +153,14 @@ Files Changed (12):
 **Purpose**: Compare implementation against original requirements (if provided).
 
 **Tasks**:
+
 1. Read feature documentation (if provided)
 2. Extract requirements list
 3. Verify each requirement is implemented
 4. Flag missing or partial implementations
 
 **Example Output**:
+
 ```
 Requirements Validation:
 ✅ Implemented (8/10):
@@ -181,6 +191,7 @@ Requirements Validation:
 **Validation Checklist**:
 
 #### 3.1 No Framework Dependencies (CRITICAL)
+
 ```typescript
 // ❌ CRITICAL VIOLATION
 import { useState } from 'react';
@@ -198,6 +209,7 @@ export class Project {
 ```
 
 **Grep Pattern**:
+
 ```bash
 # Check for React imports in core/
 grep -r "from 'react'" src/core/
@@ -209,6 +221,7 @@ grep -r "from 'next" src/core/
 #### 3.2 Entity Validation
 
 **Requirements**:
+
 - ✅ Constructor validates all input data
 - ✅ Properties are `readonly`
 - ✅ Methods contain business logic only
@@ -216,6 +229,7 @@ grep -r "from 'next" src/core/
 - ✅ `toJSON()` method for serialization
 
 **Example Validation**:
+
 ```typescript
 // ✅ CORRECT Entity
 export class BlogPost {
@@ -231,7 +245,8 @@ export class BlogPost {
     if (!data.title) throw new Error('Title required');
   }
 
-  hasTag(tag: string): boolean { // ✅ Business logic
+  hasTag(tag: string): boolean {
+    // ✅ Business logic
     return this.tags.includes(tag);
   }
 }
@@ -244,7 +259,8 @@ export class BlogPost {
     this.title = data.title; // ❌ No validation
   }
 
-  async save(): Promise<void> { // ❌ Side effect (API call)
+  async save(): Promise<void> {
+    // ❌ Side effect (API call)
     await fetch('/api/blog', { method: 'POST' });
   }
 }
@@ -253,12 +269,14 @@ export class BlogPost {
 #### 3.3 Use-Case Validation
 
 **Requirements**:
+
 - ✅ Pure functions (input → output)
 - ✅ No side effects
 - ✅ Fully testable
 - ✅ JSDoc documentation
 
 **Example Validation**:
+
 ```typescript
 // ✅ CORRECT Use-Case
 /**
@@ -268,16 +286,18 @@ export class BlogPost {
  * @returns Filtered array
  */
 export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
-  return posts.filter(post => post.hasTag(tag));
+  return posts.filter((post) => post.hasTag(tag));
 }
 
 // ❌ VIOLATION - Side effect
-export function loadPosts(): Promise<BlogPost[]> { // ❌ Side effect
-  return fetch('/api/posts').then(r => r.json());
+export function loadPosts(): Promise<BlogPost[]> {
+  // ❌ Side effect
+  return fetch('/api/posts').then((r) => r.json());
 }
 ```
 
 **Core Layer Score Calculation**:
+
 ```
 Total Checks: 10
 Passed: 8
@@ -343,6 +363,7 @@ const t = useTranslations('blog');
 ```
 
 **Grep Pattern**:
+
 ```bash
 # Find potential hardcoded strings in JSX
 grep -n '>[ ]*[A-Z][a-z]' src/features/**/*.tsx
@@ -365,7 +386,8 @@ export function BlogCard({ post, onSelect }: BlogCardProps) {
 }
 
 // ❌ VIOLATION - No props interface
-export function BlogCard({ post, onSelect }) { // ❌ No types
+export function BlogCard({ post, onSelect }) {
+  // ❌ No types
   // ...
 }
 ```
@@ -384,6 +406,7 @@ import { Hero } from '@/features/hero/Hero'; // ❌ Cross-feature import
 ```
 
 **Features Layer Score Calculation**:
+
 ```
 Total Checks: 20
 Passed: 16
@@ -412,16 +435,12 @@ interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
 }
 
 export function Button({ variant = 'default', className, ...props }: ButtonProps) {
-  return (
-    <button
-      className={cn('px-4 py-2', className)}
-      {...props}
-    />
-  );
+  return <button className={cn('px-4 py-2', className)} {...props} />;
 }
 
 // ❌ VIOLATION - Feature-specific logic
-export function Button({ onClick }: any) { // ❌ No types
+export function Button({ onClick }: any) {
+  // ❌ No types
   const posts = fetchBlogPosts(); // ❌ Feature-specific logic
   return <button onClick={onClick}>Click</button>;
 }
@@ -452,6 +471,7 @@ export function useInterval(callback: () => void, delay: number) {
 ```
 
 **Shared Layer Score Calculation**:
+
 ```
 Total Checks: 8
 Passed: 7
@@ -510,12 +530,14 @@ diff es-keys.txt en-keys.txt
 #### 6.3 Component Text Coverage
 
 **Manual Check**:
+
 1. Read component files
 2. Find all `t('keyName')` calls
 3. Verify each key exists in `messages/es.json` and `messages/en.json`
 4. Flag missing keys
 
 **Translation Completeness Score**:
+
 ```
 Total Text Elements: 45
 Translated (ES): 45/45 (100%)
@@ -531,6 +553,7 @@ Score: 95.5%
 **Purpose**: Verify test coverage meets 80%+ threshold.
 
 **Commands**:
+
 ```bash
 # Run tests with coverage
 npm run test:coverage
@@ -544,11 +567,13 @@ npm run test:coverage
 ```
 
 **Validation**:
+
 - ✅ Overall coverage ≥ 80% (lines, functions, branches, statements)
 - ⚠️ Coverage < 80% triggers warning
 - ❌ Coverage < 70% is CRITICAL
 
 **Missing Tests Detection**:
+
 ```bash
 # Find files without corresponding tests
 for file in src/**/*.tsx; do
@@ -561,6 +586,7 @@ done
 ```
 
 **Testing Score Calculation**:
+
 ```
 Coverage: 87.4%
 Threshold: 80%
@@ -578,6 +604,7 @@ Score: 87.4% (PASS)
 #### 8.1 Security Checks
 
 **XSS Vulnerabilities**:
+
 ```tsx
 // ❌ CRITICAL - Unescaped user input
 <div dangerouslySetInnerHTML={{ __html: userInput }} /> // ❌ XSS risk
@@ -587,6 +614,7 @@ Score: 87.4% (PASS)
 ```
 
 **API Route Validation**:
+
 ```typescript
 // ❌ CRITICAL - No input validation
 export async function POST(request: Request) {
@@ -610,6 +638,7 @@ export async function POST(request: Request) {
 #### 8.2 Performance Checks
 
 **Large Bundle Imports**:
+
 ```tsx
 // ❌ VIOLATION - Importing entire library
 import _ from 'lodash'; // ❌ 70KB bundle
@@ -619,16 +648,18 @@ import { debounce } from 'lodash-es';
 ```
 
 **Unoptimized Images**:
+
 ```tsx
 // ❌ VIOLATION - <img> tag
-<img src="/hero.png" alt="Hero" />
+<img src="/hero.png" alt="Hero" />;
 
 // ✅ CORRECT - next/image
 import Image from 'next/image';
-<Image src="/hero.png" alt="Hero" width={800} height={600} />
+<Image src="/hero.png" alt="Hero" width={800} height={600} />;
 ```
 
 **Security & Performance Score**:
+
 ```
 Security Checks: 5
 Passed: 4
@@ -646,10 +677,12 @@ Score: 7/8 = 87.5%
 ## Violation Severity Levels
 
 ### CRITICAL ❌
+
 **Impact**: Breaks build, violates core principles, security risk
 **Must Fix**: Before merge
 
 **Examples**:
+
 - Framework imports in core layer
 - Missing translations (breaks i18n)
 - Test coverage < 70%
@@ -657,10 +690,12 @@ Score: 7/8 = 87.5%
 - Unvalidated API inputs
 
 ### HIGH ⚠️
+
 **Impact**: Code quality issues, potential bugs
 **Should Fix**: Before merge (recommended)
 
 **Examples**:
+
 - Missing TypeScript interfaces
 - Business logic in components
 - Missing cleanup in useEffect
@@ -668,20 +703,24 @@ Score: 7/8 = 87.5%
 - Missing accessibility labels
 
 ### MEDIUM 💡
+
 **Impact**: Best practices, maintainability
 **Can Fix**: In follow-up PR
 
 **Examples**:
+
 - Missing JSDoc comments
 - Inconsistent naming
 - Could extract to custom hook
 - Missing error boundaries
 
 ### LOW ℹ️
+
 **Impact**: Stylistic, minor improvements
 **Optional**: Nice to have
 
 **Examples**:
+
 - Could use const instead of let
 - Could destructure props
 - Could add more specific type
@@ -709,6 +748,7 @@ Score: 7/8 = 87.5%
 **Lines Removed**: [-XXX]
 
 **Summary**:
+
 - ✅ [N] checks passed
 - ⚠️ [N] warnings
 - ❌ [N] critical violations
@@ -722,25 +762,30 @@ Score: 7/8 = 87.5%
 
 **Changed Files ([N])**:
 ```
+
 Core Layer (N files):
-  + src/core/entities/[Entity].ts (ADDED, XXX lines)
-  + src/core/use-cases/[feature].ts (ADDED, XXX lines)
+
+- src/core/entities/[Entity].ts (ADDED, XXX lines)
+- src/core/use-cases/[feature].ts (ADDED, XXX lines)
 
 Features Layer (N files):
-  + src/features/[feature]/[Feature].tsx (ADDED, XXX lines)
+
+- src/features/[feature]/[Feature].tsx (ADDED, XXX lines)
   M src/features/[feature]/[Component].tsx (MODIFIED, +XX/-XX lines)
 
 Shared Layer (N files):
-  M src/shared/constants/[file].ts (MODIFIED, +XX lines)
+M src/shared/constants/[file].ts (MODIFIED, +XX lines)
 
 Translations (2 files):
-  M messages/es.json (MODIFIED, +XX keys)
-  M messages/en.json (MODIFIED, +XX keys)
+M messages/es.json (MODIFIED, +XX keys)
+M messages/en.json (MODIFIED, +XX keys)
 
 Tests (N files):
-  + tests/core/entities/[Entity].test.ts (ADDED, XXX lines)
-  + tests/features/[feature]/[Feature].test.tsx (ADDED, XXX lines)
-```
+
+- tests/core/entities/[Entity].test.ts (ADDED, XXX lines)
+- tests/features/[feature]/[Feature].test.tsx (ADDED, XXX lines)
+
+````
 
 ---
 
@@ -773,9 +818,10 @@ import { useState } from 'react';
 export class [Entity] {
   // ...
 }
-```
+````
 
 **Fix**:
+
 ```typescript
 // ✅ CORRECT - Pure TypeScript only
 export interface [Entity]Data {
@@ -809,6 +855,7 @@ export class [Entity] {
 ```
 
 **Fix**:
+
 ```tsx
 // ✅ CORRECT
 'use client';
@@ -831,6 +878,7 @@ export function Component() {
 **Also update translation files**:
 
 `messages/es.json`:
+
 ```json
 {
   "[feature]": {
@@ -843,6 +891,7 @@ export function Component() {
 ```
 
 `messages/en.json`:
+
 ```json
 {
   "[feature]": {
@@ -866,16 +915,19 @@ export function Component() {
 **Gap**: [XX]%
 
 **Files with Insufficient Coverage**:
+
 - `src/features/[feature]/[Component].tsx`: [XX]% (need +[XX]%)
 - `src/core/use-cases/[useCase].ts`: [XX]% (need +[XX]%)
 
 **Missing Tests**:
+
 - [ ] `tests/features/[feature]/[Component].test.tsx` - Component rendering tests
 - [ ] `tests/features/[feature]/[Component].test.tsx` - User interaction tests
 - [ ] `tests/core/use-cases/[useCase].test.ts` - Use-case unit tests
 
 **Recommendation**:
 Add comprehensive test suites:
+
 - Entity validation tests (4-6 tests)
 - Use-case logic tests (3-5 tests)
 - Component rendering tests (5-8 tests)
@@ -896,16 +948,19 @@ Add comprehensive test suites:
 **Score**: [X]/10
 
 **Files Reviewed**:
+
 - `src/core/entities/[Entity].ts` ([XXX] lines)
 - `src/core/use-cases/[feature].ts` ([XXX] lines)
 
 ✅ **Passes ([X]/[Y])**:
+
 - NO framework dependencies (pure TypeScript)
 - Entities have validation in constructor
 - Use-cases are pure functions
 - Proper TypeScript interfaces
 
 ❌ **Failures ([X]/[Y])**:
+
 - **CRITICAL**: React import found
   - File: `src/core/entities/[Entity].ts:1`
   - Issue: `import { useState } from 'react'`
@@ -919,16 +974,19 @@ Add comprehensive test suites:
 **Score**: [X]/10
 
 **Files Reviewed**:
+
 - `src/features/[feature]/[Feature].tsx` ([XXX] lines)
 - `src/features/[feature]/[Component].tsx` ([XXX] lines)
 
 ✅ **Passes ([X]/[Y])**:
+
 - Component structure follows pattern
 - Props properly typed
 - Uses custom hooks from shared/
 - Framer Motion animations included
 
 ❌ **Failures ([X]/[Y])**:
+
 - **Missing Translation** (CRITICAL)
   - File: `src/features/[feature]/[Feature].tsx:23-30`
   - Issue: [N] hardcoded strings found
@@ -948,16 +1006,19 @@ Add comprehensive test suites:
 **Score**: [X]/10
 
 **Files Reviewed**:
+
 - `src/shared/components/ui/[Component].tsx`
 - `src/shared/hooks/[hookName].ts`
 
 ✅ **Passes ([X]/[Y])**:
+
 - Components are reusable
 - Proper TypeScript interfaces
 - Accessibility built-in
 - Dark mode support
 
 ❌ **Failures ([X]/[Y])**:
+
 - **Missing Cleanup** (HIGH)
   - File: `src/shared/hooks/[hook].ts:15`
   - Issue: useEffect missing cleanup function
@@ -971,10 +1032,12 @@ Add comprehensive test suites:
 **Score**: [X]/10
 
 ✅ **Passes**:
+
 - Translation files exist (es.json, en.json)
 - Most components use `useTranslations()`
 
 ❌ **Failures**:
+
 - **Missing Keys** (CRITICAL)
   - [N] translation keys missing in `messages/en.json`
   - Keys exist in ES but not EN
@@ -992,6 +1055,7 @@ Add comprehensive test suites:
 **Score**: [X]/10
 
 **Coverage Analysis**:
+
 ```
 File                              | Stmts | Branch | Funcs | Lines
 src/core/entities/[Entity].ts     | 95.2% | 92.1%  | 100%  | 94.8%
@@ -1002,11 +1066,13 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 ```
 
 ✅ **Passes**:
+
 - Entity tests comprehensive (95%+ coverage)
 - Use-case tests good (88%+coverage)
 - Overall coverage above 80% threshold
 
 ⚠️ **Warnings**:
+
 - Feature components at 78.5% (below 80%)
 - Branch coverage at 79.8% (below 80%)
 
@@ -1019,19 +1085,23 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 **Score**: [X]/10
 
 ✅ **Security Passes**:
+
 - No `dangerouslySetInnerHTML` usage
 - API routes have validation
 - No exposed secrets
 
 ❌ **Security Violations**:
+
 - None found
 
 ✅ **Performance Passes**:
+
 - Using next/image for images
 - Tree-shaking imports
 - Lazy loading components
 
 ❌ **Performance Violations**:
+
 - None found
 
 ---
@@ -1098,27 +1168,27 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 
 ## Compliance Score Breakdown
 
-| Category | Score | Weight | Weighted Score |
-|----------|-------|--------|----------------|
-| Core Layer | [X]/10 | 25% | [X]/25 |
-| Features Layer | [X]/10 | 20% | [X]/20 |
-| Shared Layer | [X]/10 | 10% | [X]/10 |
-| Translations | [X]/10 | 15% | [X]/15 |
-| Testing | [X]/10 | 20% | [X]/20 |
-| Security & Performance | [X]/10 | 10% | [X]/10 |
-| **Overall** | **[X]/100** | | **[X]/100** |
+| Category               | Score       | Weight | Weighted Score |
+| ---------------------- | ----------- | ------ | -------------- |
+| Core Layer             | [X]/10      | 25%    | [X]/25         |
+| Features Layer         | [X]/10      | 20%    | [X]/20         |
+| Shared Layer           | [X]/10      | 10%    | [X]/10         |
+| Translations           | [X]/10      | 15%    | [X]/15         |
+| Testing                | [X]/10      | 20%    | [X]/20         |
+| Security & Performance | [X]/10      | 10%    | [X]/10         |
+| **Overall**            | **[X]/100** |        | **[X]/100**    |
 
 ---
 
 ## Compliance Rating
 
-| Score Range | Rating | Description |
-|-------------|--------|-------------|
-| 90-100 | ⭐⭐⭐⭐⭐ Excellent | Production-ready, minimal issues |
-| 80-89 | ⭐⭐⭐⭐ Good | Minor improvements needed |
-| 70-79 | ⭐⭐⭐ Fair | Several issues, needs work |
-| 60-69 | ⭐⭐ Poor | Significant issues, not ready |
-| < 60 | ⭐ Critical | Major violations, must address |
+| Score Range | Rating               | Description                      |
+| ----------- | -------------------- | -------------------------------- |
+| 90-100      | ⭐⭐⭐⭐⭐ Excellent | Production-ready, minimal issues |
+| 80-89       | ⭐⭐⭐⭐ Good        | Minor improvements needed        |
+| 70-79       | ⭐⭐⭐ Fair          | Several issues, needs work       |
+| 60-69       | ⭐⭐ Poor            | Significant issues, not ready    |
+| < 60        | ⭐ Critical          | Major violations, must address   |
 
 **Your Score**: [X]/100 - [Rating]
 
@@ -1132,12 +1202,14 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 [Based on score, provide recommendation]
 
 **If YES WITH FIXES**:
+
 1. Address all CRITICAL violations ([N] items, ~[X] hours)
 2. Consider addressing HIGH violations ([N] items, ~[X] minutes)
 3. Re-run validation after fixes
 4. Merge when compliance ≥ 80%
 
 **If NO**:
+
 1. Critical violations must be fixed before merge
 2. Test coverage must reach 80%+
 3. All translations must be complete
@@ -1156,6 +1228,7 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
    - Priority: Before merge
 
 3. **Re-run Validation**
+
    ```bash
    # After fixes, re-run code-reviewer
    "Review my implementation on [branch]"
@@ -1173,6 +1246,7 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 **Report Generated**: [Date]
 **Validation Skill Version**: 1.0.0
 **Target Project**: DevPortfolio (Next.js 15 + React 19 + TypeScript 5)
+
 ```
 
 ---
@@ -1182,6 +1256,7 @@ Overall Coverage                  | 82.4% | 79.8%  | 86.2%  | 83.5%
 ### Example 1: Review Feature Implementation
 
 ```
+
 User: "Review my blog feature implementation on feature/blog branch"
 
 Claude: [Invokes code-reviewer skill]
@@ -1194,30 +1269,36 @@ Claude: [Invokes code-reviewer skill]
 6. Generates comprehensive report
 
 Output: validation-report-blog-2025-12-10.md (800+ lines)
+
 ```
 
 ### Example 2: Quick Validation
 
 ```
+
 User: "Quick code review on my current changes"
 
 Claude: [Invokes code-reviewer skill]
 
 Output: Shortened report focusing on critical issues only
+
 ```
 
 ### Example 3: Pre-Merge Checklist
 
 ```
+
 User: "Am I ready to merge feature/contact-form?"
 
 Claude: [Invokes code-reviewer skill]
 
 Output:
+
 - Compliance: 88/100 ⭐⭐⭐⭐
 - Status: ✅ READY (with minor fixes)
 - 2 HIGH priority items to address
 - Estimated fix time: 20 minutes
+
 ```
 
 ---
@@ -1247,3 +1328,4 @@ Output:
 **Skill Version**: 1.0.0
 **Last Updated**: 2025-12-10
 **Target Project**: DevPortfolio (Next.js 15 + React 19 + TypeScript 5)
+```

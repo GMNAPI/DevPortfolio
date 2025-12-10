@@ -17,6 +17,7 @@ Analyze feature documentation and create a comprehensive, structured implementat
 **DevPortfolio**: Personal portfolio website for Ángel Hidalgo Barreiro, full-stack developer specializing in SaaS, scalable architectures, and DevOps.
 
 **Tech Stack**:
+
 - **Framework**: Next.js 15 with App Router
 - **UI Library**: React 19
 - **Language**: TypeScript 5 (strict mode)
@@ -138,16 +139,18 @@ core/ (Domain Layer)
 ```
 
 **Rules**:
+
 - ✅ `app/` → can import from `features/`, `shared/`, `core/`
 - ✅ `features/` → can import from `shared/` and `core/`
 - ✅ `shared/` → can import from `core/`
 - ❌ `core/` → CANNOT import from ANYWHERE (pure TypeScript only, NO React, NO Next.js)
 
 **Violations**:
+
 ```typescript
 // ❌ CRITICAL VIOLATION: Framework import in core/
 // src/core/entities/Project.ts
-import { useState } from 'react';  // ❌ FORBIDDEN
+import { useState } from 'react'; // ❌ FORBIDDEN
 
 // ✅ CORRECT: Pure TypeScript only
 export class Project {
@@ -172,6 +175,7 @@ Configured in `tsconfig.json` and `vitest.config.ts`:
 ```
 
 **Usage**:
+
 ```typescript
 import { Project } from '@/core/entities/Project';
 import { Hero } from '@/features/hero/Hero';
@@ -218,6 +222,7 @@ export default async function Page() {
 #### Translation Files Structure
 
 **messages/es.json** (default locale):
+
 ```json
 {
   "myComponent": {
@@ -229,6 +234,7 @@ export default async function Page() {
 ```
 
 **messages/en.json**:
+
 ```json
 {
   "myComponent": {
@@ -274,6 +280,7 @@ const t = useTranslations('blog');
 ```
 
 **Violations**:
+
 ```tsx
 // ❌ CRITICAL: Hardcoded text (any language)
 <h1>Welcome to my portfolio</h1>
@@ -292,6 +299,7 @@ const t = useTranslations('home');
 **Coverage Thresholds**: 80% minimum (lines, functions, branches, statements)
 
 **Configured in `vitest.config.ts`**:
+
 ```typescript
 coverage: {
   provider: 'v8',
@@ -511,6 +519,7 @@ describe('Contact API Route', () => {
 #### Tailwind Utility Classes
 
 **Color Palette** (warm tones - beige/brown):
+
 ```css
 /* Light mode */
 --background: #faf8f5;
@@ -524,23 +533,24 @@ describe('Contact API Route', () => {
 ```
 
 **Usage**:
+
 ```tsx
 <div className="bg-background text-foreground">
-  <button className="bg-accent text-white hover:bg-accent/90">
-    Click me
-  </button>
+  <button className="bg-accent text-white hover:bg-accent/90">Click me</button>
 </div>
 ```
 
 #### Responsive Design (Mobile-First)
 
 ```tsx
-<div className="
+<div
+  className="
   px-4 py-6           // Mobile
   md:px-6 md:py-8     // Tablet
   lg:px-8 lg:py-12    // Desktop
   xl:px-12 xl:py-16   // Large Desktop
-">
+"
+>
   Content
 </div>
 ```
@@ -548,10 +558,12 @@ describe('Contact API Route', () => {
 #### Dark Mode Support
 
 ```tsx
-<div className="
+<div
+  className="
   bg-gray-100 dark:bg-gray-900
   text-gray-900 dark:text-gray-100
-">
+"
+>
   Supports dark mode
 </div>
 ```
@@ -587,7 +599,7 @@ import { motion } from 'framer-motion';
   transition={{ duration: 0.6 }}
 >
   Content
-</motion.div>
+</motion.div>;
 ```
 
 #### Motion Utilities
@@ -634,6 +646,7 @@ When creating implementation plans, follow these 8 phases in order:
 **Purpose**: Design TypeScript interfaces, types, and domain entities that represent the core business logic.
 
 **Tasks**:
+
 1. Define TypeScript interfaces for data structures
 2. Create domain entity classes (if business logic needed)
 3. Design validation rules with Zod schemas (if forms)
@@ -643,6 +656,7 @@ When creating implementation plans, follow these 8 phases in order:
 **Location**: `src/core/entities/`
 
 **CRITICAL**:
+
 - ✅ Entities are PURE TypeScript (no React, no Next.js imports)
 - ✅ All validation logic in entity constructor
 - ✅ Immutable properties (readonly)
@@ -746,7 +760,7 @@ export class BlogPost {
    * Check if post has a specific tag
    */
   hasTag(tag: string): boolean {
-    return this.tags.some(t => t.toLowerCase() === tag.toLowerCase());
+    return this.tags.some((t) => t.toLowerCase() === tag.toLowerCase());
   }
 
   /**
@@ -779,6 +793,7 @@ export class BlogPost {
 ```
 
 **Checklist**:
+
 - [ ] Define `[Entity]Data` interface
 - [ ] Create `[Entity]` class with readonly properties
 - [ ] Implement validation in constructor
@@ -796,6 +811,7 @@ export class BlogPost {
 **Purpose**: Create pure functions that contain business logic and orchestrate entities.
 
 **Tasks**:
+
 1. Identify use-cases for the feature
 2. Create pure functions (input → output, no side effects)
 3. Add filtering, sorting, transformation logic
@@ -805,6 +821,7 @@ export class BlogPost {
 **Location**: `src/core/use-cases/`
 
 **CRITICAL**:
+
 - ✅ Pure functions only (deterministic)
 - ✅ NO side effects (API calls, localStorage, etc.)
 - ✅ Fully testable with unit tests
@@ -829,7 +846,7 @@ export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
     return posts;
   }
 
-  return posts.filter(post => post.hasTag(tag));
+  return posts.filter((post) => post.hasTag(tag));
 }
 
 /**
@@ -838,7 +855,7 @@ export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
  * @returns Array of recent posts
  */
 export function getRecentPosts(posts: BlogPost[]): BlogPost[] {
-  return posts.filter(post => post.isRecent);
+  return posts.filter((post) => post.isRecent);
 }
 
 /**
@@ -860,8 +877,8 @@ export function sortPostsByDate(posts: BlogPost[]): BlogPost[] {
 export function getAllTags(posts: BlogPost[]): string[] {
   const tagSet = new Set<string>();
 
-  posts.forEach(post => {
-    post.tags.forEach(tag => tagSet.add(tag));
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => tagSet.add(tag));
   });
 
   return Array.from(tagSet).sort();
@@ -889,7 +906,7 @@ export function searchPosts(posts: BlogPost[], query: string): BlogPost[] {
 
   const lowerQuery = query.toLowerCase();
 
-  return posts.filter(post => {
+  return posts.filter((post) => {
     return (
       post.title.toLowerCase().includes(lowerQuery) ||
       post.content.toLowerCase().includes(lowerQuery) ||
@@ -900,6 +917,7 @@ export function searchPosts(posts: BlogPost[], query: string): BlogPost[] {
 ```
 
 **Checklist**:
+
 - [ ] Create use-case functions in `src/core/use-cases/`
 - [ ] Ensure functions are pure (no side effects)
 - [ ] Add JSDoc documentation
@@ -915,6 +933,7 @@ export function searchPosts(posts: BlogPost[], query: string): BlogPost[] {
 **Purpose**: Create React components that compose the feature UI and integrate business logic.
 
 **Tasks**:
+
 1. Create main feature component
 2. Implement component logic with hooks
 3. Add translation integration (next-intl)
@@ -926,6 +945,7 @@ export function searchPosts(posts: BlogPost[], query: string): BlogPost[] {
 **Location**: `src/features/[feature-name]/`
 
 **CRITICAL**:
+
 - ✅ Use `'use client'` directive if hooks or interactivity
 - ✅ All text uses `useTranslations()` hook
 - ✅ Import entities and use-cases from `@/core`
@@ -976,12 +996,8 @@ export function Blog() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <m.div className="space-y-4" variants={fadeInUp}>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-foreground-secondary max-w-3xl">
-            {t('subtitle')}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">{t('title')}</h2>
+          <p className="text-lg text-foreground-secondary max-w-3xl">{t('subtitle')}</p>
         </m.div>
 
         {/* Tag Filters */}
@@ -993,7 +1009,7 @@ export function Blog() {
           >
             {t('allPosts', { count: blogPosts.length })}
           </Button>
-          {allTags.map(tag => (
+          {allTags.map((tag) => (
             <Button
               key={tag}
               variant={selectedTag === tag ? 'default' : 'outline'}
@@ -1035,9 +1051,7 @@ export function BlogList({ posts }: BlogListProps) {
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-lg text-foreground-secondary">
-          {t('noPosts')}
-        </p>
+        <p className="text-lg text-foreground-secondary">{t('noPosts')}</p>
       </div>
     );
   }
@@ -1047,7 +1061,7 @@ export function BlogList({ posts }: BlogListProps) {
       className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       variants={staggerContainer(0.12, 0.2)}
     >
-      {posts.map(post => (
+      {posts.map((post) => (
         <m.article key={post.id} variants={fadeInUp}>
           <BlogCard post={post} />
         </m.article>
@@ -1086,9 +1100,7 @@ export function BlogCard({ post }: BlogCardProps) {
     <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
-          <time className="text-sm text-foreground-secondary">
-            {post.getFormattedDate(locale)}
-          </time>
+          <time className="text-sm text-foreground-secondary">{post.getFormattedDate(locale)}</time>
           {post.isRecent && (
             <span className="px-2 py-1 text-xs font-semibold bg-accent/20 text-accent rounded">
               {t('new')}
@@ -1101,19 +1113,13 @@ export function BlogCard({ post }: BlogCardProps) {
       <CardContent className="mt-auto">
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap gap-2">
-            {post.tags.slice(0, 3).map(tag => (
-              <span
-                key={tag}
-                className="px-2 py-1 text-xs bg-background-secondary rounded"
-              >
+            {post.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="px-2 py-1 text-xs bg-background-secondary rounded">
                 {tag}
               </span>
             ))}
           </div>
-          <Link
-            href={`/blog/${post.id}`}
-            className="text-accent hover:underline font-medium"
-          >
+          <Link href={`/blog/${post.id}`} className="text-accent hover:underline font-medium">
             {t('readMore')} →
           </Link>
         </div>
@@ -1127,6 +1133,7 @@ export function BlogCard({ post }: BlogCardProps) {
 ```
 
 **Checklist**:
+
 - [ ] Create main feature component in `src/features/[feature]/`
 - [ ] Add `'use client'` directive if using hooks
 - [ ] Implement `useTranslations()` for all text
@@ -1146,6 +1153,7 @@ export function BlogCard({ post }: BlogCardProps) {
 **Purpose**: Create reusable, atomic UI components used across features.
 
 **Tasks**:
+
 1. Identify reusable UI patterns
 2. Create atomic components (Button, Card, Input)
 3. Add variant support (primary, secondary, outline, etc.)
@@ -1156,6 +1164,7 @@ export function BlogCard({ post }: BlogCardProps) {
 **Location**: `src/shared/components/ui/`
 
 **CRITICAL**:
+
 - ✅ Reusable across multiple features
 - ✅ Fully typed with TypeScript
 - ✅ Accessibility built-in
@@ -1218,18 +1227,10 @@ export function Button({
 import { cn } from '@/shared/utils/cn';
 import { ComponentPropsWithoutRef } from 'react';
 
-export function Card({
-  className,
-  children,
-  ...props
-}: ComponentPropsWithoutRef<'div'>) {
+export function Card({ className, children, ...props }: ComponentPropsWithoutRef<'div'>) {
   return (
     <div
-      className={cn(
-        'rounded-lg border border-border bg-background',
-        'shadow-sm',
-        className
-      )}
+      className={cn('rounded-lg border border-border bg-background', 'shadow-sm', className)}
       {...props}
     >
       {children}
@@ -1237,11 +1238,7 @@ export function Card({
   );
 }
 
-export function CardHeader({
-  className,
-  children,
-  ...props
-}: ComponentPropsWithoutRef<'div'>) {
+export function CardHeader({ className, children, ...props }: ComponentPropsWithoutRef<'div'>) {
   return (
     <div className={cn('p-6 pb-3', className)} {...props}>
       {children}
@@ -1249,41 +1246,23 @@ export function CardHeader({
   );
 }
 
-export function CardTitle({
-  className,
-  children,
-  ...props
-}: ComponentPropsWithoutRef<'h3'>) {
+export function CardTitle({ className, children, ...props }: ComponentPropsWithoutRef<'h3'>) {
   return (
-    <h3
-      className={cn('text-2xl font-semibold text-foreground', className)}
-      {...props}
-    >
+    <h3 className={cn('text-2xl font-semibold text-foreground', className)} {...props}>
       {children}
     </h3>
   );
 }
 
-export function CardDescription({
-  className,
-  children,
-  ...props
-}: ComponentPropsWithoutRef<'p'>) {
+export function CardDescription({ className, children, ...props }: ComponentPropsWithoutRef<'p'>) {
   return (
-    <p
-      className={cn('text-sm text-foreground-secondary mt-1', className)}
-      {...props}
-    >
+    <p className={cn('text-sm text-foreground-secondary mt-1', className)} {...props}>
       {children}
     </p>
   );
 }
 
-export function CardContent({
-  className,
-  children,
-  ...props
-}: ComponentPropsWithoutRef<'div'>) {
+export function CardContent({ className, children, ...props }: ComponentPropsWithoutRef<'div'>) {
   return (
     <div className={cn('p-6 pt-3', className)} {...props}>
       {children}
@@ -1293,6 +1272,7 @@ export function CardContent({
 ```
 
 **Checklist**:
+
 - [ ] Create UI components in `src/shared/components/ui/`
 - [ ] Add variant and size props
 - [ ] Use `cn()` utility for conditional classes
@@ -1310,6 +1290,7 @@ export function CardContent({
 **Purpose**: Implement client-side interactivity with React hooks and state management.
 
 **Tasks**:
+
 1. Create custom hooks for reusable logic
 2. Implement state management (useState, useReducer)
 3. Add side effects (useEffect)
@@ -1320,6 +1301,7 @@ export function CardContent({
 **Location**: `src/shared/hooks/` or within feature components
 
 **CRITICAL**:
+
 - ✅ Follow Rules of Hooks
 - ✅ Extract reusable logic into custom hooks
 - ✅ Properly handle cleanup in useEffect
@@ -1378,7 +1360,7 @@ export function useContactForm() {
   });
 
   const handleChange = (field: keyof FormData, value: string) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       data: { ...prev.data, [field]: value },
       error: null,
@@ -1386,7 +1368,7 @@ export function useContactForm() {
   };
 
   const handleSubmit = async () => {
-    setState(prev => ({ ...prev, isSubmitting: true, error: null }));
+    setState((prev) => ({ ...prev, isSubmitting: true, error: null }));
 
     try {
       const response = await fetch('/api/contact', {
@@ -1399,14 +1381,14 @@ export function useContactForm() {
         throw new Error(t('errors.submitFailed'));
       }
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         isSubmitting: false,
         success: true,
         data: { name: '', email: '', message: '' },
       }));
     } catch (error) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         isSubmitting: false,
         error: error instanceof Error ? error.message : t('errors.unknown'),
@@ -1423,6 +1405,7 @@ export function useContactForm() {
 ```
 
 **Checklist**:
+
 - [ ] Create custom hooks in `src/shared/hooks/`
 - [ ] Extract reusable logic from components
 - [ ] Add proper TypeScript types
@@ -1439,6 +1422,7 @@ export function useContactForm() {
 **Purpose**: Apply responsive, accessible styling with Tailwind CSS.
 
 **Tasks**:
+
 1. Apply Tailwind utility classes
 2. Ensure mobile-first responsive design
 3. Add dark mode variants
@@ -1447,6 +1431,7 @@ export function useContactForm() {
 6. Verify accessibility (contrast, focus visible)
 
 **CRITICAL**:
+
 - ✅ Mobile-first approach (base styles for mobile, then `md:`, `lg:`, etc.)
 - ✅ Dark mode support (`dark:` variant)
 - ✅ Accessible colors (WCAG AA contrast)
@@ -1456,13 +1441,15 @@ export function useContactForm() {
 **Responsive Design Pattern**:
 
 ```tsx
-<div className="
+<div
+  className="
   px-4 py-6              // Mobile (default)
   sm:px-6 sm:py-8        // Small screens (640px+)
   md:px-8 md:py-10       // Medium screens (768px+)
   lg:px-10 lg:py-12      // Large screens (1024px+)
   xl:px-12 xl:py-16      // Extra large (1280px+)
-">
+"
+>
   Content
 </div>
 ```
@@ -1470,16 +1457,19 @@ export function useContactForm() {
 **Dark Mode Pattern**:
 
 ```tsx
-<div className="
+<div
+  className="
   bg-gray-100 dark:bg-gray-900
   text-gray-900 dark:text-gray-100
   border-gray-300 dark:border-gray-700
-">
+"
+>
   Supports dark mode
 </div>
 ```
 
 **Checklist**:
+
 - [ ] Apply Tailwind classes (no inline styles)
 - [ ] Test on mobile, tablet, desktop
 - [ ] Verify dark mode appearance
@@ -1496,6 +1486,7 @@ export function useContactForm() {
 **Purpose**: Add internationalization support for Spanish and English.
 
 **Tasks**:
+
 1. Add all translation keys to `messages/es.json`
 2. Add English translations to `messages/en.json`
 3. Verify all text uses `useTranslations()` or `getTranslations()`
@@ -1503,6 +1494,7 @@ export function useContactForm() {
 5. Ensure translations are complete (no missing keys)
 
 **CRITICAL**:
+
 - ✅ ALL user-facing text must be translated
 - ✅ Both ES and EN must be complete
 - ❌ NO hardcoded strings (any language)
@@ -1543,6 +1535,7 @@ export function useContactForm() {
 ```
 
 **Checklist**:
+
 - [ ] Add all keys to `messages/es.json`
 - [ ] Add all keys to `messages/en.json`
 - [ ] Verify NO hardcoded strings remain
@@ -1559,6 +1552,7 @@ export function useContactForm() {
 **Purpose**: Write comprehensive tests to achieve 80%+ coverage.
 
 **Tasks**:
+
 1. Write entity tests (core layer)
 2. Write use-case tests (core layer)
 3. Write component tests (features layer)
@@ -1568,6 +1562,7 @@ export function useContactForm() {
 7. Verify coverage reaches 80%+
 
 **CRITICAL**:
+
 - ✅ 80%+ coverage REQUIRED (lines, functions, branches, statements)
 - ✅ Entity tests (validation, methods)
 - ✅ Use-case tests (pure function logic)
@@ -1682,10 +1677,12 @@ describe('BlogPost Entity', () => {
       const post = new BlogPost(validData);
       const json = post.toJSON();
 
-      expect(json).toEqual(expect.objectContaining({
-        id: '1',
-        title: 'Test Post',
-      }));
+      expect(json).toEqual(
+        expect.objectContaining({
+          id: '1',
+          title: 'Test Post',
+        })
+      );
       expect(json).not.toBe(validData); // New object
     });
   });
@@ -1890,6 +1887,7 @@ npm run test:coverage
 ```
 
 **Checklist**:
+
 - [ ] Write entity tests in `tests/core/entities/`
 - [ ] Write use-case tests in `tests/core/use-cases/`
 - [ ] Write component tests in `tests/features/[feature]/`
@@ -1922,11 +1920,13 @@ When generating implementation plans, use this structure:
 **Estimated Time**: [X hours]
 
 **Tasks**:
+
 1. [Task 1] - [time]
 2. [Task 2] - [time]
 3. [Task 3] - [time]
 
 **Files to Create**:
+
 - [ ] `src/core/entities/[Entity].ts` - Domain entity class
 
 **Example Code**:
@@ -1939,10 +1939,12 @@ When generating implementation plans, use this structure:
 **Estimated Time**: [X hours]
 
 **Tasks**:
+
 1. [Task 1] - [time]
 2. [Task 2] - [time]
 
 **Files to Create**:
+
 - [ ] `src/core/use-cases/[feature].ts` - Pure functions
 
 **Example Code**:
@@ -1957,25 +1959,31 @@ When generating implementation plans, use this structure:
 ## Files Checklist
 
 ### Core Layer
+
 - [ ] `src/core/entities/[Entity].ts`
 - [ ] `src/core/use-cases/[feature].ts`
 
 ### Features Layer
+
 - [ ] `src/features/[feature]/[Feature].tsx`
 - [ ] `src/features/[feature]/[ChildComponent].tsx`
 
 ### Shared Layer
+
 - [ ] `src/shared/components/ui/[Component].tsx` (if new UI component)
 - [ ] `src/shared/hooks/[hookName].ts` (if custom hook)
 
 ### App Router
+
 - [ ] `app/[locale]/[feature]/page.tsx` (if new route)
 
 ### Translations
+
 - [ ] `messages/es.json` (add [N] keys)
 - [ ] `messages/en.json` (add [N] keys)
 
 ### Tests
+
 - [ ] `tests/core/entities/[Entity].test.ts`
 - [ ] `tests/core/use-cases/[feature].test.ts`
 - [ ] `tests/features/[feature]/[Feature].test.tsx`
@@ -1984,17 +1992,17 @@ When generating implementation plans, use this structure:
 
 ## Estimated Timeline
 
-| Phase | Time Estimate |
-|-------|---------------|
-| Phase 1: Entity & Type Design | [X hours] |
-| Phase 2: Core Layer | [X hours] |
-| Phase 3: Feature Layer | [X hours] |
-| Phase 4: UI Components | [X hours] |
-| Phase 5: Client Interactions | [X hours] |
-| Phase 6: Styling | [X hours] |
-| Phase 7: i18n & Translations | [X hours] |
-| Phase 8: Testing | [X hours] |
-| **Total** | **[X-Y hours]** |
+| Phase                         | Time Estimate   |
+| ----------------------------- | --------------- |
+| Phase 1: Entity & Type Design | [X hours]       |
+| Phase 2: Core Layer           | [X hours]       |
+| Phase 3: Feature Layer        | [X hours]       |
+| Phase 4: UI Components        | [X hours]       |
+| Phase 5: Client Interactions  | [X hours]       |
+| Phase 6: Styling              | [X hours]       |
+| Phase 7: i18n & Translations  | [X hours]       |
+| Phase 8: Testing              | [X hours]       |
+| **Total**                     | **[X-Y hours]** |
 
 ---
 

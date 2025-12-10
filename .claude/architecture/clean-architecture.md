@@ -24,6 +24,7 @@ core     → NO puede importar nada (TypeScript puro)
 ```
 
 **Ejemplo CORRECTO**:
+
 ```typescript
 // ✅ features/hero/HeroSection.tsx
 import { validateEmail } from '@/core/use-cases/validateEmail';
@@ -39,6 +40,7 @@ export function validateEmail(email: string): boolean {
 ```
 
 **Ejemplo INCORRECTO**:
+
 ```typescript
 // ❌ core/entities/Project.ts
 import { useState } from 'react'; // NUNCA importar React en core/
@@ -55,10 +57,12 @@ import { Project } from '@/features/projects/types'; // NUNCA importar features 
 **Responsabilidad**: Lógica de negocio pura, independiente de frameworks.
 
 **Contenido**:
+
 - **Entities** (`/entities`): Modelos de dominio con validación
 - **Use Cases** (`/use-cases`): Funciones puras de lógica de negocio
 
 **Reglas**:
+
 - ✅ Solo TypeScript puro
 - ✅ 100% testeable sin mocks
 - ❌ NO imports de React, Next.js, Framer Motion, etc.
@@ -78,13 +82,7 @@ export interface ProjectData {
   category: ProjectCategory;
 }
 
-export type ProjectCategory =
-  | 'fullstack'
-  | 'frontend'
-  | 'backend'
-  | 'devops'
-  | 'mobile'
-  | 'data';
+export type ProjectCategory = 'fullstack' | 'frontend' | 'backend' | 'devops' | 'mobile' | 'data';
 
 export class Project {
   readonly id: string;
@@ -156,7 +154,7 @@ export function filterProjectsByCategory(
     return projects;
   }
 
-  return projects.filter(project => project.category === category);
+  return projects.filter((project) => project.category === category);
 }
 
 // src/core/use-cases/validateContactForm.ts
@@ -210,12 +208,14 @@ function isValidEmail(email: string): boolean {
 **Responsabilidad**: Implementación de características específicas del portfolio. Cada feature es una vertical slice con componentes, hooks, tipos y constantes.
 
 **Contenido**:
+
 - Componentes React específicos de la feature
 - Custom hooks de la feature
 - Tipos TypeScript de la feature
 - Constantes de la feature
 
 **Reglas**:
+
 - ✅ Puede importar de `@/core` y `@/shared`
 - ✅ Componentes con 'use client' si usan hooks de React
 - ✅ Traducciones con `useTranslations('feature-name')`
@@ -290,6 +290,7 @@ export function ProjectsSection() {
 **Responsabilidad**: Código reutilizable por múltiples features.
 
 **Contenido**:
+
 - `/components/ui`: Componentes atómicos (Button, Card, Modal, etc.)
 - `/components/layout`: Layout components (Navbar, Footer)
 - `/hooks`: Custom hooks reutilizables
@@ -297,6 +298,7 @@ export function ProjectsSection() {
 - `/constants`: Constantes globales del proyecto
 
 **Reglas**:
+
 - ✅ Puede importar de `@/core`
 - ✅ Componentes UI genéricos y reutilizables
 - ✅ Sin dependencias de features específicas
@@ -391,6 +393,7 @@ El proyecto usa path aliases para imports limpios:
 ```
 
 **Uso recomendado**:
+
 ```typescript
 // ✅ CORRECTO: Usa path aliases
 import { Project } from '@/core/entities/Project';
@@ -435,6 +438,7 @@ import { Button } from '../../shared/components/ui/Button';
 ### Error 1: Framework imports en core/
 
 **❌ Incorrecto**:
+
 ```typescript
 // src/core/entities/Project.ts
 import { useState } from 'react';
@@ -445,6 +449,7 @@ export class Project {
 ```
 
 **✅ Correcto**:
+
 ```typescript
 // src/core/entities/Project.ts
 // Sin imports de frameworks
@@ -457,6 +462,7 @@ export class Project {
 ### Error 2: Lógica de negocio en componentes
 
 **❌ Incorrecto**:
+
 ```typescript
 // src/features/contact/ContactForm.tsx
 export function ContactForm() {
@@ -470,6 +476,7 @@ export function ContactForm() {
 ```
 
 **✅ Correcto**:
+
 ```typescript
 // src/core/use-cases/validateContactForm.ts
 export function validateContactForm(data: ContactFormData) {
@@ -496,16 +503,20 @@ export function ContactForm() {
 ### Error 3: Imports circulares entre features
 
 **❌ Incorrecto**:
+
 ```typescript
 // src/features/projects/ProjectCard.tsx
 import { ContactButton } from '@/features/contact/ContactButton';
 ```
 
 **✅ Correcto**:
+
 ```typescript
 // Mover ContactButton a shared si es reutilizable
 // src/shared/components/ui/ContactButton.tsx
-export function ContactButton() { /* ... */ }
+export function ContactButton() {
+  /* ... */
+}
 
 // src/features/projects/ProjectCard.tsx
 import { ContactButton } from '@/shared/components/ui/ContactButton';

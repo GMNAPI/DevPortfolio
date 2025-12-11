@@ -1,10 +1,16 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline - Portfolio
 
 on:
   push:
     branches: [master]
+    paths:
+      - 'apps/portfolio/**'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
   pull_request:
     branches: [master]
+    paths:
+      - 'apps/portfolio/**'
 
 env:
   NODE_VERSION: '20.x'
@@ -23,16 +29,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Run ESLint
-        run: npm run lint
+        run: pnpm --filter portfolio run lint
 
       - name: Check Prettier formatting
-        run: npm run format:check
+        run: pnpm --filter portfolio run format:check
 
   # Job 2: Type Check
   typecheck:
@@ -47,10 +53,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Run TypeScript compiler
         run: npx tsc --noEmit
@@ -68,16 +74,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Run tests
-        run: npm run test:run
+        run: pnpm --filter portfolio run test:run
 
       - name: Generate coverage report
-        run: npm run test:coverage
+        run: pnpm --filter portfolio run test:coverage
         continue-on-error: true
 
       - name: Upload coverage reports
@@ -103,13 +109,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Build Next.js application
-        run: npm run build
+        run: pnpm --filter portfolio run build
         env:
           NEXT_PUBLIC_SITE_URL: https://angelhidalgo.dev
 
@@ -135,13 +141,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Build for Lighthouse
-        run: npm run build
+        run: pnpm --filter portfolio run build
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
@@ -164,7 +170,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Run npm audit
         run: npm audit --production

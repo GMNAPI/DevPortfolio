@@ -1,0 +1,18 @@
+{
+  "buildCommand": "pnpm build:portfolio && pnpm build:lab",
+  "outputDirectory": "apps/portfolio/.next",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/lab/:path*",
+      "destination": "/apps/lab/build/:path*"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/lab/(.*)",
+      "dest": "/apps/lab/build/$1"
+    }
+  ]
+}

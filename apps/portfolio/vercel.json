@@ -1,4 +1,4 @@
 {
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter portfolio build",
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile"
+  "buildCommand": "cd ../.. && corepack enable && corepack prepare pnpm@9.0.0 --activate && pnpm install && pnpm --filter portfolio build",
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@9.0.0 --activate && pnpm install"
 }

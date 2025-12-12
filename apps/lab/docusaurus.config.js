@@ -7,7 +7,7 @@ const config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://desenvolupadormaster.vercel.app',
-  baseUrl: '/lab/',
+  baseUrl: '/',
 
   organizationName: 'GMNAPI',
   projectName: 'devportfolio-lab',

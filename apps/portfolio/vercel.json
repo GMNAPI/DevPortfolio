@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm install -g pnpm@9.12.0 && cd ../.. && pnpm install && pnpm --filter portfolio build",
-  "installCommand": "npm install -g pnpm@9.12.0 && cd ../.. && pnpm install",
+  "buildCommand": "corepack enable && corepack prepare pnpm@9.12.0 --activate && cd ../.. && pnpm install && pnpm --filter portfolio build",
+  "installCommand": "corepack enable && corepack prepare pnpm@9.12.0 --activate && cd ../.. && pnpm install",
   "framework": "nextjs"
 }

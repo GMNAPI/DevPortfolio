@@ -4,9 +4,11 @@ description: Generate React components following DevPortfolio patterns with auto
 allowed-tools: Read, Write, Grep, Glob, AskUserQuestion
 ---
 
+**Nota**: Este skill genera componentes para `apps/portfolio/` únicamente. Para `apps/lab/` (Docusaurus), crear componentes manualmente siguiendo patrones de Docusaurus.
+
 ## Purpose
 
-Generate production-ready React components that follow DevPortfolio Clean Architecture, include proper TypeScript typing, i18n translations, Framer Motion animations, dark mode support, and test scaffolds.
+Generate production-ready React components for the **Portfolio app** that follow DevPortfolio Clean Architecture, include proper TypeScript typing, i18n translations, Framer Motion animations, dark mode support, and test scaffolds.
 
 ---
 
@@ -14,7 +16,7 @@ Generate production-ready React components that follow DevPortfolio Clean Archit
 
 ### 1. Feature Components
 
-**Location**: `src/features/[feature-name]/`
+**Location**: `apps/portfolio/src/features/[feature-name]/`
 **Purpose**: Main feature sections (Hero, About, Skills, Projects, Contact, Blog)
 **Characteristics**:
 

@@ -1,10 +1,12 @@
-# Claude Code Skills - DevPortfolio
+# Claude Code Skills - DevPortfolio Monorepo
 
-Sistema de skills personalizados de Claude Code para el proyecto DevPortfolio (Next.js 15 + React 19 + TypeScript).
+Sistema de skills personalizados de Claude Code para el monorepo DevPortfolio (Next.js 15 Portfolio + Docusaurus 2.4 Lab).
 
 ## Overview
 
-Este directorio contiene 4 skills especializados que asisten en el desarrollo de features siguiendo la Clean Architecture del proyecto y los estándares de calidad establecidos (80%+ test coverage, i18n ES/EN, TypeScript estricto).
+Este directorio contiene 4 skills especializados que asisten en el desarrollo de features del **Portfolio** siguiendo la Clean Architecture del proyecto y los estándares de calidad establecidos (80%+ test coverage, i18n ES/EN, TypeScript estricto).
+
+**Nota**: Los skills están enfocados en `apps/portfolio/`. Para `apps/lab/` (Docusaurus), usar las herramientas estándar de Docusaurus.
 
 ## Skills Disponibles
 
@@ -191,10 +193,27 @@ Output: tests/features/projects/Projects.test.tsx
 
 ## Arquitectura del Proyecto
 
-Este portfolio sigue **Clean Architecture** con 3 capas:
+Este monorepo contiene dos aplicaciones:
 
 ```
-/src
+DevPortfolio/
+├── apps/
+│   ├── portfolio/          # Next.js 15 - Portfolio (Clean Architecture)
+│   │   ├── app/            # Next.js App Router
+│   │   ├── src/            # Clean Architecture layers
+│   │   ├── tests/          # Vitest tests
+│   │   └── messages/       # i18n translations
+│   └── lab/                # Docusaurus 2.4 - Blog + Docs
+│       ├── docs/           # Documentation
+│       ├── blog/           # Blog posts
+│       └── src/            # Custom components
+└── packages/               # Shared packages (future)
+```
+
+**Portfolio** sigue **Clean Architecture** con 3 capas:
+
+```
+apps/portfolio/src/
 ├── /core              # Domain Layer (pure TypeScript)
 │   ├── /entities      # Project, Contact, etc.
 │   └── /use-cases     # Pure functions, fully testable
@@ -213,37 +232,47 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
     └── /constants
 ```
 
-**Dependency Rule** (CRÍTICA):
+**Dependency Rule** (CRÍTICA - solo para Portfolio):
 
 - `features` → puede importar de `core` y `shared`
 - `shared` → puede importar de `core`
 - `core` → NO puede importar de NADA (pure TypeScript)
 
+**Path Aliases** (Portfolio):
+```typescript
+@/core/*        → apps/portfolio/src/core/*
+@/features/*    → apps/portfolio/src/features/*
+@/shared/*      → apps/portfolio/src/shared/*
+@/app/*         → apps/portfolio/app/*
+@/i18n/*        → apps/portfolio/src/i18n/*
+@/messages/*    → apps/portfolio/messages/*
+```
+
 ---
 
 ## Estándares del Proyecto
 
-### 1. Testing (ESTRICTO)
+### 1. Testing (ESTRICTO - Portfolio only)
 
 - **80%+ coverage requerido** (lines, functions, branches, statements)
 - Vitest + React Testing Library
 - Tests deben seguir AAA pattern
-- Archivos: `tests/` mirror de `src/`
+- Archivos: `apps/portfolio/tests/` mirror de `apps/portfolio/src/`
 
-### 2. i18n (OBLIGATORIO)
+### 2. i18n (OBLIGATORIO - Portfolio only)
 
 - **TODO texto visible debe usar traducciones**
 - Soportar ES (default) y EN
 - Client components: `useTranslations()`
 - Server components: `getTranslations()`
-- Archivos: `messages/es.json`, `messages/en.json`
+- Archivos: `apps/portfolio/messages/es.json`, `apps/portfolio/messages/en.json`
 
-### 3. TypeScript (ESTRICTO)
+### 3. TypeScript (ESTRICTO - Portfolio only)
 
 - Strict mode enabled
 - Interfaces para todas las props
 - No `any` types
-- Path aliases: `@/core`, `@/features`, `@/shared`
+- Path aliases (Portfolio): `@/core`, `@/features`, `@/shared`, `@/app`, `@/i18n`
 
 ### 4. Styling
 
@@ -256,7 +285,7 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
 
 ## Workflow Típico
 
-### Desarrollo de Nueva Feature
+### Desarrollo de Nueva Feature (Portfolio)
 
 1. **Plan** → Usa `feature-planner`
 
@@ -267,10 +296,10 @@ Este portfolio sigue **Clean Architecture** con 3 capas:
    Output: Plan detallado de 8 fases
 
 2. **Implement** → Sigue el plan generado
-   - Crear entities (core/)
-   - Crear components (features/)
-   - Añadir traducciones
-   - Escribir tests
+   - Crear entities (`apps/portfolio/src/core/entities/`)
+   - Crear components (`apps/portfolio/src/features/`)
+   - Añadir traducciones (`apps/portfolio/messages/`)
+   - Escribir tests (`apps/portfolio/tests/`)
 
 3. **Generate** → Usa `component-generator` para componentes específicos
 
@@ -425,13 +454,14 @@ Los skills validan automáticamente:
 
 ## Notas Importantes
 
+- **Monorepo**: Los skills están diseñados para `apps/portfolio/`. Para `apps/lab/` usar Docusaurus CLI
 - **Auto-contenidos**: Cada skill tiene arquitectura completa embebida
 - **No requieren CLAUDE.md**: Skills funcionan independientemente
 - **Compartibles**: Teammates pueden usar sin setup adicional
-- **Actualizados**: Reflejan Next.js 15, React 19, TypeScript 5
+- **Actualizados**: Reflejan estructura de monorepo con pnpm workspaces
 
 ---
 
-**Última actualización**: 2025-12-10
-**Versión**: 1.0.0
-**Proyecto**: DevPortfolio (Next.js 15 + React 19 + TypeScript 5)
+**Última actualización**: 2025-12-12
+**Versión**: 2.0.0 (Monorepo)
+**Proyecto**: DevPortfolio Monorepo (Portfolio: Next.js 15 + React 19 | Lab: Docusaurus 2.4)

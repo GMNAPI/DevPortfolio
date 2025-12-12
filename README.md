@@ -149,7 +149,7 @@ EMAIL_TO=contact@example.com
 pnpm dev
 
 # O ejecutar individualmente:
-pnpm dev:portfolio      # Portfolio en http://localhost:3000
+pnpm dev:portfolio      # Portfolio en http://localhost:3002
 pnpm dev:lab            # Lab en http://localhost:3001
 ```
 
@@ -158,7 +158,7 @@ pnpm dev:lab            # Lab en http://localhost:3001
 ```bash
 # Desarrollo
 pnpm dev                # Ejecutar ambas apps en paralelo
-pnpm dev:portfolio      # Solo portfolio (localhost:3000)
+pnpm dev:portfolio      # Solo portfolio (localhost:3002)
 pnpm dev:lab            # Solo lab (localhost:3001)
 
 # Build

@@ -1,10 +1,17 @@
-# Testing Strategy - DevPortfolio Monorepo
+---
+id: testing-strategy
+title: Estrategia de Testing en DevPortfolio
+sidebar_label: Testing Strategy
+sidebar_position: 2
+description: Guía de testing con Vitest y React Testing Library para alcanzar 80%+ de cobertura
+keywords: [testing, vitest, react testing library, coverage, aaa pattern]
+---
+
+# Testing Strategy - DevPortfolio
 
 ## Objetivo de Testing
 
-**Meta de cobertura**: 80%+ (líneas, funciones, branches, statements) para **Portfolio**
-
-**Nota**: Este documento se aplica solo a `apps/portfolio/`. La app `apps/lab/` (Docusaurus) no tiene requisitos de testing específicos.
+**Meta de cobertura**: 80%+ (líneas, funciones, branches, statements)
 
 **Herramientas**:
 
@@ -17,7 +24,7 @@
 
 ### Archivos de Configuración
 
-**apps/portfolio/vitest.config.ts**:
+**vitest.config.ts**:
 
 ```typescript
 import { defineConfig } from 'vitest/config';
@@ -52,7 +59,7 @@ export default defineConfig({
 });
 ```
 
-**apps/portfolio/tests/setup.ts**:
+**tests/setup.ts**:
 
 ```typescript
 import '@testing-library/jest-dom';
@@ -107,7 +114,7 @@ npm run test:coverage # Generate coverage report
 #### Testing Entities
 
 ```typescript
-// apps/portfolio/tests/core/entities/Project.test.ts
+// tests/core/entities/Project.test.ts
 import { describe, it, expect } from 'vitest';
 import { Project, type ProjectData } from '@/core/entities/Project';
 
@@ -229,7 +236,7 @@ describe('Project Entity', () => {
 #### Testing Use Cases
 
 ```typescript
-// apps/portfolio/tests/core/use-cases/filterProjectsByCategory.test.ts
+// tests/core/use-cases/filterProjectsByCategory.test.ts
 import { describe, it, expect } from 'vitest';
 import { filterProjectsByCategory } from '@/core/use-cases/filterProjectsByCategory';
 import { Project } from '@/core/entities/Project';
@@ -303,7 +310,7 @@ Todos los tests deben seguir el patrón AAA:
 #### Testing Componentes
 
 ```typescript
-// apps/portfolio/tests/features/projects/ProjectCard.test.tsx
+// tests/features/projects/ProjectCard.test.tsx
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ProjectCard } from '@/features/projects/ProjectCard';
@@ -401,7 +408,7 @@ describe('ProjectCard', () => {
 #### Testing Interacciones de Usuario
 
 ```typescript
-// apps/portfolio/tests/features/contact/ContactForm.test.tsx
+// tests/features/contact/ContactForm.test.tsx
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -477,7 +484,7 @@ describe('ContactForm', () => {
 #### Testing UI Components
 
 ```typescript
-// apps/portfolio/tests/shared/components/ui/Button.test.tsx
+// tests/shared/components/ui/Button.test.tsx
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -557,7 +564,7 @@ describe('Button', () => {
 #### Testing Custom Hooks
 
 ```typescript
-// apps/portfolio/tests/shared/hooks/useScrollSpy.test.ts
+// tests/shared/hooks/useScrollSpy.test.ts
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useScrollSpy } from '@/shared/hooks/useScrollSpy';

@@ -1,15 +1,22 @@
-# Clean Architecture - DevPortfolio Monorepo
+---
+id: clean-architecture
+title: Clean Architecture en DevPortfolio
+sidebar_label: Clean Architecture
+sidebar_position: 1
+description: Guía completa sobre implementación de Clean Architecture con 3 capas en Next.js
+keywords: [clean architecture, next.js, typescript, dependency rule]
+---
+
+# Clean Architecture - DevPortfolio
 
 ## Introducción
 
-El **Portfolio** del monorepo DevPortfolio implementa una versión simplificada de **Clean Architecture** con 3 capas principales. Esta arquitectura garantiza separación de responsabilidades, testabilidad y mantenibilidad del código.
-
-**Nota**: Este documento se aplica solo a `apps/portfolio/`. La app `apps/lab/` (Docusaurus) sigue su propia estructura.
+DevPortfolio implementa una versión simplificada de **Clean Architecture** con 3 capas principales. Esta arquitectura garantiza separación de responsabilidades, testabilidad y mantenibilidad del código.
 
 ## Estructura de Capas
 
 ```
-apps/portfolio/src/
+/src
 ├── /core              # 🎯 Capa de Dominio
 ├── /features          # 📦 Capa de Features
 └── /shared            # 🔧 Capa Compartida
@@ -54,14 +61,14 @@ import { Project } from '@/features/projects/types'; // NUNCA importar features 
 
 ## Capa 1: Core (Dominio)
 
-**Ubicación**: `apps/portfolio/src/core`
+**Ubicación**: `/src/core`
 
 **Responsabilidad**: Lógica de negocio pura, independiente de frameworks.
 
 **Contenido**:
 
-- **Entities** (`apps/portfolio/src/core/entities`): Modelos de dominio con validación
-- **Use Cases** (`apps/portfolio/src/core/use-cases`): Funciones puras de lógica de negocio
+- **Entities** (`/entities`): Modelos de dominio con validación
+- **Use Cases** (`/use-cases`): Funciones puras de lógica de negocio
 
 **Reglas**:
 
@@ -73,7 +80,7 @@ import { Project } from '@/features/projects/types'; // NUNCA importar features 
 ### Ejemplo: Entity
 
 ```typescript
-// apps/portfolio/src/core/entities/Project.ts
+// src/core/entities/Project.ts
 export interface ProjectData {
   id: string;
   title: string;
@@ -144,7 +151,7 @@ export class Project {
 ### Ejemplo: Use Case
 
 ```typescript
-// apps/portfolio/src/core/use-cases/filterProjectsByCategory.ts
+// src/core/use-cases/filterProjectsByCategory.ts
 import type { Project } from '@/core/entities/Project';
 import type { ProjectCategory } from '@/core/entities/Project';
 
@@ -411,7 +418,7 @@ import { Button } from '../../shared/components/ui/Button';
 
 ### Checklist para Core Layer
 
-- [ ] ¿El archivo está en `apps/portfolio/src/core`?
+- [ ] ¿El archivo está en `/src/core`?
 - [ ] ¿Solo usa TypeScript puro (sin React, Next.js, etc.)?
 - [ ] ¿No tiene side effects (API calls, localStorage)?
 - [ ] ¿Es 100% testeable sin mocks?
@@ -420,7 +427,7 @@ import { Button } from '../../shared/components/ui/Button';
 
 ### Checklist para Features Layer
 
-- [ ] ¿El archivo está en `apps/portfolio/src/features/[feature-name]`?
+- [ ] ¿El archivo está en `/src/features/[feature-name]`?
 - [ ] ¿Solo importa de `@/core` y `@/shared`?
 - [ ] ¿NO importa de otras features?
 - [ ] ¿Tiene 'use client' si usa hooks de React?
@@ -429,7 +436,7 @@ import { Button } from '../../shared/components/ui/Button';
 
 ### Checklist para Shared Layer
 
-- [ ] ¿El archivo está en `apps/portfolio/src/shared`?
+- [ ] ¿El archivo está en `/src/shared`?
 - [ ] ¿Solo importa de `@/core`?
 - [ ] ¿NO importa de `/features`?
 - [ ] ¿Es genérico y reutilizable?
@@ -480,7 +487,7 @@ export function ContactForm() {
 **✅ Correcto**:
 
 ```typescript
-// apps/portfolio/src/core/use-cases/validateContactForm.ts
+// src/core/use-cases/validateContactForm.ts
 export function validateContactForm(data: ContactFormData) {
   const errors = {};
   if (!data.email.includes('@')) {

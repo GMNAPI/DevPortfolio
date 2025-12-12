@@ -1,6 +1,8 @@
 # Claude Code Skills - Usage Examples
 
-Comprehensive examples demonstrating how to use the DevPortfolio Claude Code skills for planning, code review, component generation, and test writing.
+Comprehensive examples demonstrating how to use the DevPortfolio **Monorepo** Claude Code skills for planning, code review, component generation, and test writing.
+
+**Nota**: Todos los ejemplos y paths están actualizados para la estructura de monorepo con `apps/portfolio/`.
 
 ---
 
@@ -49,12 +51,12 @@ Create an implementation plan following Clean Architecture.
 
 **Files to Create**:
 
-- [ ] `src/core/entities/BlogPost.ts` - Domain entity class
+- [ ] `apps/portfolio/src/core/entities/BlogPost.ts` - Domain entity class
 
 **Example Code**:
 
 ```typescript
-// src/core/entities/BlogPost.ts
+// apps/portfolio/src/core/entities/BlogPost.ts
 export interface BlogPostData {
   id: string;
   title: string;
@@ -112,12 +114,12 @@ export class BlogPost {
 
 **Files to Create**:
 
-- [ ] `src/core/use-cases/blogPosts.ts` - Pure functions
+- [ ] `apps/portfolio/src/core/use-cases/blogPosts.ts` - Pure functions
 
 **Example Code**:
 
 ```typescript
-// src/core/use-cases/blogPosts.ts
+// apps/portfolio/src/core/use-cases/blogPosts.ts
 import { BlogPost } from '@/core/entities/BlogPost';
 
 export function filterPostsByTag(posts: BlogPost[], tag: string): BlogPost[] {
@@ -146,30 +148,30 @@ export function getAllTags(posts: BlogPost[]): string[] {
 
 ### Core Layer
 
-- [ ] `src/core/entities/BlogPost.ts` (150 lines)
-- [ ] `src/core/use-cases/blogPosts.ts` (100 lines)
+- [ ] `apps/portfolio/src/core/entities/BlogPost.ts` (150 lines)
+- [ ] `apps/portfolio/src/core/use-cases/blogPosts.ts` (100 lines)
 
 ### Features Layer
 
-- [ ] `src/features/blog/Blog.tsx` (120 lines)
-- [ ] `src/features/blog/BlogList.tsx` (60 lines)
-- [ ] `src/features/blog/BlogCard.tsx` (80 lines)
+- [ ] `apps/portfolio/src/features/blog/Blog.tsx` (120 lines)
+- [ ] `apps/portfolio/src/features/blog/BlogList.tsx` (60 lines)
+- [ ] `apps/portfolio/src/features/blog/BlogCard.tsx` (80 lines)
 
 ### App Router
 
-- [ ] `app/[locale]/blog/page.tsx` (40 lines)
-- [ ] `app/[locale]/blog/[slug]/page.tsx` (60 lines)
+- [ ] `apps/portfolio/app/[locale]/blog/page.tsx` (40 lines)
+- [ ] `apps/portfolio/app/[locale]/blog/[slug]/page.tsx` (60 lines)
 
 ### Translations
 
-- [ ] `messages/es.json` (+18 keys)
-- [ ] `messages/en.json` (+18 keys)
+- [ ] `apps/portfolio/messages/es.json` (+18 keys)
+- [ ] `apps/portfolio/messages/en.json` (+18 keys)
 
 ### Tests
 
-- [ ] `tests/core/entities/BlogPost.test.ts` (180 lines, 15 tests)
-- [ ] `tests/core/use-cases/blogPosts.test.ts` (150 lines, 12 tests)
-- [ ] `tests/features/blog/Blog.test.tsx` (200 lines, 18 tests)
+- [ ] `apps/portfolio/tests/core/entities/BlogPost.test.ts` (180 lines, 15 tests)
+- [ ] `apps/portfolio/tests/core/use-cases/blogPosts.test.ts` (150 lines, 12 tests)
+- [ ] `apps/portfolio/tests/features/blog/Blog.test.tsx` (200 lines, 18 tests)
 
 **Total Files**: 12 files
 **Estimated Lines of Code**: ~1,200 lines
@@ -283,29 +285,29 @@ I've completed all the code and want to know if it's ready to merge.
 
 Core Layer (2 files):
 
-- src/core/entities/BlogPost.ts (ADDED, 152 lines)
-- src/core/use-cases/blogPosts.ts (ADDED, 98 lines)
+- apps/portfolio/src/core/entities/BlogPost.ts (ADDED, 152 lines)
+- apps/portfolio/src/core/use-cases/blogPosts.ts (ADDED, 98 lines)
 
 Features Layer (3 files):
 
-- src/features/blog/Blog.tsx (ADDED, 125 lines)
-- src/features/blog/BlogList.tsx (ADDED, 62 lines)
-- src/features/blog/BlogCard.tsx (ADDED, 85 lines)
+- apps/portfolio/src/features/blog/Blog.tsx (ADDED, 125 lines)
+- apps/portfolio/src/features/blog/BlogList.tsx (ADDED, 62 lines)
+- apps/portfolio/src/features/blog/BlogCard.tsx (ADDED, 85 lines)
 
 App Router (2 files):
 
-- app/[locale]/blog/page.tsx (ADDED, 42 lines)
-- app/[locale]/blog/[slug]/page.tsx (ADDED, 68 lines)
+- apps/portfolio/app/[locale]/blog/page.tsx (ADDED, 42 lines)
+- apps/portfolio/app/[locale]/blog/[slug]/page.tsx (ADDED, 68 lines)
 
 Translations (2 files):
-M messages/es.json (MODIFIED, +18 keys)
-M messages/en.json (MODIFIED, +15 keys) ⚠️ Missing 3 keys
+M apps/portfolio/messages/es.json (MODIFIED, +18 keys)
+M apps/portfolio/messages/en.json (MODIFIED, +15 keys) ⚠️ Missing 3 keys
 
 Tests (3 files):
 
-- tests/core/entities/BlogPost.test.ts (ADDED, 180 lines)
-- tests/features/blog/Blog.test.tsx (ADDED, 145 lines)
-- tests/features/blog/BlogCard.test.tsx (ADDED, 95 lines)
+- apps/portfolio/tests/core/entities/BlogPost.test.ts (ADDED, 180 lines)
+- apps/portfolio/tests/features/blog/Blog.test.tsx (ADDED, 145 lines)
+- apps/portfolio/tests/features/blog/BlogCard.test.tsx (ADDED, 95 lines)
 
 ````
 
@@ -315,7 +317,7 @@ Tests (3 files):
 
 ### 1. Missing Translations (CRITICAL)
 
-**File**: `messages/en.json`
+**File**: `apps/portfolio/messages/en.json`
 
 **Found 3 missing translation keys**:
 - `blog.filterByTag`
@@ -325,7 +327,7 @@ Tests (3 files):
 **Impact**: English locale will show missing key errors
 
 **Fix**:
-Add to `messages/en.json`:
+Add to `apps/portfolio/messages/en.json`:
 ```json
 {
   "blog": {
@@ -342,7 +344,7 @@ Add to `messages/en.json`:
 
 ### 2. Missing 'use client' Directive (CRITICAL)
 
-**File**: `src/features/blog/BlogCard.tsx:1`
+**File**: `apps/portfolio/src/features/blog/BlogCard.tsx:1`
 
 **Issue**: Component uses `useState` but missing `'use client'` directive
 
@@ -370,6 +372,7 @@ export function BlogCard() {
 }
 ```
 
+**File Path**: `apps/portfolio/src/features/blog/BlogCard.tsx`
 **Impact**: Runtime error in production build
 **Time to Fix**: 1 minute
 
@@ -383,8 +386,8 @@ export function BlogCard() {
 
 **Files with Insufficient Coverage**:
 
-- `src/features/blog/BlogList.tsx`: 75% (need +5%)
-- `src/features/blog/BlogCard.tsx`: 72% (need +8%)
+- `apps/portfolio/src/features/blog/BlogList.tsx`: 75% (need +5%)
+- `apps/portfolio/src/features/blog/BlogCard.tsx`: 72% (need +8%)
 
 **Missing Tests**:
 
@@ -479,14 +482,14 @@ export function BlogCard() {
 **Coverage Analysis**:
 
 ```
-File                              | Stmts | Branch | Funcs | Lines
-src/core/entities/BlogPost.ts     | 95.2% | 92.1%  | 100%  | 94.8%
-src/core/use-cases/blogPosts.ts   | 90.3% | 88.2%  | 95.5%  | 91.1%
-src/features/blog/Blog.tsx        | 85.5% | 82.3%  | 87.1%  | 86.2%
-src/features/blog/BlogList.tsx    | 75.0% | 70.5%  | 80.0%  | 74.2% ⚠️
-src/features/blog/BlogCard.tsx    | 72.3% | 68.1%  | 75.0%  | 71.8% ⚠️
+File                                           | Stmts | Branch | Funcs | Lines
+apps/portfolio/src/core/entities/BlogPost.ts   | 95.2% | 92.1%  | 100%  | 94.8%
+apps/portfolio/src/core/use-cases/blogPosts.ts | 90.3% | 88.2%  | 95.5%  | 91.1%
+apps/portfolio/src/features/blog/Blog.tsx      | 85.5% | 82.3%  | 87.1%  | 86.2%
+apps/portfolio/src/features/blog/BlogList.tsx  | 75.0% | 70.5%  | 80.0%  | 74.2% ⚠️
+apps/portfolio/src/features/blog/BlogCard.tsx  | 72.3% | 68.1%  | 75.0%  | 71.8% ⚠️
 
-Overall Coverage                  | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
+Overall Coverage                               | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
 ```
 
 ⚠️ **Below 80% Threshold**:
@@ -506,9 +509,10 @@ Overall Coverage                  | 78.5% | 75.8%  | 82.1%  | 79.3% ❌
 
 1. [ ] **Add missing translations to en.json** (5 min)
    - Keys: filterByTag, clearFilter, postsCount
+   - File: `apps/portfolio/messages/en.json`
 
 2. [ ] **Add 'use client' to BlogCard.tsx** (1 min)
-   - File: `src/features/blog/BlogCard.tsx:1`
+   - File: `apps/portfolio/src/features/blog/BlogCard.tsx:1`
 
 3. [ ] **Increase test coverage to 80%+** (45 min)
    - Add tests for BlogList empty state
@@ -608,8 +612,8 @@ Generate a Modal component with the following features:
 ✅ Component Generated: Modal
 
 Files Created:
-✅ src/shared/components/ui/Modal.tsx (145 lines)
-✅ tests/shared/components/ui/Modal.test.tsx (120 lines)
+✅ apps/portfolio/src/shared/components/ui/Modal.tsx (145 lines)
+✅ apps/portfolio/tests/shared/components/ui/Modal.test.tsx (120 lines)
 
 Component Features:
 ✅ TypeScript interface (ModalProps)
@@ -626,7 +630,7 @@ Component Features:
 Component Code:
 
 ```tsx
-// src/shared/components/ui/Modal.tsx
+// apps/portfolio/src/shared/components/ui/Modal.tsx
 'use client';
 
 import { cn } from '@/shared/utils/cn';
@@ -739,10 +743,10 @@ Generate a Testimonials feature component with:
 **Claude Response** (invokes component-generator skill):
 
 Generates:
-- `src/features/testimonials/Testimonials.tsx`
-- `src/features/testimonials/TestimonialCard.tsx`
-- Updates to `messages/es.json` and `messages/en.json`
-- Test file `tests/features/testimonials/Testimonials.test.tsx`
+- `apps/portfolio/src/features/testimonials/Testimonials.tsx`
+- `apps/portfolio/src/features/testimonials/TestimonialCard.tsx`
+- Updates to `apps/portfolio/messages/es.json` and `apps/portfolio/messages/en.json`
+- Test file `apps/portfolio/tests/features/testimonials/Testimonials.test.tsx`
 
 ---
 
@@ -765,7 +769,7 @@ The component is at src/features/blog/Blog.tsx.
 ✅ Tests Generated: Blog Component
 
 Files Created:
-✅ tests/features/blog/Blog.test.tsx (210 lines, 22 test cases)
+✅ apps/portfolio/tests/features/blog/Blog.test.tsx (210 lines, 22 test cases)
 
 Test Suites:
 ✓ Rendering (6 tests) - Renders blog section with correct id - Renders blog title - Renders subtitle - Renders all posts by default - Renders tag filter buttons - Renders post count
@@ -799,7 +803,7 @@ npm run test:coverage
 
 **Generated Test File**:
 ```typescript
-// tests/features/blog/Blog.test.tsx
+// apps/portfolio/tests/features/blog/Blog.test.tsx
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -841,7 +845,7 @@ describe('Blog Component', () => {
 **User Request**:
 
 ```
-Write tests for the BlogPost entity in src/core/entities/BlogPost.ts.
+Write tests for the BlogPost entity in apps/portfolio/src/core/entities/BlogPost.ts.
 Focus on validation and business logic methods.
 ```
 
@@ -1007,6 +1011,6 @@ Generates comprehensive entity tests with:
 
 ---
 
-**Last Updated**: 2025-12-10
-**Version**: 1.0.0
-**Project**: DevPortfolio (Next.js 15 + React 19 + TypeScript 5)
+**Last Updated**: 2025-12-12
+**Version**: 2.0.0 (Monorepo)
+**Project**: DevPortfolio Monorepo (Portfolio: Next.js 15 + React 19 | Lab: Docusaurus 2.4)

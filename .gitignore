@@ -43,3 +43,17 @@ gptPrompt.md
 
 # Temporary files and helpers
 /temp
+
+# Monorepo
+.turbo
+
+# Docusaurus
+.docusaurus
+apps/lab/build
+apps/lab/.docusaurus
+apps/lab/node_modules
+
+# Next.js
+apps/portfolio/.next
+apps/portfolio/build
+apps/portfolio/node_modules

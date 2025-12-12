@@ -4,9 +4,11 @@ description: Validate feature implementations against DevPortfolio Clean Archite
 allowed-tools: Read, Grep, Glob, Bash, AskUserQuestion
 ---
 
+**Nota**: Este skill valida código en `apps/portfolio/` únicamente. Para `apps/lab/` (Docusaurus), usar validaciones estándar de Docusaurus.
+
 ## Purpose
 
-Analyze code implementations and generate comprehensive validation reports that identify violations of Clean Architecture principles, coding standards, testing requirements, and i18n completeness. Provide actionable feedback with file:line references and compliance scoring.
+Analyze code implementations and generate comprehensive validation reports that identify violations of Clean Architecture principles, coding standards, testing requirements, and i18n completeness for the **Portfolio app** in the DevPortfolio monorepo. Provide actionable feedback with file:line references and compliance scoring.
 
 ---
 
@@ -14,7 +16,8 @@ Analyze code implementations and generate comprehensive validation reports that 
 
 ### Project Overview
 
-**DevPortfolio**: Personal portfolio website following Clean Architecture principles.
+**DevPortfolio Monorepo**: Contains Portfolio (Next.js 15) and Lab (Docusaurus 2.4) apps.
+**This skill validates**: `apps/portfolio/` - Personal portfolio following Clean Architecture principles.
 
 **Tech Stack**:
 
@@ -921,9 +924,9 @@ export function Component() {
 
 **Missing Tests**:
 
-- [ ] `tests/features/[feature]/[Component].test.tsx` - Component rendering tests
-- [ ] `tests/features/[feature]/[Component].test.tsx` - User interaction tests
-- [ ] `tests/core/use-cases/[useCase].test.ts` - Use-case unit tests
+- [ ] `apps/portfolio/tests/features/[feature]/[Component].test.tsx` - Component rendering tests
+- [ ] `apps/portfolio/tests/features/[feature]/[Component].test.tsx` - User interaction tests
+- [ ] `apps/portfolio/tests/core/use-cases/[useCase].test.ts` - Use-case unit tests
 
 **Recommendation**:
 Add comprehensive test suites:

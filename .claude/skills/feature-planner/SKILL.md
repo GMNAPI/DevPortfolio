@@ -1,12 +1,14 @@
 ---
 name: feature-planner
-description: Analyze feature documentation (PDF, markdown, or requirements) and create comprehensive implementation plans for DevPortfolio features. Use when asked to create implementation plans, analyze feature requirements, plan new sections, or design features. Generates detailed phase-by-phase plans with entity design, core layer, components, hooks, styling, i18n, and testing checklists.
+description: Analyze feature documentation (PDF, markdown, or requirements) and create comprehensive implementation plans for DevPortfolio Portfolio app features. Use when asked to create implementation plans, analyze feature requirements, plan new sections, or design features for apps/portfolio/. Generates detailed phase-by-phase plans with entity design, core layer, components, hooks, styling, i18n, and testing checklists.
 allowed-tools: Read, Grep, Glob, AskUserQuestion, WebFetch
 ---
 
 ## Purpose
 
-Analyze feature documentation and create a comprehensive, structured implementation plan that adheres to DevPortfolio Clean Architecture, Next.js 15 best practices, and project standards (80%+ test coverage, i18n ES/EN, TypeScript strict).
+Analyze feature documentation and create a comprehensive, structured implementation plan that adheres to DevPortfolio **Portfolio app** Clean Architecture, Next.js 15 best practices, and project standards (80%+ test coverage, i18n ES/EN, TypeScript strict).
+
+**Nota**: Este skill es para `apps/portfolio/` únicamente. Para `apps/lab/` (Docusaurus), usar herramientas estándar de Docusaurus.
 
 ---
 
@@ -14,7 +16,8 @@ Analyze feature documentation and create a comprehensive, structured implementat
 
 ### Project Overview
 
-**DevPortfolio**: Personal portfolio website for Ángel Hidalgo Barreiro, full-stack developer specializing in SaaS, scalable architectures, and DevOps.
+**DevPortfolio Monorepo**: Contains Portfolio (Next.js 15) and Lab (Docusaurus 2.4) apps.
+**This skill focuses on**: `apps/portfolio/` - Personal portfolio website for Ángel Hidalgo Barreiro.
 
 **Tech Stack**:
 
@@ -35,7 +38,7 @@ Analyze feature documentation and create a comprehensive, structured implementat
 ### Directory Structure
 
 ```
-DevPortfolio/
+apps/portfolio/                    # Portfolio App (Next.js 15)
 ├── app/                           # Next.js App Router
 │   ├── [locale]/                  # i18n routes (es, en)
 │   │   ├── layout.tsx             # Root layout with providers
@@ -1927,7 +1930,7 @@ When generating implementation plans, use this structure:
 
 **Files to Create**:
 
-- [ ] `src/core/entities/[Entity].ts` - Domain entity class
+- [ ] `apps/portfolio/src/core/entities/[Entity].ts` - Domain entity class
 
 **Example Code**:
 [Insert TypeScript code example]
@@ -1945,7 +1948,7 @@ When generating implementation plans, use this structure:
 
 **Files to Create**:
 
-- [ ] `src/core/use-cases/[feature].ts` - Pure functions
+- [ ] `apps/portfolio/src/core/use-cases/[feature].ts` - Pure functions
 
 **Example Code**:
 [Insert TypeScript code example]
@@ -1960,33 +1963,33 @@ When generating implementation plans, use this structure:
 
 ### Core Layer
 
-- [ ] `src/core/entities/[Entity].ts`
-- [ ] `src/core/use-cases/[feature].ts`
+- [ ] `apps/portfolio/src/core/entities/[Entity].ts`
+- [ ] `apps/portfolio/src/core/use-cases/[feature].ts`
 
 ### Features Layer
 
-- [ ] `src/features/[feature]/[Feature].tsx`
-- [ ] `src/features/[feature]/[ChildComponent].tsx`
+- [ ] `apps/portfolio/src/features/[feature]/[Feature].tsx`
+- [ ] `apps/portfolio/src/features/[feature]/[ChildComponent].tsx`
 
 ### Shared Layer
 
-- [ ] `src/shared/components/ui/[Component].tsx` (if new UI component)
-- [ ] `src/shared/hooks/[hookName].ts` (if custom hook)
+- [ ] `apps/portfolio/src/shared/components/ui/[Component].tsx` (if new UI component)
+- [ ] `apps/portfolio/src/shared/hooks/[hookName].ts` (if custom hook)
 
 ### App Router
 
-- [ ] `app/[locale]/[feature]/page.tsx` (if new route)
+- [ ] `apps/portfolio/app/[locale]/[feature]/page.tsx` (if new route)
 
 ### Translations
 
-- [ ] `messages/es.json` (add [N] keys)
-- [ ] `messages/en.json` (add [N] keys)
+- [ ] `apps/portfolio/messages/es.json` (add [N] keys)
+- [ ] `apps/portfolio/messages/en.json` (add [N] keys)
 
 ### Tests
 
-- [ ] `tests/core/entities/[Entity].test.ts`
-- [ ] `tests/core/use-cases/[feature].test.ts`
-- [ ] `tests/features/[feature]/[Feature].test.tsx`
+- [ ] `apps/portfolio/tests/core/entities/[Entity].test.ts`
+- [ ] `apps/portfolio/tests/core/use-cases/[feature].test.ts`
+- [ ] `apps/portfolio/tests/features/[feature]/[Feature].test.tsx`
 
 ---
 

@@ -1,17 +1,24 @@
-# i18n Patterns - DevPortfolio Monorepo
+---
+id: i18n-patterns
+title: Patrones de i18n en DevPortfolio
+sidebar_label: i18n Patterns
+sidebar_position: 3
+description: Guía de internacionalización con next-intl, soportando español e inglés
+keywords: [i18n, internationalization, next-intl, translations, locale]
+---
+
+# i18n Patterns - DevPortfolio
 
 ## Introducción
 
-El **Portfolio** del monorepo DevPortfolio implementa internacionalización (i18n) usando **next-intl**, soportando español (ES) e inglés (EN). El español es el locale por defecto.
-
-**Nota**: Este documento se aplica solo a `apps/portfolio/`. La app `apps/lab/` (Docusaurus) tiene su propio sistema de i18n.
+DevPortfolio implementa internacionalización (i18n) usando **next-intl**, soportando español (ES) e inglés (EN). El español es el locale por defecto.
 
 ## Configuración
 
 ### Locales Soportados
 
 ```typescript
-// apps/portfolio/src/i18n/routing.ts
+// src/i18n/routing.ts
 export const routing = defineRouting({
   locales: ['es', 'en'],
   defaultLocale: 'es',
@@ -27,7 +34,7 @@ export const routing = defineRouting({
 ### Archivos de Traducción
 
 ```
-apps/portfolio/messages/
+/messages
 ├── es.json  # Traducciones en español (fuente de verdad)
 └── en.json  # Traducciones en inglés
 ```
@@ -96,7 +103,7 @@ apps/portfolio/messages/
 ```typescript
 // middleware.ts
 import createMiddleware from 'next-intl/middleware';
-import { routing } from './apps/portfolio/src/i18n/routing';
+import { routing } from './src/i18n/routing';
 
 export default createMiddleware(routing);
 
@@ -192,7 +199,7 @@ const t = useTranslations('projects');
 ### Patrón 1: Feature Section con i18n
 
 ```typescript
-// apps/portfolio/src/features/projects/ProjectsSection.tsx
+// src/features/projects/ProjectsSection.tsx
 'use client';
 
 import { useState } from 'react';
@@ -244,7 +251,7 @@ export function ProjectsSection() {
 ### Patrón 2: Validación con Mensajes de Error i18n
 
 ```typescript
-// apps/portfolio/src/features/contact/ContactForm.tsx
+// src/features/contact/ContactForm.tsx
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -314,7 +321,7 @@ export function ContactForm() {
 Para componentes shared que pueden ser reutilizados en múltiples contexts:
 
 ```typescript
-// apps/portfolio/src/shared/components/ui/Modal.tsx
+// src/shared/components/ui/Modal.tsx
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -359,7 +366,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 Para páginas dinámicas como `/projects/[slug]`:
 
 ```typescript
-// apps/portfolio/app/[locale]/projects/[slug]/page.tsx
+// app/[locale]/projects/[slug]/page.tsx
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { PROJECTS } from '@/shared/constants/projects';
@@ -422,7 +429,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 ### Client-Side Locale Switching
 
 ```typescript
-// apps/portfolio/src/shared/components/layout/LocaleSwitcher.tsx
+// src/shared/components/layout/LocaleSwitcher.tsx
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
@@ -485,7 +492,7 @@ export function ProjectLink({ slug }: { slug: string }) {
 ### Mock de next-intl en Tests
 
 ```typescript
-// apps/portfolio/tests/features/hero/HeroSection.test.tsx
+// tests/features/hero/HeroSection.test.tsx
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { HeroSection } from '@/features/hero/HeroSection';
@@ -625,8 +632,8 @@ return <h1>{t('projects.title')}</h1>; // Más verboso
 
 **Workflow recomendado**:
 
-1. Actualizar `apps/portfolio/messages/es.json` (fuente de verdad)
-2. Actualizar `apps/portfolio/messages/en.json` con traducciones equivalentes
+1. Actualizar `messages/es.json` (fuente de verdad)
+2. Actualizar `messages/en.json` con traducciones equivalentes
 3. Verificar que las claves coinciden
 4. Ejecutar tests de i18n
 

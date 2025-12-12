@@ -4,9 +4,11 @@ description: Generate comprehensive test suites ensuring 80%+ coverage for DevPo
 allowed-tools: Read, Write, Grep, Glob, Bash, AskUserQuestion
 ---
 
+**Nota**: Este skill genera tests para `apps/portfolio/` únicamente. La app `apps/lab/` (Docusaurus) no tiene requisitos de testing específicos.
+
 ## Purpose
 
-Generate comprehensive, production-ready test suites that achieve 80%+ coverage using Vitest and React Testing Library. Tests follow AAA pattern (Arrange-Act-Assert), include accessibility checks, i18n rendering tests, and edge case coverage.
+Generate comprehensive, production-ready test suites for the **Portfolio app** that achieve 80%+ coverage using Vitest and React Testing Library. Tests follow AAA pattern (Arrange-Act-Assert), include accessibility checks, i18n rendering tests, and edge case coverage.
 
 ---
 
@@ -14,7 +16,7 @@ Generate comprehensive, production-ready test suites that achieve 80%+ coverage 
 
 ### Coverage Thresholds (CRITICAL)
 
-**Configured in `vitest.config.ts`**:
+**Configured in `apps/portfolio/vitest.config.ts`**:
 
 ```typescript
 coverage: {

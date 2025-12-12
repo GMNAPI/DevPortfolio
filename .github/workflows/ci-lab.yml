@@ -1,0 +1,42 @@
+name: CI - Lab
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'apps/lab/**'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
+  pull_request:
+    paths:
+      - 'apps/lab/**'
+
+jobs:
+  build-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Lab
+        run: pnpm --filter lab build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab-build
+          path: apps/lab/build
+          retention-days: 7

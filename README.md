@@ -1,15 +1,33 @@
-# Portfolio Web - Ángel Hidalgo Barreiro
+# DevPortfolio Monorepo - Ángel Hidalgo Barreiro
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus-2.4-3ECC5F?style=for-the-badge&logo=docusaurus)](https://docusaurus.io/)
 
-Portfolio personal de **Ángel Hidalgo Barreiro**, desarrollador full-stack especializado en SaaS, arquitecturas escalables y DevOps, con sede en Barcelona.
+Monorepo que contiene el portfolio personal y blog técnico de **Ángel Hidalgo Barreiro**, desarrollador full-stack especializado en SaaS, arquitecturas escalables y DevOps, con sede en Barcelona.
 
 > 🚀 **"Desarrollador de cosas | SaaS | Node.js | React | PHP/Symfony"**
 
-Este proyecto no solo sirve como mi portfolio profesional, sino también como demo de buenas prácticas de desarrollo, arquitectura limpia y organización de proyectos.
+Este proyecto no solo sirve como mi portfolio profesional, sino también como demo de buenas prácticas de desarrollo, arquitectura limpia, monorepos y organización de proyectos.
+
+## 📦 Estructura del Monorepo
+
+```
+DevPortfolio/
+├── apps/
+│   ├── portfolio/          # Next.js 15 - Portfolio principal
+│   └── lab/                # Docusaurus 2.4 - Blog técnico + Docs
+├── .github/workflows/      # CI/CD para ambas apps
+├── package.json            # Root workspace config
+├── pnpm-workspace.yaml
+└── turbo.json             # Turborepo config
+```
+
+**URLs de Producción:**
+- Portfolio: `https://desenvolupadormaster.vercel.app`
+- Lab (Blog + Docs): `https://desenvolupadormaster.vercel.app/lab`
 
 ## ✨ Características
 
@@ -88,8 +106,12 @@ Ver [ARCHITECTURE.md](ARCHITECTURE.md) para más detalles.
 
 ## 📋 Prerequisitos
 
-- **Node.js**: 20.x o superior
-- **npm**: 10.x o superior (o yarn/pnpm)
+- **Node.js**: 18.x o superior (20.x recomendado para portfolio)
+- **pnpm**: 8.x o superior
+
+```bash
+npm install -g pnpm
+```
 
 ## 🛠️ Instalación
 
@@ -103,12 +125,12 @@ cd DevPortfolio
 2. **Instalar dependencias**
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. **Configurar variables de entorno**
 
-Crear archivo `.env.local` en la raíz:
+Crear archivo `.env.local` en `apps/portfolio/`:
 
 ```env
 # Email configuration (para formulario de contacto)
@@ -123,28 +145,34 @@ EMAIL_TO=contact@example.com
 4. **Ejecutar en desarrollo**
 
 ```bash
-npm run dev
-```
+# Ejecutar ambas apps en paralelo
+pnpm dev
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+# O ejecutar individualmente:
+pnpm dev:portfolio      # Portfolio en http://localhost:3002
+pnpm dev:lab            # Lab en http://localhost:3001
+```
 
 ## 📜 Scripts Disponibles
 
 ```bash
 # Desarrollo
-npm run dev              # Servidor de desarrollo
-npm start                # Servidor de producción (requiere build previo)
+pnpm dev                # Ejecutar ambas apps en paralelo
+pnpm dev:portfolio      # Solo portfolio (localhost:3002)
+pnpm dev:lab            # Solo lab (localhost:3001)
 
 # Build
-npm run build           # Build de producción
+pnpm build              # Build de ambas apps
+pnpm build:portfolio    # Solo portfolio
+pnpm build:lab          # Solo lab
 
 # Calidad de Código
-npm run lint            # Ejecutar ESLint
-npm run format          # Formatear código con Prettier
-npm run format:check    # Verificar formato sin escribir
+pnpm lint               # Lint en ambas apps
+pnpm format             # Formatear todo el código
+pnpm format:check       # Verificar formato
 
 # Testing
-npm test                # Ejecutar tests en watch mode
+pnpm test               # Tests en ambas apps
 npm run test:ui         # Ejecutar tests con UI de Vitest
 npm run test:run        # Ejecutar tests una vez (CI mode)
 npm run test:coverage   # Generar reporte de cobertura

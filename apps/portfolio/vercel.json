@@ -1,4 +1,4 @@
 {
-  "buildCommand": "cd ../.. && corepack enable && corepack prepare pnpm@9.12.0 --activate && pnpm install && pnpm --filter portfolio build",
-  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@9.12.0 --activate && pnpm install"
+  "buildCommand": "cd ../.. && corepack enable && corepack prepare pnpm@10.0.0 --activate && pnpm install && pnpm --filter portfolio build",
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@10.0.0 --activate && pnpm install"
 }

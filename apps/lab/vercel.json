@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter lab build",
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && cd apps/lab && pnpm run build",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "outputDirectory": "build",
   "framework": "docusaurus"

@@ -46,7 +46,6 @@ gptPrompt.md
 
 # Monorepo
 .turbo
-pnpm-lock.yaml
 
 # Docusaurus
 .docusaurus

@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter lab build",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "outputDirectory": "apps/lab/build",
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter lab build",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "outputDirectory": "build",
   "framework": "docusaurus"
 }

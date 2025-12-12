@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm --filter portfolio build",
-  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "npm install -g pnpm@9.12.0 && cd ../.. && pnpm install && pnpm --filter portfolio build",
+  "installCommand": "npm install -g pnpm@9.12.0 && cd ../.. && pnpm install",
   "framework": "nextjs"
 }

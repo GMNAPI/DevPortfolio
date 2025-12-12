@@ -43,7 +43,7 @@ Este sitio está construido con:
 
 ## Navegación
 
-Usa el sidebar izquierdo para explorar las **Guías de Arquitectura** o visita el **[Blog](/blog)** para ver los artículos más recientes.
+Usa el sidebar izquierdo para explorar las **Guías de Arquitectura**.
 
 ---
 

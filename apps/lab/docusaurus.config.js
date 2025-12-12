@@ -70,7 +70,7 @@ const config = {
           position: 'left',
           label: 'Guías',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        // { to: '/blog', label: 'Blog', position: 'left' }, // Disabled: no blog posts yet
         {
           type: 'localeDropdown',
           position: 'right',
@@ -92,10 +92,10 @@ const config = {
               label: 'Guías',
               to: '/docs/intro',
             },
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
+            // {
+            //   label: 'Blog',
+            //   to: '/blog',
+            // }, // Disabled: no blog posts yet
           ],
         },
         {

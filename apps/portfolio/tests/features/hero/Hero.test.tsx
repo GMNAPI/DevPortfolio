@@ -4,11 +4,13 @@ import userEvent from '@testing-library/user-event';
 import { NextIntlClientProvider } from 'next-intl';
 
 import esMessages from '../../../messages/es.json';
+import enMessages from '../../../messages/en.json';
 import { Hero } from '@/features/hero/Hero';
 
-function renderHero() {
+function renderHero(locale = 'es') {
+  const messages = locale === 'en' ? enMessages : esMessages;
   return render(
-    <NextIntlClientProvider locale="es" messages={esMessages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <Hero />
     </NextIntlClientProvider>
   );
@@ -134,6 +136,34 @@ describe('Hero Section', () => {
         '_blank',
         'noopener,noreferrer'
       );
+
+      windowOpenSpy.mockRestore();
+    });
+
+    it('should download Spanish CV when locale is es', async () => {
+      const user = userEvent.setup();
+      const windowOpenSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+      renderHero('es');
+
+      const cvButton = screen.getByRole('button', { name: /descargar cv/i });
+      await user.click(cvButton);
+
+      expect(windowOpenSpy).toHaveBeenCalledWith('/cvEs.pdf', '_blank', 'noopener,noreferrer');
+
+      windowOpenSpy.mockRestore();
+    });
+
+    it('should download English CV when locale is en', async () => {
+      const user = userEvent.setup();
+      const windowOpenSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+      renderHero('en');
+
+      const cvButton = screen.getByRole('button', { name: /download cv/i });
+      await user.click(cvButton);
+
+      expect(windowOpenSpy).toHaveBeenCalledWith('/cvEn.pdf', '_blank', 'noopener,noreferrer');
 
       windowOpenSpy.mockRestore();
     });

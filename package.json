@@ -2,6 +2,8 @@
   "name": "devportfolio-monorepo",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@10.25.0",
+  "engines": { "node": ">=24 <25" },
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -27,6 +29,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "devDependencies": {
+    "next": "15.0.5",
     "prettier": "^3.6.2",
     "turbo": "^1.11.3"
   }

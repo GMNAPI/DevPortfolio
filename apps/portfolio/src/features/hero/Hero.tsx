@@ -8,7 +8,7 @@
 'use client';
 
 import { m } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 import { Button } from '@/shared/components/ui/Button';
 import { personalInfo, availability } from '@/shared/constants/personal';
@@ -17,6 +17,7 @@ import { fadeInUp, fadeIn, staggerContainer } from '@/shared/utils/motion';
 export function Hero() {
   const tHero = useTranslations('hero');
   const tPersonal = useTranslations('personal');
+  const locale = useLocale();
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
@@ -33,7 +34,8 @@ export function Hero() {
   };
 
   const downloadCV = () => {
-    window.open(personalInfo.cvUrl, '_blank', 'noopener,noreferrer');
+    const cvFileName = locale === 'en' ? 'cvEn.pdf' : 'cvEs.pdf';
+    window.open(`/${cvFileName}`, '_blank', 'noopener,noreferrer');
   };
 
   const asciiLines = [

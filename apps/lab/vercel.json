@@ -1,8 +1,6 @@
 {
-  "buildCommand": "cd ../.. && pnpm --filter lab build",
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "framework": "docusaurus",
-  "env": {
-    "NODE_VERSION": "20"
-  }
+  "buildCommand": "cd ../.. && pnpm install && cd apps/lab && pnpm run build",
+  "installCommand": "cd ../.. && pnpm install",
+  "outputDirectory": "build",
+  "framework": "docusaurus"
 }

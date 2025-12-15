@@ -1,8 +1,0 @@
-{
-  "buildCommand": "cd ../.. && pnpm --filter portfolio build",
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "framework": "nextjs",
-  "env": {
-    "NODE_VERSION": "20"
-  }
-}

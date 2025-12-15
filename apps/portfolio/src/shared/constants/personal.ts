@@ -20,7 +20,6 @@ export interface PersonalInfo {
     full: string;
   };
   avatar: string;
-  cvUrl: string;
   social: {
     email: string;
     linkedin: string;
@@ -53,7 +52,6 @@ export const personalInfo: PersonalInfo = {
   },
 
   avatar: '/images/avatar-placeholder.svg',
-  cvUrl: '/documents/cv-angel-hidalgo-barreiro.pdf',
 
   social: {
     email: 'angel@gestionominegocio.es',

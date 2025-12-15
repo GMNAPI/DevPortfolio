@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm install -g pnpm@8.15.9 && cd ../.. && pnpm install && cd apps/portfolio && pnpm build",
-  "installCommand": "npm install -g pnpm@8.15.9 && cd ../.. && pnpm install",
-  "framework": "nextjs"
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && cd apps/portfolio && pnpm build",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }

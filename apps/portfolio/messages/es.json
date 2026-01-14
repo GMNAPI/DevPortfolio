@@ -1,27 +1,26 @@
 {
   "metadata": {
     "title": "{name} | {tagline}",
-    "description": "Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps.",
+    "description": "Tech Lead con experiencia colaborando con usuarios y clientes, acostumbrado a tratar incidencias y necesidades reales con comunicación clara y actitud resolutiva. Especializado en traducir requisitos de negocio a soluciones técnicas.",
     "ogImageAlt": "{name} - Portfolio Profesional",
     "keywords": [
       "Ángel Hidalgo Barreiro",
-      "desarrollador full stack",
+      "tech lead",
       "Barcelona",
+      "gestión técnica",
+      "comunicación",
+      "coordinación equipos",
       "SaaS",
-      "microservicios",
-      "DevOps",
       "PHP",
       "Symfony",
       "Node.js",
       "React",
       "Next.js",
       "TypeScript",
-      "Clean Architecture",
-      "DDD",
+      "liderazgo técnico",
       "portfolio",
-      "arquitecturas escalables",
-      "modernización legacy",
-      "API Platform"
+      "resolución incidencias",
+      "gestión stakeholders"
     ]
   },
   "navigation": {
@@ -64,7 +63,7 @@
   "about": {
     "eyebrow": "Experiencia",
     "title": "Sobre mí",
-    "intro": "Desarrollador enfocado en crear soluciones robustas y escalables. Apasionado por el código limpio, las buenas prácticas y la arquitectura de software. Cada proyecto es una oportunidad para aprender y mejorar.",
+    "intro": "Tech Lead con experiencia colaborando con usuarios y clientes, acostumbrado a tratar incidencias y necesidades reales con comunicación clara y actitud resolutiva. Enfocado en traducir requisitos de negocio a soluciones prácticas, con seguimiento constante y entregas iterativas.",
     "sections": {
       "timeline": "Timeline profesional",
       "activity": "Actividad reciente",
@@ -109,32 +108,33 @@
           "role": "Cofundador & Lead Dev",
           "company": "GestionoMiNegocio",
           "period": { "start": "2020", "end": "Actualidad" },
-          "headline": "Migración ERP legacy a SaaS moderno sobre Symfony 7 con foco en resiliencia.",
+          "headline": "Trabajo con usuarios beta: recogida de feedback, mejoras y acompañamiento en uso del producto.",
           "achievements": [
-            "Reducción del 70% en incidencias de producción tras automatizar CI/CD.",
-            "Activación de más de 8 usuarios beta y adopción progresiva del nuevo flujo SaaS.",
-            "Diseño de arquitectura escalable con despliegues automatizados."
+            "Enfoque en claridad, calidad y experiencia de usuario.",
+            "Activación de más de 8 usuarios beta con acompañamiento personalizado.",
+            "Comunicación constante con stakeholders para priorizar funcionalidades."
           ]
         },
         {
           "role": "Especialista de programa",
           "company": "Vita Liber S.L.U.",
-          "period": { "start": "2021", "end": "Actualidad" },
-          "headline": "Modernización de plataforma a stack Next.js + Symfony con foco en integraciones.",
+          "period": { "start": "2020", "end": "Actualidad" },
+          "headline": "Gestión de necesidades de usuarios internos: priorización, incidencias, validación y soporte funcional.",
           "achievements": [
-            "Construcción de APIs REST con API Platform 4.1 e integración con MariaDB.",
-            "Implantación de estrategia de testing con Jest, Playwright y PHPUnit.",
-            "Liderazgo de roadmap técnico garantizando entregas iterativas."
+            "Atención personalizada y resolución de incidencias con comunicación efectiva.",
+            "Coordinación con equipos internos para priorización de tareas.",
+            "Seguimiento de entregas y validación funcional con usuarios finales."
           ]
         },
         {
           "role": "Consultor & Tech Lead",
           "company": "Fastbyte SL",
           "period": { "start": "2019", "end": "Actualidad" },
-          "headline": "Transformación de sistemas PHP legacy hacia microservicios con Symfony/Next.js.",
+          "headline": "Toma de requisitos con clientes/equipos y traducción a soluciones prácticas.",
           "achievements": [
-            "Definición de arquitecturas escalables y asesoría DevOps continua.",
-            "Automatización de despliegues y observabilidad para servicios críticos."
+            "Comunicación constante, seguimiento de tareas y entrega por fases.",
+            "Coordinación técnica con equipos cliente para alinear expectativas.",
+            "Resolución proactiva de bloqueos e incidencias técnicas."
           ]
         },
         {
@@ -151,10 +151,11 @@
           "role": "Webmaster",
           "company": "Seedstockers (BCG)",
           "period": { "start": "2023", "end": "2024" },
-          "headline": "Gestión de e-commerce multilingüe en PrestaShop con foco en conversión.",
+          "headline": "Gestión de e-commerce multilingüe y coordinación con áreas de pagos/logística.",
           "achievements": [
-            "Implementación de módulos de pago y logística a medida.",
-            "Mantenimiento de catálogo en múltiples idiomas con automatizaciones."
+            "Coordinación para resolver incidencias operativas en el flujo de compra (pedido, pago, envío).",
+            "Mejora continua de experiencia de usuario en procesos clave.",
+            "Colaboración transversal con equipos de negocio y operaciones."
           ]
         },
         {
@@ -282,6 +283,46 @@
             "experienceYears": 4,
             "experienceProjects": 9,
             "keywords": ["Design tokens", "Dark mode", "Framer Motion"]
+          }
+        ]
+      },
+      {
+        "id": "leadership",
+        "name": "Liderazgo & Comunicación",
+        "summary": "Gestión de equipos, comunicación con stakeholders y resolución efectiva de incidencias.",
+        "experienceYears": 5,
+        "skills": [
+          {
+            "name": "Comunicación técnica",
+            "description": "Traducción de requisitos de negocio a soluciones prácticas.",
+            "usagePercentage": 90,
+            "experienceYears": 5,
+            "experienceProjects": 15,
+            "keywords": ["Stakeholders", "Requisitos", "Documentación"]
+          },
+          {
+            "name": "Gestión de incidencias",
+            "description": "Priorización, validación y soporte funcional a usuarios.",
+            "usagePercentage": 85,
+            "experienceYears": 5,
+            "experienceProjects": 12,
+            "keywords": ["Soporte", "Resolución", "Seguimiento"]
+          },
+          {
+            "name": "Coordinación de equipos",
+            "description": "Seguimiento de tareas y entrega por fases.",
+            "usagePercentage": 80,
+            "experienceYears": 4,
+            "experienceProjects": 10,
+            "keywords": ["Liderazgo", "Metodologías", "Entregas"]
+          },
+          {
+            "name": "Orientación al cliente",
+            "description": "Atención personalizada, empatía y feedback continuo.",
+            "usagePercentage": 85,
+            "experienceYears": 5,
+            "experienceProjects": 15,
+            "keywords": ["UX", "Feedback", "Mejora continua"]
           }
         ]
       },
@@ -660,23 +701,23 @@
       "city": "Barcelona",
       "country": "España"
     },
-    "tagline": "Desarrollador de cosas | SaaS | Node.js | React | PHP/Symfony",
+    "tagline": "Tech Lead | Comunicación técnica | SaaS | Node.js | React | PHP/Symfony",
     "bio": {
-      "short": "Desarrollador full-stack especializado en SaaS, arquitecturas escalables y DevOps.",
-      "full": "Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps. Apasionado por crear soluciones técnicas robustas que resuelvan problemas reales de negocio."
+      "short": "Tech Lead con experiencia colaborando con usuarios y clientes, comunicación clara y actitud resolutiva.",
+      "full": "Tech Lead especializado en traducir requisitos de negocio a soluciones técnicas. Experiencia liderando equipos, coordinando con stakeholders, y gestionando incidencias con comunicación efectiva. Enfocado en entregar valor a través de comunicación clara, seguimiento de tareas y entregas iterativas."
     },
     "availability": {
       "open": "Abierto a nuevas oportunidades"
     },
     "focusAreas": [
-      "SaaS Development",
-      "Clean Architecture",
-      "Microservices",
-      "Legacy Modernization",
-      "DevOps & CI/CD",
-      "API Design",
-      "Domain-Driven Design",
-      "Full-Stack Development"
+      "Technical Leadership",
+      "Stakeholder Communication",
+      "Requirements Analysis",
+      "Team Coordination",
+      "Incident Resolution",
+      "Iterative Delivery",
+      "User Support & Training",
+      "Technical Strategy"
     ]
   },
   "career": {}

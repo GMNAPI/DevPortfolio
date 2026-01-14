@@ -27,7 +27,7 @@ describe('Hero Section', () => {
       renderHero();
       expect(
         screen.getByRole('heading', {
-          name: /desarrollador de cosas.*saas.*node\.js.*react.*php\/symfony/i,
+          name: /tech lead.*comunicación técnica.*saas.*node\.js.*react.*php\/symfony/i,
         })
       ).toBeInTheDocument();
     });
@@ -35,7 +35,7 @@ describe('Hero Section', () => {
     it('should render bio description', () => {
       renderHero();
       expect(
-        screen.getByText(/desarrollador full-stack con amplia experiencia/i)
+        screen.getByText(/tech lead especializado en traducir requisitos/i)
       ).toBeInTheDocument();
     });
 

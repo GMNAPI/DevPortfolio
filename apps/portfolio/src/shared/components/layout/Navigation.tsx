@@ -14,7 +14,7 @@
 
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { AnimatePresence, m } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
@@ -28,7 +28,13 @@ import { fadeInUp } from '@/shared/utils/motion';
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  // Prevent hydration mismatch by only rendering theme icon after mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
@@ -168,10 +174,10 @@ export function Navigation() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors px-3 py-2 bg-transparent text-foreground hover:bg-background-secondary"
+              className="inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors px-3 py-2 bg-transparent text-foreground hover:bg-background-secondary w-10 h-10"
               aria-label={tNavigation('theme.toggle')}
             >
-              {theme === 'dark' ? '☀️' : '🌙'}
+              {mounted ? (theme === 'dark' ? '☀️' : '🌙') : null}
             </button>
 
             {/* Mobile Menu Button */}

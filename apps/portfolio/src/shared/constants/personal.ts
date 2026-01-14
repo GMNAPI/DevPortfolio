@@ -44,11 +44,12 @@ export const personalInfo: PersonalInfo = {
     countryCode: 'ES',
   },
 
-  tagline: 'Desarrollador de cosas | SaaS | Node.js | React | PHP/Symfony',
+  tagline: 'Tech Lead | Comunicación técnica | SaaS | Node.js | React | PHP/Symfony',
 
   bio: {
-    short: 'Desarrollador full-stack especializado en SaaS, arquitecturas escalables y DevOps.',
-    full: 'Desarrollador full-stack con amplia experiencia en construcción de SaaS, microservicios y arquitecturas escalables. Especializado en modernización de sistemas legacy, implementación de Clean Architecture y DevOps. Apasionado por crear soluciones técnicas robustas que resuelvan problemas reales de negocio.',
+    short:
+      'Tech Lead con experiencia colaborando con usuarios y clientes, comunicación clara y actitud resolutiva.',
+    full: 'Tech Lead especializado en traducir requisitos de negocio a soluciones técnicas. Experiencia liderando equipos, coordinando con stakeholders, y gestionando incidencias con comunicación efectiva. Enfocado en entregar valor a través de comunicación clara, seguimiento de tareas y entregas iterativas.',
   },
 
   avatar: '/images/avatar-placeholder.svg',
@@ -90,14 +91,14 @@ export const workPreferences = {
  * Professional Focus Areas
  */
 export const focusAreas = [
-  'SaaS Development',
-  'Clean Architecture',
-  'Microservices',
-  'Legacy Modernization',
-  'DevOps & CI/CD',
-  'API Design',
-  'Domain-Driven Design',
-  'Full-Stack Development',
+  'Technical Leadership',
+  'Stakeholder Communication',
+  'Requirements Analysis',
+  'Team Coordination',
+  'Incident Resolution',
+  'Iterative Delivery',
+  'User Support & Training',
+  'Technical Strategy',
 ] as const;
 
 /**

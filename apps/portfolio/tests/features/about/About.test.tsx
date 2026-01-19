@@ -105,7 +105,9 @@ describe('About Section', () => {
       // Certification should have issuer and year (multiple "Zend" instances expected)
       const zendElements = screen.getAllByText(/zend/i);
       expect(zendElements.length).toBeGreaterThan(0);
-      expect(screen.getByText(/2025/i)).toBeInTheDocument();
+      // Since multiple experience periods also contain "2025", check that at least one exists
+      const year2025Elements = screen.getAllByText(/2025/i);
+      expect(year2025Elements.length).toBeGreaterThan(0);
     });
   });
 

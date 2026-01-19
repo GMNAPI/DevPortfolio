@@ -105,37 +105,25 @@
     "career": {
       "experiences": [
         {
-          "role": "Cofundador & Lead Dev",
-          "company": "GestionoMiNegocio",
-          "period": { "start": "2020", "end": "Actualidad" },
-          "headline": "Trabajo con usuarios beta: recogida de feedback, mejoras y acompañamiento en uso del producto.",
-          "achievements": [
-            "Enfoque en claridad, calidad y experiencia de usuario.",
-            "Activación de más de 8 usuarios beta con acompañamiento personalizado.",
-            "Comunicación constante con stakeholders para priorizar funcionalidades."
-          ]
-        },
-        {
-          "role": "Especialista de programa",
-          "company": "Vita Liber S.L.U.",
-          "period": { "start": "2020", "end": "Actualidad" },
-          "headline": "Gestión de necesidades de usuarios internos: priorización, incidencias, validación y soporte funcional.",
-          "achievements": [
-            "Atención personalizada y resolución de incidencias con comunicación efectiva.",
-            "Coordinación con equipos internos para priorización de tareas.",
-            "Seguimiento de entregas y validación funcional con usuarios finales."
-          ]
-        },
-        {
           "role": "Consultor & Tech Lead",
           "company": "Fastbyte SL",
-          "period": { "start": "2019", "end": "Actualidad" },
+          "period": { "start": "2019", "end": "2025" },
           "headline": "Toma de requisitos con clientes/equipos y traducción a soluciones prácticas.",
-          "achievements": [
-            "Comunicación constante, seguimiento de tareas y entrega por fases.",
-            "Coordinación técnica con equipos cliente para alinear expectativas.",
-            "Resolución proactiva de bloqueos e incidencias técnicas."
-          ]
+          "achievements": ["Comunicación constante, seguimiento de tareas y entrega por fases."]
+        },
+        {
+          "role": "Especialista de Programa",
+          "company": "Vita Liber S.L.U.",
+          "period": { "start": "2020", "end": "2025" },
+          "headline": "Gestión de necesidades de usuarios internos: priorización, incidencias, validación y soporte funcional.",
+          "achievements": []
+        },
+        {
+          "role": "Cofundador & Lead Dev",
+          "company": "GestionoMiNegocio",
+          "period": { "start": "2020", "end": "2025" },
+          "headline": "Trabajo con usuarios beta: recogida de feedback, mejoras y acompañamiento en uso del producto.",
+          "achievements": ["Enfoque en claridad, calidad y experiencia de usuario."]
         },
         {
           "role": "Developer",
@@ -151,21 +139,10 @@
           "role": "Webmaster",
           "company": "Seedstockers (BCG)",
           "period": { "start": "2023", "end": "2024" },
-          "headline": "Gestión de e-commerce multilingüe y coordinación con áreas de pagos/logística.",
+          "headline": "Gestión de e-commerce multilingüe (PrestaShop) y colaboración con áreas de pagos/logística.",
           "achievements": [
             "Coordinación para resolver incidencias operativas en el flujo de compra (pedido, pago, envío).",
-            "Mejora continua de experiencia de usuario en procesos clave.",
-            "Colaboración transversal con equipos de negocio y operaciones."
-          ]
-        },
-        {
-          "role": "AI Projects",
-          "company": "Autónomo",
-          "period": { "start": "2023", "end": "Actualidad" },
-          "headline": "Investigación y entrega de soluciones IA aplicadas a procesos de negocio.",
-          "achievements": [
-            "Diseño de sistemas RAG y workflows con n8n para automatización inteligente.",
-            "Experimentación con modelos locales e integración con OpenAI Platform."
+            "Mejora continua de experiencia de usuario en procesos clave."
           ]
         }
       ],
@@ -496,7 +473,7 @@
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Selección de productos SaaS, herramientas internas y documentación técnica desarrollada para clientes y proyectos propios. Organizados en 6 categorías estratégicas.",
+    "subtitle": "Selección de productos SaaS, herramientas internas y documentación técnica desarrollada en proyectos profesionales. Organizados en 6 categorías estratégicas.",
     "filters": {
       "all": "Todas ({count})"
     },
@@ -548,7 +525,7 @@
     "items": [
       {
         "id": "verifactur-gmn",
-        "title": "VerifacturGMN",
+        "title": "Sistema de Facturación Electrónica",
         "description": "Sistema completo de facturación electrónica compatible con VeriFactu/AEAT con flujos SaaS y automatización fiscal.",
         "tech": ["Symfony 7", "API Platform", "PostgreSQL", "Docker", "CI/CD"],
         "links": {
@@ -558,7 +535,7 @@
       },
       {
         "id": "facturae-docusaurus",
-        "title": "FacturaeDocusaurus",
+        "title": "Portal de Documentación Técnica",
         "description": "Portal de documentación técnica para VeriFactu y Facturae con guías, ejemplos y despliegue automatizado.",
         "tech": ["Docusaurus", "TypeScript", "MDX", "GitHub Actions"],
         "links": {
@@ -568,7 +545,7 @@
       },
       {
         "id": "apigns",
-        "title": "apiGns",
+        "title": "API REST de Gestión de Servicios",
         "description": "API REST moderna para la gestión integral de servicios con autenticación avanzada y paneles externos.",
         "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Redis", "Docker"],
         "links": {
@@ -578,7 +555,7 @@
       },
       {
         "id": "frontend-json",
-        "title": "FrontendJson",
+        "title": "Frontend Empresarial",
         "description": "Frontend empresarial en Next.js 15 con arquitectura limpia, tipado estricto y diseño atómico.",
         "tech": ["Next.js 15", "TypeScript", "Tailwind CSS", "Clean Architecture"],
         "links": {
@@ -588,7 +565,7 @@
       },
       {
         "id": "fynkus",
-        "title": "FYNKUS",
+        "title": "Plataforma de Reservas",
         "description": "Plataforma de reservas deportivas con arquitectura hexagonal, DDD y CQRS, enfocada en escalabilidad.",
         "tech": ["PHP 8.2", "Symfony 5.4", "CQRS", "React 18", "Docker"],
         "links": {
@@ -598,7 +575,7 @@
       },
       {
         "id": "gestiono-mi-negocio",
-        "title": "GestiónoMiNegocio",
+        "title": "Plataforma ERP SaaS",
         "description": "Migración de ERP legacy a SaaS modular con multi-tenant, automatización de facturación y paneles analíticos.",
         "tech": ["Symfony 7", "Next.js", "RabbitMQ", "PostgreSQL", "Terraform"],
         "links": {
@@ -608,7 +585,7 @@
       },
       {
         "id": "vita-liber",
-        "title": "Vita Liber Platform",
+        "title": "Plataforma de Gestión Empresarial",
         "description": "Plataforma full-stack para gestión logística y académica con integración Symfony + Next.js.",
         "tech": ["Next.js 14", "Symfony 6", "MariaDB", "API Platform", "Jest"],
         "links": {
@@ -618,7 +595,7 @@
       },
       {
         "id": "genesis-enterprise",
-        "title": "Genesis Enterprise",
+        "title": "Ecosistema Enterprise",
         "description": "Ecosistema enterprise (4M LOC) modernizado hacia microservicios con Symfony, mensajería y DevOps.",
         "tech": ["Symfony", "RabbitMQ", "Microservices", "Docker", "CI/CD"],
         "links": {
@@ -628,7 +605,7 @@
       },
       {
         "id": "streamlit-gmn",
-        "title": "Streamlit GMN",
+        "title": "Simulador de Modelos de Negocio",
         "description": "Simulador de modelos de negocio SaaS con analítica en tiempo real y dashboards interactivos.",
         "tech": ["Python", "Streamlit", "Pandas", "Plotly"],
         "links": {
@@ -638,7 +615,7 @@
       },
       {
         "id": "zend-laminas-tech-tests",
-        "title": "Zend Laminas Tech Tests",
+        "title": "Colección de Pruebas Técnicas",
         "description": "Colección de 10 pruebas técnicas realistas para Laminas MVC y Mezzio orientadas a formación profesional.",
         "tech": ["Laminas", "PHP", "Mezzio", "Docker", "Testing"],
         "links": {

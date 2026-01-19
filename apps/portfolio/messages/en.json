@@ -105,67 +105,44 @@
     "career": {
       "experiences": [
         {
-          "role": "Co-founder & Lead Dev",
-          "company": "GestionoMiNegocio",
-          "period": { "start": "2020", "end": "Present" },
-          "headline": "Working with beta users: collecting feedback, improvements and product onboarding support.",
-          "achievements": [
-            "Focus on clarity, quality and user experience.",
-            "Onboarded 8+ beta users with personalized support.",
-            "Constant communication with stakeholders to prioritize features."
-          ]
+          "role": "Consultant & Tech Lead",
+          "company": "Fastbyte SL",
+          "period": { "start": "2019", "end": "2025" },
+          "headline": "Requirements gathering with clients/teams and translation into practical solutions.",
+          "achievements": ["Constant communication, task follow-up and phased delivery."]
         },
         {
           "role": "Program Specialist",
           "company": "Vita Liber S.L.U.",
-          "period": { "start": "2020", "end": "Present" },
+          "period": { "start": "2020", "end": "2025" },
           "headline": "Managing internal user needs: prioritization, incidents, validation and functional support.",
-          "achievements": [
-            "Personalized attention and incident resolution with effective communication.",
-            "Coordination with internal teams for task prioritization.",
-            "Delivery follow-up and functional validation with end users."
-          ]
+          "achievements": []
         },
         {
-          "role": "Consultant & Tech Lead",
-          "company": "Fastbyte SL",
-          "period": { "start": "2019", "end": "Present" },
-          "headline": "Requirements gathering with clients/teams and translation into practical solutions.",
-          "achievements": [
-            "Constant communication, task follow-up and phased delivery.",
-            "Technical coordination with client teams to align expectations.",
-            "Proactive resolution of blockers and technical incidents."
-          ]
+          "role": "Co-founder & Lead Dev",
+          "company": "GestionoMiNegocio",
+          "period": { "start": "2020", "end": "2025" },
+          "headline": "Working with beta users: collecting feedback, improvements and product onboarding support.",
+          "achievements": ["Focus on clarity, quality and user experience."]
         },
         {
           "role": "Developer",
           "company": "240dots",
           "period": { "start": "2020", "end": "2023" },
-          "headline": "Delivered headless solutions combining WordPress and Symfony.",
+          "headline": "Development of headless solutions combining WordPress and Symfony.",
           "achievements": [
-            "Built plugins connected to custom APIs.",
-            "Optimized performance and content pipelines."
+            "Building plugins connected to custom APIs.",
+            "Performance optimization and content pipelines."
           ]
         },
         {
           "role": "Webmaster",
           "company": "Seedstockers (BCG)",
           "period": { "start": "2023", "end": "2024" },
-          "headline": "Multilingual e-commerce management and coordination with payment/logistics areas.",
+          "headline": "Multilingual e-commerce management (PrestaShop) and collaboration with payment/logistics areas.",
           "achievements": [
             "Coordination to resolve operational incidents in the purchase flow (order, payment, shipping).",
-            "Continuous improvement of user experience in key processes.",
-            "Cross-functional collaboration with business and operations teams."
-          ]
-        },
-        {
-          "role": "AI Projects",
-          "company": "Self-employed",
-          "period": { "start": "2023", "end": "Present" },
-          "headline": "Research and delivery of AI solutions applied to business processes.",
-          "achievements": [
-            "Designed RAG systems and workflows with n8n for intelligent automation.",
-            "Experimented with local models and integrations with OpenAI Platform."
+            "Continuous improvement of user experience in key processes."
           ]
         }
       ],
@@ -496,7 +473,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Selection of SaaS products, internal tools and technical documentation created for clients and personal initiatives. Organized into 6 strategic categories.",
+    "subtitle": "Selection of SaaS products, internal tools and technical documentation created in professional projects. Organized into 6 strategic categories.",
     "filters": {
       "all": "All ({count})"
     },
@@ -548,7 +525,7 @@
     "items": [
       {
         "id": "verifactur-gmn",
-        "title": "VerifacturGMN",
+        "title": "Electronic Invoicing System",
         "description": "End-to-end electronic invoicing system compliant with VeriFactu/AEAT, offering SaaS flows and fiscal automation.",
         "tech": ["Symfony 7", "API Platform", "PostgreSQL", "Docker", "CI/CD"],
         "links": {
@@ -558,7 +535,7 @@
       },
       {
         "id": "facturae-docusaurus",
-        "title": "FacturaeDocusaurus",
+        "title": "Technical Documentation Portal",
         "description": "Technical documentation portal for VeriFactu and Facturae with guides, examples and automated deployment.",
         "tech": ["Docusaurus", "TypeScript", "MDX", "GitHub Actions"],
         "links": {
@@ -568,7 +545,7 @@
       },
       {
         "id": "apigns",
-        "title": "apiGns",
+        "title": "REST API for Service Management",
         "description": "Modern REST API for comprehensive service management with advanced authentication and external dashboards.",
         "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Redis", "Docker"],
         "links": {
@@ -578,7 +555,7 @@
       },
       {
         "id": "frontend-json",
-        "title": "FrontendJson",
+        "title": "Enterprise Frontend",
         "description": "Enterprise frontend in Next.js 15 with clean architecture, strict typing and atomic design system.",
         "tech": ["Next.js 15", "TypeScript", "Tailwind CSS", "Clean Architecture"],
         "links": {
@@ -588,7 +565,7 @@
       },
       {
         "id": "fynkus",
-        "title": "FYNKUS",
+        "title": "Booking Platform",
         "description": "Sports booking platform using hexagonal architecture, DDD and CQRS with a scalability focus.",
         "tech": ["PHP 8.2", "Symfony 5.4", "CQRS", "React 18", "Docker"],
         "links": {
@@ -598,7 +575,7 @@
       },
       {
         "id": "gestiono-mi-negocio",
-        "title": "GestiónoMiNegocio",
+        "title": "ERP SaaS Platform",
         "description": "Legacy ERP migration to modular SaaS with multi-tenant support, automated billing and analytic dashboards.",
         "tech": ["Symfony 7", "Next.js", "RabbitMQ", "PostgreSQL", "Terraform"],
         "links": {
@@ -608,7 +585,7 @@
       },
       {
         "id": "vita-liber",
-        "title": "Vita Liber Platform",
+        "title": "Enterprise Management Platform",
         "description": "Full-stack platform for logistics and academic management integrating Symfony + Next.js.",
         "tech": ["Next.js 14", "Symfony 6", "MariaDB", "API Platform", "Jest"],
         "links": {
@@ -618,7 +595,7 @@
       },
       {
         "id": "genesis-enterprise",
-        "title": "Genesis Enterprise",
+        "title": "Enterprise Ecosystem",
         "description": "Enterprise ecosystem (4M LOC) modernized into microservices with Symfony, messaging and DevOps practices.",
         "tech": ["Symfony", "RabbitMQ", "Microservices", "Docker", "CI/CD"],
         "links": {
@@ -628,7 +605,7 @@
       },
       {
         "id": "streamlit-gmn",
-        "title": "Streamlit GMN",
+        "title": "Business Model Simulator",
         "description": "SaaS business model simulator with real-time analytics and interactive dashboards.",
         "tech": ["Python", "Streamlit", "Pandas", "Plotly"],
         "links": {
@@ -638,7 +615,7 @@
       },
       {
         "id": "zend-laminas-tech-tests",
-        "title": "Zend Laminas Tech Tests",
+        "title": "Technical Tests Collection",
         "description": "Collection of 10 realistic technical tests for Laminas MVC and Mezzio aimed at professional training.",
         "tech": ["Laminas", "PHP", "Mezzio", "Docker", "Testing"],
         "links": {

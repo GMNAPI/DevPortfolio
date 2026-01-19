@@ -116,16 +116,18 @@ export function About() {
                     </span>
                   </header>
 
-                  <ul className="mt-4 space-y-2 text-sm md:text-base text-foreground-secondary">
-                    {experience.achievements.map((achievement) => (
-                      <m.li key={achievement} className="flex gap-2" variants={fadeInUp}>
-                        <span aria-hidden="true" className="mt-1 text-accent">
-                          •
-                        </span>
-                        <span>{achievement}</span>
-                      </m.li>
-                    ))}
-                  </ul>
+                  {experience.achievements.length > 0 && (
+                    <ul className="mt-4 space-y-2 text-sm md:text-base text-foreground-secondary">
+                      {experience.achievements.map((achievement) => (
+                        <m.li key={achievement} className="flex gap-2" variants={fadeInUp}>
+                          <span aria-hidden="true" className="mt-1 text-accent">
+                            •
+                          </span>
+                          <span>{achievement}</span>
+                        </m.li>
+                      ))}
+                    </ul>
+                  )}
                 </m.article>
               ))}
             </div>

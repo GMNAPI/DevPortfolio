@@ -25,7 +25,8 @@ export type ProjectCategoryId =
   | 'arquitectura-avanzada'
   | 'erp-transformacion'
   | 'herramientas'
-  | 'educacion';
+  | 'educacion'
+  | 'ia-chatbots';
 
 export interface ProjectData {
   id: string;

@@ -520,6 +520,11 @@
         "id": "educacion",
         "name": "Education & Community",
         "description": "Training material and technical challenges to share knowledge."
+      },
+      {
+        "id": "ia-chatbots",
+        "name": "AI & Chatbots",
+        "description": "Conversational assistants and RAG systems powered by generative AI."
       }
     ],
     "items": [
@@ -622,6 +627,17 @@
           "github": "https://github.com/GMNAPI/zend-laminas-tech-tests"
         },
         "categoryId": "educacion"
+      },
+      {
+        "id": "llarjove",
+        "title": "LlarJove - AI Housing Assistant",
+        "description": "RAG chatbot helping young people (18-35) in Catalonia find rental subsidies, understand their rights (LAU, deposit rules) and access public housing resources.",
+        "tech": ["TypeScript", "React 19", "Vite 6", "Tailwind v4", "Fastify", "RAG", "OpenAI GPT-4", "ChromaDB", "Docker", "Railway"],
+        "links": {
+          "github": "https://github.com/GMNAPI/llarjove",
+          "demo": "https://llarjove-production-754a.up.railway.app/"
+        },
+        "categoryId": "ia-chatbots"
       }
     ]
   },

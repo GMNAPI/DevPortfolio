@@ -16,6 +16,7 @@ export const PROJECT_SLUGS = [
   'genesis-enterprise',
   'streamlit-gmn',
   'zend-laminas-tech-tests',
+  'llarjove',
 ] as const;
 
 export type ProjectSlug = (typeof PROJECT_SLUGS)[number];

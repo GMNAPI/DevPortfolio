@@ -632,7 +632,18 @@
         "id": "llarjove",
         "title": "LlarJove - Asistente de Vivienda con IA",
         "description": "Chatbot RAG que ayuda a jóvenes de 18-35 años en Catalunya a encontrar ayudas de alquiler, conocer sus derechos (LAU, fianza) y acceder a recursos de vivienda públicos.",
-        "tech": ["TypeScript", "React 19", "Vite 6", "Tailwind v4", "Fastify", "RAG", "OpenAI GPT-4", "ChromaDB", "Docker", "Railway"],
+        "tech": [
+          "TypeScript",
+          "React 19",
+          "Vite 6",
+          "Tailwind v4",
+          "Fastify",
+          "RAG",
+          "OpenAI GPT-4",
+          "ChromaDB",
+          "Docker",
+          "Railway"
+        ],
         "links": {
           "github": "https://github.com/GMNAPI/llarjove",
           "demo": "https://llarjove-production-754a.up.railway.app/"

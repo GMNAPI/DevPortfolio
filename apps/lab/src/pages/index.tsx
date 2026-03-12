@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Translate from '@docusaurus/Translate';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
@@ -16,17 +17,19 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          <Translate id="homepage.tagline">{siteConfig.tagline}</Translate>
+        </p>
         <div className={clsx(styles.buttons, styles.buttonsColumn)}>
           <Link
             className="button button--primary button--lg"
             to="/docs/intro">
-            Ver Guías
+            <Translate id="homepage.button.guides">Ver Guías</Translate>
           </Link>
           <Link
             className="button button--secondary button--lg"
             to="/blog">
-            Ir al Blog
+            <Translate id="homepage.button.blog">Ir al Blog</Translate>
           </Link>
         </div>
       </div>

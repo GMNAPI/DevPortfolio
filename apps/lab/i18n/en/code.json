@@ -1,4 +1,40 @@
 {
+  "homepage.tagline": {
+    "message": "Technical experiments, skills, and development documentation",
+    "description": "Homepage hero tagline"
+  },
+  "homepage.button.guides": {
+    "message": "View Guides",
+    "description": "Homepage primary CTA button"
+  },
+  "homepage.button.blog": {
+    "message": "Go to Blog",
+    "description": "Homepage secondary CTA button"
+  },
+  "homepage.feature.guides.title": {
+    "message": "Guides",
+    "description": "Homepage feature card title for Guides"
+  },
+  "homepage.feature.guides.description": {
+    "message": "Documentation on Clean Architecture, testing, and i18n patterns for Next.js and TypeScript projects.",
+    "description": "Homepage feature card description for Guides"
+  },
+  "homepage.feature.blog.title": {
+    "message": "Blog",
+    "description": "Homepage feature card title for Blog"
+  },
+  "homepage.feature.blog.description": {
+    "message": "Technical articles, experiments, and case studies on development, SaaS, and DevOps.",
+    "description": "Homepage feature card description for Blog"
+  },
+  "homepage.feature.portfolio.title": {
+    "message": "Portfolio",
+    "description": "Homepage feature card title for Portfolio"
+  },
+  "homepage.feature.portfolio.description": {
+    "message": "Production projects, skills, and contact. The main CV linked to this Lab.",
+    "description": "Homepage feature card description for Portfolio"
+  },
   "theme.ErrorPageContent.title": {
     "message": "This page crashed.",
     "description": "The title of the fallback page when the page crashed"

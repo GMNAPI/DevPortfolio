@@ -36,6 +36,7 @@ export interface ProjectData {
   links: ProjectLinks;
   categoryId: ProjectCategoryId;
   detailSlug?: string;
+  imageUrl?: string;
 }
 
 export class Project {
@@ -46,6 +47,7 @@ export class Project {
   readonly links: ProjectLinks;
   readonly categoryId: ProjectCategoryId;
   readonly detailSlug: string;
+  readonly imageUrl: string | undefined;
 
   constructor(data: ProjectData) {
     this.validate(data);
@@ -57,6 +59,7 @@ export class Project {
     this.links = data.links;
     this.categoryId = data.categoryId;
     this.detailSlug = data.detailSlug ?? data.id;
+    this.imageUrl = data.imageUrl;
   }
 
   /**
@@ -96,6 +99,7 @@ export class Project {
       links: { ...this.links },
       categoryId: this.categoryId,
       detailSlug: this.detailSlug,
+      imageUrl: this.imageUrl,
     };
   }
 }

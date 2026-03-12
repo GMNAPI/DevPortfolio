@@ -478,13 +478,17 @@
       "all": "All ({count})"
     },
     "aria": {
-      "tech": "Technologies used"
+      "tech": "Technologies used",
+      "openProject": "Open details for {title}",
+      "closeModal": "Close modal"
     },
     "labels": {
       "github": "GitHub",
       "demo": "Demo →",
       "detail": "View detail",
-      "categoryFallback": "Project"
+      "categoryFallback": "Project",
+      "close": "Close",
+      "moretech": "+{count} more"
     },
     "privateNotice": {
       "text": "Private repository — request access on <link>{linkLabel}</link>",

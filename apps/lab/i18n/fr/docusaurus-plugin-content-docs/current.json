@@ -1,14 +1,14 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "Suivant",
     "description": "The label for version current"
   },
   "sidebar.guidesSidebar.category.Guías de Arquitectura": {
-    "message": "Architecture Guides",
+    "message": "Guides d'architecture",
     "description": "The label for category Guías de Arquitectura in sidebar guidesSidebar"
   },
   "sidebar.guidesSidebar.category.Guías de Arquitectura.link.generated-index.description": {
-    "message": "Detailed guides on Clean Architecture, Testing, and i18n in DevPortfolio.",
-    "description": "The generated-index page description for Architecture Guides"
+    "message": "Guides détaillés sur Clean Architecture, tests et i18n dans DevPortfolio.",
+    "description": "The generated-index page description for category Guías de Arquitectura in sidebar guidesSidebar"
   }
 }

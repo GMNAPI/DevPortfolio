@@ -1,19 +1,19 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+typescript:
+  label: TypeScript
+  permalink: /typescript
+  description: Artículos sobre TypeScript y tipado estático
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+nextjs:
+  label: Next.js
+  permalink: /nextjs
+  description: Contenido sobre Next.js y React Server Components
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+devops:
+  label: DevOps
+  permalink: /devops
+  description: CI/CD, Docker, despliegues y automatización
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+clean-architecture:
+  label: Clean Architecture
+  permalink: /clean-architecture
+  description: Patrones, capas y estructura de proyectos

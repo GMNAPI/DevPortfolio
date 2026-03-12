@@ -182,6 +182,10 @@
     "experienceLabel": "{years}+ años",
     "usageLabel": "{percentage}% uso repos",
     "projectsLabel": "{count} proyectos",
+    "aria": {
+      "openCategory": "Abrir detalles de {name}",
+      "closeModal": "Cerrar modal"
+    },
     "categories": [
       {
         "id": "backend",
@@ -478,13 +482,17 @@
       "all": "Todas ({count})"
     },
     "aria": {
-      "tech": "Tecnologías utilizadas"
+      "tech": "Tecnologías utilizadas",
+      "openProject": "Abrir detalles de {title}",
+      "closeModal": "Cerrar modal"
     },
     "labels": {
       "github": "GitHub",
       "demo": "Demo →",
       "detail": "Ver detalle",
-      "categoryFallback": "Proyecto"
+      "categoryFallback": "Proyecto",
+      "close": "Cerrar",
+      "moretech": "+{count} más"
     },
     "privateNotice": {
       "text": "Repositorio privado — solicita acceso en <link>{linkLabel}</link>",
@@ -520,6 +528,11 @@
         "id": "educacion",
         "name": "Educación & Comunidad",
         "description": "Material formativo y pruebas técnicas para compartir conocimiento."
+      },
+      {
+        "id": "ia-chatbots",
+        "name": "IA & Chatbots",
+        "description": "Asistentes conversacionales y sistemas RAG con inteligencia artificial generativa."
       }
     ],
     "items": [
@@ -622,6 +635,28 @@
           "github": "https://github.com/GMNAPI/zend-laminas-tech-tests"
         },
         "categoryId": "educacion"
+      },
+      {
+        "id": "llarjove",
+        "title": "LlarJove - Asistente de Vivienda con IA",
+        "description": "Chatbot RAG que ayuda a jóvenes de 18-35 años en Catalunya a encontrar ayudas de alquiler, conocer sus derechos (LAU, fianza) y acceder a recursos de vivienda públicos.",
+        "tech": [
+          "TypeScript",
+          "React 19",
+          "Vite 6",
+          "Tailwind v4",
+          "Fastify",
+          "RAG",
+          "OpenAI GPT-4",
+          "ChromaDB",
+          "Docker",
+          "Railway"
+        ],
+        "links": {
+          "github": "https://github.com/GMNAPI/llarjove",
+          "demo": "https://llarjove-production-754a.up.railway.app/"
+        },
+        "categoryId": "ia-chatbots"
       }
     ]
   },

@@ -8,6 +8,7 @@ const config = {
 
   url: 'https://desenvolupadormaster.vercel.app',
   baseUrl: '/',
+  trailingSlash: false,
 
   organizationName: 'GMNAPI',
   projectName: 'devportfolio-lab',
@@ -70,7 +71,7 @@ const config = {
           position: 'left',
           label: 'Guías',
         },
-        // { to: '/blog', label: 'Blog', position: 'left' }, // Disabled: no blog posts yet
+        { to: '/blog', label: 'Blog', position: 'left' },
         {
           type: 'localeDropdown',
           position: 'right',
@@ -92,10 +93,10 @@ const config = {
               label: 'Guías',
               to: '/docs/intro',
             },
-            // {
-            //   label: 'Blog',
-            //   to: '/blog',
-            // }, // Disabled: no blog posts yet
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
           ],
         },
         {

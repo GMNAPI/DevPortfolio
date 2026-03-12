@@ -91,9 +91,9 @@ export function SkillCard({ category, onOpen }: SkillCardProps) {
                 )}
               </div>
               {skill.usagePercentage !== undefined && (
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-background-secondary">
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/15">
                   <span
-                    className="block h-full bg-accent/80 transition-all"
+                    className="block h-full bg-accent transition-all"
                     style={{ width: `${Math.min(skill.usagePercentage, 100)}%` }}
                     aria-hidden="true"
                   />

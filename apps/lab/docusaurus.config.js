@@ -8,7 +8,7 @@ const config = {
 
   url: 'https://desenvolupadormaster.vercel.app',
   baseUrl: '/',
-  trailingSlash: true,
+  trailingSlash: false,
 
   organizationName: 'GMNAPI',
   projectName: 'devportfolio-lab',
@@ -18,7 +18,7 @@ const config = {
 
   i18n: {
     defaultLocale: 'es',
-    locales: ['es', 'en', 'fr'],
+    locales: ['es', 'en'],
     localeConfigs: {
       es: {
         label: 'Español',
@@ -29,11 +29,6 @@ const config = {
         label: 'English',
         direction: 'ltr',
         htmlLang: 'en-US',
-      },
-      fr: {
-        label: 'Français',
-        direction: 'ltr',
-        htmlLang: 'fr-FR',
       },
     },
   },

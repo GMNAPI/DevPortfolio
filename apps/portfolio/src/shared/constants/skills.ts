@@ -8,7 +8,7 @@ export interface SkillItem {
 }
 
 export interface SkillCategory {
-  id: 'backend' | 'frontend' | 'databases' | 'devops' | 'ai-automation' | 'testing';
+  id: 'backend' | 'frontend' | 'databases' | 'devops' | 'ai-automation' | 'testing' | 'leadership';
   name: string;
   summary: string;
   experienceYears: number;

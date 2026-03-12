@@ -14,16 +14,21 @@ export interface ModalProps {
 export function Modal({ isOpen, onClose, children, ariaLabel }: ModalProps) {
   const [mounted, setMounted] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const onCloseRef = useRef(onClose);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+
+  useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
     };
 
     document.addEventListener('keydown', handleKeyDown);
@@ -33,7 +38,7 @@ export function Modal({ isOpen, onClose, children, ariaLabel }: ModalProps) {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!mounted) return null;
 

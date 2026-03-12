@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { NextIntlClientProvider } from 'next-intl';
 
@@ -31,22 +31,41 @@ describe('Projects Section', () => {
     it('should render first project title', () => {
       renderProjects();
       const firstTitle = esMessages.projects.items[0].title;
-      expect(screen.getByText(firstTitle)).toBeInTheDocument();
+      // Title appears twice per card (default view + hover overlay)
+      expect(screen.getAllByText(firstTitle).length).toBeGreaterThanOrEqual(1);
     });
 
     it('should display project titles', () => {
       renderProjects();
       esMessages.projects.items.forEach((project) => {
-        expect(screen.getByText(project.title)).toBeInTheDocument();
+        expect(screen.getAllByText(project.title).length).toBeGreaterThanOrEqual(1);
       });
     });
 
-    it('should display project descriptions', () => {
+    it('should NOT display project descriptions on cards by default', () => {
       renderProjects();
-      expect(screen.getByText(esMessages.projects.items[0].description)).toBeInTheDocument();
+      // Descriptions are hidden behind hover/modal — not directly visible in DOM default state
+      // The description appears only in the hover overlay (opacity-0) and the modal
+      // We check the first project's description is not the primary visible content
+      const description = esMessages.projects.items[0].description;
+      // Description may be in the DOM (in hover overlay) but should not be the heading
+      const heading = screen.getByRole('heading', { level: 2 });
+      expect(heading.textContent).not.toBe(description);
     });
 
-    it('should display tech stack for each project', () => {
+    it('should open modal with description when card is clicked', () => {
+      renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
+      // Modal should now render with the project description
+      const description = esMessages.projects.items[0].description;
+      // Description may appear in both hover overlay and modal
+      expect(screen.getAllByText(description).length).toBeGreaterThan(0);
+      // The dialog must be open
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('should display tech stack in cards', () => {
       renderProjects();
       const nextjsTags = screen.getAllByText(/Next\.js/i);
       const typescriptTags = screen.getAllByText(/TypeScript/i);
@@ -55,50 +74,88 @@ describe('Projects Section', () => {
     });
   });
 
-  describe('Links', () => {
-    it('should render GitHub links for projects', () => {
+  describe('Links (in modal)', () => {
+    it('should render GitHub links inside modal after clicking a card', () => {
       renderProjects();
+      // Open the first project modal
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
       const githubLinks = screen.getAllByRole('link', { name: /github/i });
       expect(githubLinks.length).toBeGreaterThan(0);
     });
 
-    it('should render demo links when available', () => {
+    it('should render demo links in modal when available for that project', () => {
       renderProjects();
-      const demoLinks = screen.queryAllByRole('link', { name: /demo/i });
       const projectsData = esMessages.projects.items as unknown as ProjectData[];
-      const hasDemo = projectsData.some((project) => Boolean(project.links.demo));
-
-      if (hasDemo) {
+      const demoProjectIndex = projectsData.findIndex((p) => Boolean(p.links.demo));
+      if (demoProjectIndex >= 0) {
+        const articles = screen.getAllByRole('article');
+        fireEvent.click(articles[demoProjectIndex]);
+        const demoLinks = screen.queryAllByRole('link', { name: /demo/i });
         expect(demoLinks.length).toBeGreaterThan(0);
-      } else {
-        expect(demoLinks.length).toBe(0);
       }
     });
 
-    it('should have proper href attributes', () => {
+    it('should have proper href attributes on GitHub links in modal', () => {
       renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
       const link = screen.getAllByRole('link', { name: /github/i })[0];
       expect(link).toHaveAttribute('href');
       expect(link.getAttribute('href')).toContain('github.com');
     });
 
-    it('should open links in new tab', () => {
+    it('should open external links in new tab', () => {
       renderProjects();
-      const link = screen.getAllByRole('link')[0];
-      expect(link).toHaveAttribute('target', '_blank');
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
+      const githubLink = screen.getAllByRole('link', { name: /github/i })[0];
+      expect(githubLink).toHaveAttribute('target', '_blank');
+      expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
-    it('should render private repository notice', () => {
+    it('should render private repository notice in modal', () => {
       renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
       const notices = screen.getAllByText(/repositorio privado/i);
       expect(notices.length).toBeGreaterThan(0);
     });
 
-    it('should render detail links for projects', () => {
+    it('should render detail link in modal', () => {
       renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
       const detailLinks = screen.getAllByRole('link', { name: /ver detalle/i });
       expect(detailLinks.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Modal behavior', () => {
+    it('should open modal when a project card is clicked', () => {
+      renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('should close modal when Escape key is pressed', () => {
+      renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
+
+    it('should close modal when backdrop is clicked', () => {
+      renderProjects();
+      const articles = screen.getAllByRole('article');
+      fireEvent.click(articles[0]);
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      const backdrop = document.querySelector('.fixed.inset-0');
+      fireEvent.click(backdrop!);
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });
 

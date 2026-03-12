@@ -20,12 +20,12 @@ export interface ProjectLinks {
 }
 
 export type ProjectCategoryId =
+  | 'arquitectura-avanzada'
+  | 'educacion'
+  | 'erp-transformacion'
   | 'facturacion-compliance'
   | 'gestion-servicios'
-  | 'arquitectura-avanzada'
-  | 'erp-transformacion'
   | 'herramientas'
-  | 'educacion'
   | 'ia-chatbots';
 
 export interface ProjectData {

@@ -65,7 +65,10 @@ export function SkillModal({ category, onClose }: SkillModalProps) {
               : null;
 
           return (
-            <li key={skill.name} className="space-y-2 pt-4 border-t border-border/50 first:border-t-0 first:pt-0">
+            <li
+              key={skill.name}
+              className="space-y-2 pt-4 border-t border-border/50 first:border-t-0 first:pt-0"
+            >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm font-semibold text-foreground">{skill.name}</p>
                 {usageLabel && (

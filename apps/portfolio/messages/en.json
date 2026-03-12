@@ -182,6 +182,10 @@
     "experienceLabel": "{years}+ years",
     "usageLabel": "{percentage}% repo usage",
     "projectsLabel": "{count} projects",
+    "aria": {
+      "openCategory": "Open details for {name}",
+      "closeModal": "Close modal"
+    },
     "categories": [
       {
         "id": "backend",

@@ -182,6 +182,10 @@
     "experienceLabel": "{years}+ años",
     "usageLabel": "{percentage}% uso repos",
     "projectsLabel": "{count} proyectos",
+    "aria": {
+      "openCategory": "Abrir detalles de {name}",
+      "closeModal": "Cerrar modal"
+    },
     "categories": [
       {
         "id": "backend",

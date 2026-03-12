@@ -1,6 +1,6 @@
 {
   "link.title.Contenido": {
-    "message": "Contenido",
+    "message": "Content",
     "description": "The title of the footer links column with title=Contenido in the footer"
   },
   "link.title.Portfolio": {
@@ -11,8 +11,12 @@
     "message": "Social",
     "description": "The title of the footer links column with title=Social in the footer"
   },
+  "link.item.label.Inicio": {
+    "message": "Home",
+    "description": "The label of footer link linking to portfolio home"
+  },
   "link.item.label.Guías": {
-    "message": "Guías",
+    "message": "Guides",
     "description": "The label of footer link with label=Guías linking to /docs/intro"
   },
   "link.item.label.Blog": {
@@ -20,11 +24,11 @@
     "description": "The label of footer link with label=Blog linking to /blog"
   },
   "link.item.label.Proyectos": {
-    "message": "Proyectos",
+    "message": "Projects",
     "description": "The label of footer link with label=Proyectos linking to https://angelhidalgo.dev/projects"
   },
   "link.item.label.Contacto": {
-    "message": "Contacto",
+    "message": "Contact",
     "description": "The label of footer link with label=Contacto linking to https://angelhidalgo.dev/#contact"
   },
   "link.item.label.GitHub": {

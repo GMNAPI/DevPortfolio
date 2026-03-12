@@ -133,8 +133,7 @@ export function Projects() {
         <ProjectModal
           project={selectedProject}
           categoryName={
-            categoriesById[selectedProject.categoryId]?.name ??
-            tProjects('labels.categoryFallback')
+            categoriesById[selectedProject.categoryId]?.name ?? tProjects('labels.categoryFallback')
           }
           onClose={() => setSelectedProject(null)}
         />

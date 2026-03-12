@@ -21,19 +21,11 @@ export function ProjectModal({ project, categoryName, onClose }: ProjectModalPro
   if (!project) return null;
 
   return (
-    <Modal
-      isOpen={true}
-      onClose={onClose}
-      ariaLabel={project.title}
-    >
+    <Modal isOpen={true} onClose={onClose} ariaLabel={project.title}>
       {/* Header gradient / image */}
       <div className="relative h-48 w-full overflow-hidden rounded-t-2xl">
         {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            className="h-full w-full object-cover"
-          />
+          <img src={project.imageUrl} alt={project.title} className="h-full w-full object-cover" />
         ) : (
           <div
             className={cn(

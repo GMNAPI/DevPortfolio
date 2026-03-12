@@ -37,11 +37,7 @@ export function ProjectCard({ project, categoryName, onOpen }: ProjectCardProps)
       {/* Image / Gradient area */}
       <div className="relative h-44 w-full overflow-hidden">
         {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={project.title}
-            className="h-full w-full object-cover"
-          />
+          <img src={project.imageUrl} alt={project.title} className="h-full w-full object-cover" />
         ) : (
           <div
             className={cn(
@@ -104,9 +100,7 @@ export function ProjectCard({ project, categoryName, onOpen }: ProjectCardProps)
             ))}
           </div>
         </div>
-        <p className="text-xs text-accent font-mono text-right">
-          {t('labels.detail')} →
-        </p>
+        <p className="text-xs text-accent font-mono text-right">{t('labels.detail')} →</p>
       </div>
     </m.article>
   );

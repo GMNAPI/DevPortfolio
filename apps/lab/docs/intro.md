@@ -16,9 +16,9 @@ Este es mi espacio de documentación técnica y experimentación, donde comparto
 
 Documentación detallada sobre los patrones y estrategias de arquitectura utilizados en mis proyectos:
 
-- **[Clean Architecture](./guides/clean-architecture)**: Implementación de arquitectura limpia en 3 capas con Next.js
-- **[Testing Strategy](./guides/testing-strategy)**: Estrategia de testing con Vitest y React Testing Library
-- **[i18n Patterns](./guides/i18n-patterns)**: Patrones de internacionalización con next-intl
+- **[Clean Architecture](/docs/guides/clean-architecture)**: Implementación de arquitectura limpia en 3 capas con Next.js
+- **[Testing Strategy](/docs/guides/testing-strategy)**: Estrategia de testing con Vitest y React Testing Library
+- **[i18n Patterns](/docs/guides/i18n-patterns)**: Patrones de internacionalización con next-intl
 
 ### ✍️ Blog Técnico
 

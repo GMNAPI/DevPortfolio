@@ -97,7 +97,7 @@ export function Navigation() {
 
   return (
     <m.nav
-      className="sticky top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
+      className="fixed inset-x-0 top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
       aria-label={tNavigation('ariaLabel')}
       initial={{ y: -48, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

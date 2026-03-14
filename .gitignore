@@ -37,6 +37,7 @@ next-env.d.ts
 
 # AI
 CLAUDE.md
+.cursor
 
 # Personal files
 gptPrompt.md

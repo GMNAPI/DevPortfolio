@@ -112,10 +112,10 @@ describe('Navigation Component', () => {
   });
 
   describe('Styles', () => {
-    it('should have sticky positioning', () => {
+    it('should have fixed positioning', () => {
       renderNavigation();
       const nav = screen.getByRole('navigation');
-      expect(nav).toHaveClass('sticky');
+      expect(nav).toHaveClass('fixed');
     });
 
     it('should have proper z-index', () => {

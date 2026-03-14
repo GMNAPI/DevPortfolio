@@ -58,6 +58,11 @@ const config = {
 
   themeConfig: {
     image: 'img/lab-social-card.jpg',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       title: 'Lab',
       logo: {

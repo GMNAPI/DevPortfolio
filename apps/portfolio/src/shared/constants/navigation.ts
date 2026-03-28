@@ -5,6 +5,8 @@
  * used in Navigation and Footer components.
  */
 
+import { personalInfo } from './personal';
+
 export interface NavSection {
   key: 'home' | 'about' | 'projects' | 'contact';
   sectionId: string;
@@ -35,8 +37,8 @@ export const NAV_SECTIONS: NavSection[] = [
 ];
 
 export const SOCIAL_LINK_URLS = {
-  github: 'https://github.com/usuario',
-  linkedin: 'https://linkedin.com/in/usuario',
+  github: personalInfo.social.github,
+  linkedin: personalInfo.social.linkedin,
 } as const;
 
 export type SocialLinkKey = keyof typeof SOCIAL_LINK_URLS;

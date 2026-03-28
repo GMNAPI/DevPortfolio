@@ -54,13 +54,16 @@ describe('Footer Component', () => {
     it('should have correct href for GitHub link', () => {
       renderFooter();
       const githubLink = screen.getByRole('link', { name: /github/i });
-      expect(githubLink).toHaveAttribute('href', 'https://github.com/usuario');
+      expect(githubLink).toHaveAttribute('href', 'https://github.com/GMNAPI');
     });
 
     it('should have correct href for LinkedIn link', () => {
       renderFooter();
       const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
-      expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/usuario');
+      expect(linkedinLink).toHaveAttribute(
+        'href',
+        'https://www.linkedin.com/in/angel-hidalgo-barreiro'
+      );
     });
 
     it('should open social links in new tab', () => {

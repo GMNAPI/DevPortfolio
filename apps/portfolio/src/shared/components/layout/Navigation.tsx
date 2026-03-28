@@ -29,7 +29,7 @@ import { fadeInUp } from '@/shared/utils/motion';
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
   // Prevent hydration mismatch by only rendering theme icon after mount
   useEffect(() => {
@@ -63,7 +63,7 @@ export function Navigation() {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   const localeOptions = useMemo(
@@ -97,7 +97,7 @@ export function Navigation() {
 
   return (
     <m.nav
-      className="sticky top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
+      className="fixed inset-x-0 top-0 z-40 w-full backdrop-blur-sm bg-background/95 border-b border-border"
       aria-label={tNavigation('ariaLabel')}
       initial={{ y: -48, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -177,7 +177,7 @@ export function Navigation() {
               className="inline-flex items-center justify-center rounded-md font-mono font-medium transition-colors px-3 py-2 bg-transparent text-foreground hover:bg-background-secondary w-10 h-10"
               aria-label={tNavigation('theme.toggle')}
             >
-              {mounted ? (theme === 'dark' ? '☀️' : '🌙') : null}
+              {mounted ? (resolvedTheme === 'dark' ? '☀️' : '🌙') : null}
             </button>
 
             {/* Mobile Menu Button */}

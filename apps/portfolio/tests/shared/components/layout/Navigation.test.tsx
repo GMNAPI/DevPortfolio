@@ -316,6 +316,7 @@ describe('Navigation Component', () => {
 
       mockUseTheme.mockReturnValue({
         theme: 'light',
+        resolvedTheme: 'light',
         setTheme: mockSetTheme,
       });
 
@@ -332,6 +333,7 @@ describe('Navigation Component', () => {
 
       mockUseTheme.mockReturnValue({
         theme: 'dark',
+        resolvedTheme: 'dark',
         setTheme: mockSetTheme,
       });
 

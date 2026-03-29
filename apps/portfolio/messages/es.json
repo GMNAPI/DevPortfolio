@@ -107,28 +107,40 @@
         {
           "role": "Consultor & Tech Lead",
           "company": "Fastbyte SL",
-          "period": { "start": "2019", "end": "2025" },
+          "period": {
+            "start": "2019",
+            "end": "2025"
+          },
           "headline": "Toma de requisitos con clientes/equipos y traducción a soluciones prácticas.",
           "achievements": ["Comunicación constante, seguimiento de tareas y entrega por fases."]
         },
         {
           "role": "Especialista de Programa",
           "company": "Vita Liber S.L.U.",
-          "period": { "start": "2020", "end": "2025" },
+          "period": {
+            "start": "2020",
+            "end": "2025"
+          },
           "headline": "Gestión de necesidades de usuarios internos: priorización, incidencias, validación y soporte funcional.",
           "achievements": []
         },
         {
           "role": "Cofundador & Lead Dev",
           "company": "GestionoMiNegocio",
-          "period": { "start": "2020", "end": "2025" },
+          "period": {
+            "start": "2020",
+            "end": "2025"
+          },
           "headline": "Trabajo con usuarios beta: recogida de feedback, mejoras y acompañamiento en uso del producto.",
           "achievements": ["Enfoque en claridad, calidad y experiencia de usuario."]
         },
         {
           "role": "Developer",
           "company": "240dots",
-          "period": { "start": "2020", "end": "2023" },
+          "period": {
+            "start": "2020",
+            "end": "2023"
+          },
           "headline": "Desarrollo de soluciones headless combinando WordPress y Symfony.",
           "achievements": [
             "Construcción de plugins conectados con APIs personalizadas.",
@@ -138,7 +150,10 @@
         {
           "role": "Webmaster",
           "company": "Seedstockers (BCG)",
-          "period": { "start": "2023", "end": "2024" },
+          "period": {
+            "start": "2023",
+            "end": "2024"
+          },
           "headline": "Gestión de e-commerce multilingüe (PrestaShop) y colaboración con áreas de pagos/logística.",
           "achievements": [
             "Coordinación para resolver incidencias operativas en el flujo de compra (pedido, pago, envío).",
@@ -463,11 +478,26 @@
     "summary": {
       "totalRepositories": 35,
       "mainLanguagesShare": [
-        { "language": "PHP", "usagePercentage": 31.4 },
-        { "language": "JavaScript", "usagePercentage": 20.0 },
-        { "language": "Twig", "usagePercentage": 14.3 },
-        { "language": "TypeScript", "usagePercentage": 8.6 },
-        { "language": "Python", "usagePercentage": 2.9 }
+        {
+          "language": "PHP",
+          "usagePercentage": 31.4
+        },
+        {
+          "language": "JavaScript",
+          "usagePercentage": 20
+        },
+        {
+          "language": "Twig",
+          "usagePercentage": 14.3
+        },
+        {
+          "language": "TypeScript",
+          "usagePercentage": 8.6
+        },
+        {
+          "language": "Python",
+          "usagePercentage": 2.9
+        }
       ],
       "contributionsLastYear": 1706,
       "activeRepositories": 9,
@@ -537,126 +567,59 @@
     ],
     "items": [
       {
-        "id": "verifactur-gmn",
-        "title": "Sistema de Facturación Electrónica",
-        "description": "Sistema completo de facturación electrónica compatible con VeriFactu/AEAT con flujos SaaS y automatización fiscal.",
-        "tech": ["Symfony 7", "API Platform", "PostgreSQL", "Docker", "CI/CD"],
-        "links": {
-          "github": "https://github.com/GMNAPI/VerifacturGMN"
-        },
-        "categoryId": "facturacion-compliance"
-      },
-      {
-        "id": "facturae-docusaurus",
-        "title": "Portal de Documentación Técnica",
-        "description": "Portal de documentación técnica para VeriFactu y Facturae con guías, ejemplos y despliegue automatizado.",
-        "tech": ["Docusaurus", "TypeScript", "MDX", "GitHub Actions"],
-        "links": {
-          "github": "https://github.com/GMNAPI/FacturaeDocusaurus"
-        },
-        "categoryId": "facturacion-compliance"
-      },
-      {
-        "id": "apigns",
-        "title": "API REST de Gestión de Servicios",
-        "description": "API REST moderna para la gestión integral de servicios con autenticación avanzada y paneles externos.",
-        "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Redis", "Docker"],
-        "links": {
-          "github": "https://github.com/GMNAPI/apiGns"
-        },
-        "categoryId": "gestion-servicios"
-      },
-      {
-        "id": "frontend-json",
-        "title": "Frontend Empresarial",
-        "description": "Frontend empresarial en Next.js 15 con arquitectura limpia, tipado estricto y diseño atómico.",
-        "tech": ["Next.js 15", "TypeScript", "Tailwind CSS", "Clean Architecture"],
-        "links": {
-          "github": "https://github.com/GMNAPI/FrontendJson"
-        },
-        "categoryId": "gestion-servicios"
-      },
-      {
-        "id": "fynkus",
-        "title": "Plataforma de Reservas",
-        "description": "Plataforma de reservas deportivas con arquitectura hexagonal, DDD y CQRS, enfocada en escalabilidad.",
-        "tech": ["PHP 8.2", "Symfony 5.4", "CQRS", "React 18", "Docker"],
-        "links": {
-          "github": "https://github.com/GMNAPI/FYNKUS"
-        },
-        "categoryId": "arquitectura-avanzada"
-      },
-      {
-        "id": "gestiono-mi-negocio",
-        "title": "Plataforma ERP SaaS",
-        "description": "Migración de ERP legacy a SaaS modular con multi-tenant, automatización de facturación y paneles analíticos.",
-        "tech": ["Symfony 7", "Next.js", "RabbitMQ", "PostgreSQL", "Terraform"],
-        "links": {
-          "github": "https://github.com/GMNAPI/gestionominegocio"
-        },
-        "categoryId": "erp-transformacion"
-      },
-      {
-        "id": "vita-liber",
-        "title": "Plataforma de Gestión Empresarial",
-        "description": "Plataforma full-stack para gestión logística y académica con integración Symfony + Next.js.",
-        "tech": ["Next.js 14", "Symfony 6", "MariaDB", "API Platform", "Jest"],
-        "links": {
-          "github": "https://github.com/GMNAPI/vitaliber"
-        },
-        "categoryId": "erp-transformacion"
-      },
-      {
-        "id": "genesis-enterprise",
-        "title": "Ecosistema Enterprise",
-        "description": "Ecosistema enterprise (4M LOC) modernizado hacia microservicios con Symfony, mensajería y DevOps.",
-        "tech": ["Symfony", "RabbitMQ", "Microservices", "Docker", "CI/CD"],
-        "links": {
-          "github": "https://github.com/GMNAPI/genesis"
-        },
-        "categoryId": "erp-transformacion"
-      },
-      {
-        "id": "streamlit-gmn",
-        "title": "Simulador de Modelos de Negocio",
-        "description": "Simulador de modelos de negocio SaaS con analítica en tiempo real y dashboards interactivos.",
-        "tech": ["Python", "Streamlit", "Pandas", "Plotly"],
-        "links": {
-          "github": "https://github.com/GMNAPI/streamlitGMN"
-        },
-        "categoryId": "herramientas"
-      },
-      {
-        "id": "zend-laminas-tech-tests",
-        "title": "Colección de Pruebas Técnicas",
-        "description": "Colección de 10 pruebas técnicas realistas para Laminas MVC y Mezzio orientadas a formación profesional.",
-        "tech": ["Laminas", "PHP", "Mezzio", "Docker", "Testing"],
-        "links": {
-          "github": "https://github.com/GMNAPI/zend-laminas-tech-tests"
-        },
-        "categoryId": "educacion"
-      },
-      {
-        "id": "llarjove",
-        "title": "LlarJove - Asistente de Vivienda con IA",
-        "description": "Chatbot RAG que ayuda a jóvenes de 18-35 años en Catalunya a encontrar ayudas de alquiler, conocer sus derechos (LAU, fianza) y acceder a recursos de vivienda públicos.",
+        "id": "gestiono-mi-negocio-facturacion",
+        "title": "GestionoMiNegocio - Software de Facturación",
+        "description": "Desarrollo liderado como Cofundador y Lead Dev. Plataforma integral para la gestión administrativa básica, facturación y control de cobros. Arquitectura orientada a resolver picos de trabajo manteniendo calidad y tiempos de respuesta.",
         "tech": [
+          "Symfony 7",
+          "API Platform",
+          "PostgreSQL",
+          "React",
           "TypeScript",
-          "React 19",
-          "Vite 6",
-          "Tailwind v4",
-          "Fastify",
-          "RAG",
-          "OpenAI GPT-4",
-          "ChromaDB",
           "Docker",
-          "Railway"
+          "GitHub Actions"
         ],
         "links": {
-          "github": "https://github.com/GMNAPI/llarjove",
-          "demo": "https://llarjove-production-754a.up.railway.app/"
+          "demo": "https://gestionominegocio.com/"
         },
-        "categoryId": "ia-chatbots"
+        "categoryId": "facturacion-compliance",
+        "imageUrl": "/images/projects/gestiono-mi-negocio.webp"
+      },
+      {
+        "id": "vita-liber-erp-interno",
+        "title": "Vita Liber - Rescate y Modernización de ERP",
+        "description": "Tras un fallo crítico en servidores locales que corrompió backups en 2021/2022, asumí el control del código legacy. Lideré la recuperación de datos y desarrollé desde cero un nuevo sistema corporativo con arquitectura MVC y paradigmas modernos.",
+        "tech": [
+          "PHP",
+          "Symfony",
+          "Laravel",
+          "MySQL",
+          "Redis",
+          "Bootstrap",
+          "Tailwind CSS",
+          "JavaScript"
+        ],
+        "links": {},
+        "categoryId": "erp-transformacion",
+        "imageUrl": "/images/projects/vita-liber-erp-interno.webp"
+      },
+      {
+        "id": "fastbyte-api-servicios",
+        "title": "Fastbyte - API REST de Gestión de Servicios",
+        "description": "Consultor y Tech Lead en toma de requisitos con clientes y su traducción a soluciones prácticas. API REST robusta para gestión de servicios con entregas por fases y comunicación constante con el cliente.",
+        "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Docker"],
+        "links": {},
+        "categoryId": "gestion-servicios"
+      },
+      {
+        "id": "seedstockers-b2b-platform",
+        "title": "Seedstockers - Plataforma B2B & Integración Web",
+        "description": "Mantenimiento y desarrollo de plataforma B2B en React e integración de Web Services complejos con Prestashop. Coordinación técnica con áreas de logística y pagos para resolución de incidencias operativas.",
+        "tech": ["React", "TypeScript", "Prestashop", "Node.js", "Express", "Jest", "Tailwind CSS"],
+        "links": {
+          "demo": "https://seedstockers.com/"
+        },
+        "categoryId": "erp-transformacion"
       }
     ]
   },

@@ -6,17 +6,10 @@
  */
 
 export const PROJECT_SLUGS = [
-  'apigns',
-  'facturae-docusaurus',
-  'frontend-json',
-  'fynkus',
-  'genesis-enterprise',
-  'gestiono-mi-negocio',
-  'llarjove',
-  'streamlit-gmn',
-  'verifactur-gmn',
-  'vita-liber',
-  'zend-laminas-tech-tests',
+  'gestiono-mi-negocio-facturacion',
+  'vita-liber-erp-interno',
+  'fastbyte-api-servicios',
+  'seedstockers-b2b-platform',
 ] as const;
 
 export type ProjectSlug = (typeof PROJECT_SLUGS)[number];

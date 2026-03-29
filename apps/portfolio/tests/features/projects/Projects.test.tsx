@@ -87,9 +87,7 @@ describe('Projects Section', () => {
         const articles = screen.getAllByRole('article');
         fireEvent.click(articles[linkedIndex]);
         const allLinks = screen.getAllByRole('link');
-        const externalLinks = allLinks.filter((l) =>
-          l.getAttribute('href')?.startsWith('http')
-        );
+        const externalLinks = allLinks.filter((l) => l.getAttribute('href')?.startsWith('http'));
         expect(externalLinks.length).toBeGreaterThan(0);
       }
     });
@@ -116,9 +114,7 @@ describe('Projects Section', () => {
         const articles = screen.getAllByRole('article');
         fireEvent.click(articles[linkedIndex]);
         const allLinks = screen.getAllByRole('link');
-        const externalLinks = allLinks.filter((l) =>
-          l.getAttribute('href')?.startsWith('http')
-        );
+        const externalLinks = allLinks.filter((l) => l.getAttribute('href')?.startsWith('http'));
         expect(externalLinks.length).toBeGreaterThan(0);
         externalLinks.forEach((link) => {
           expect(link).toHaveAttribute('href');
@@ -136,9 +132,7 @@ describe('Projects Section', () => {
         const articles = screen.getAllByRole('article');
         fireEvent.click(articles[linkedIndex]);
         const allLinks = screen.getAllByRole('link');
-        const externalLinks = allLinks.filter((l) =>
-          l.getAttribute('href')?.startsWith('http')
-        );
+        const externalLinks = allLinks.filter((l) => l.getAttribute('href')?.startsWith('http'));
         if (externalLinks.length > 0) {
           expect(externalLinks[0]).toHaveAttribute('target', '_blank');
           expect(externalLinks[0]).toHaveAttribute('rel', 'noopener noreferrer');

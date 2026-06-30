@@ -606,16 +606,23 @@
     "items": [
       {
         "id": "gestiono-mi-negocio-facturacion",
-        "title": "GestionoMiNegocio - Software de Facturación",
-        "description": "Desarrollo liderado como Cofundador y Lead Dev. Plataforma integral para la gestión administrativa básica, facturación y control de cobros. Arquitectura orientada a resolver picos de trabajo manteniendo calidad y tiempos de respuesta.",
+        "title": "GestionoMiNegocio (GMN) — Plataforma SaaS de facturación electrónica",
+        "description": "Plataforma SaaS multi-tenant para la gestión y la facturación electrónica de autónomos y pymes, con cumplimiento de la normativa española Veri*factu (AEAT). Arquitectura distribuida: una aplicación de gestión (facturas, presupuestos, albaranes y clientes) sobre un modelo database-per-tenant, y un microservicio independiente que resuelve el registro fiscal ante la AEAT (hash encadenado, firma digital XAdES y comunicación SOAP). Incluye suscripciones y cobros con Stripe, control de planes por funcionalidad y onboarding self-service. En producción con empresas reales.",
         "tech": [
           "Symfony 7",
-          "API Platform",
-          "PostgreSQL",
-          "React",
-          "TypeScript",
+          "PHP 8.2",
+          "Doctrine ORM",
+          "MariaDB",
+          "Twig",
+          "Bootstrap 5",
+          "API REST",
+          "Stripe",
+          "Symfony Messenger",
           "Docker",
-          "GitHub Actions"
+          "GitHub Actions",
+          "Veri*factu/AEAT",
+          "XAdES",
+          "Multi-tenant"
         ],
         "links": {
           "demo": "https://gestionominegocio.com/"

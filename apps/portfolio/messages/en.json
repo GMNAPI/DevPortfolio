@@ -606,16 +606,23 @@
     "items": [
       {
         "id": "gestiono-mi-negocio-facturacion",
-        "title": "GestionoMiNegocio - Billing Software",
-        "description": "Led development as Co-founder & Lead Dev. Comprehensive platform for basic administrative management, including billing and collection control. Architecture oriented to handle workload peaks while maintaining quality and response times.",
+        "title": "GestionoMiNegocio (GMN) — Electronic invoicing SaaS platform",
+        "description": "Multi-tenant SaaS platform for business management and electronic invoicing for freelancers and SMEs, fully compliant with Spain's Veri*factu / AEAT regulation. Distributed architecture: a management app (invoices, quotes, delivery notes and clients) on a database-per-tenant model, plus a standalone microservice that handles tax registration with the Spanish Tax Agency (hash chaining, XAdES digital signatures and SOAP communication). Includes Stripe subscription billing, plan-based feature gating and self-service onboarding. Live in production with real businesses.",
         "tech": [
           "Symfony 7",
-          "API Platform",
-          "PostgreSQL",
-          "React",
-          "TypeScript",
+          "PHP 8.2",
+          "Doctrine ORM",
+          "MariaDB",
+          "Twig",
+          "Bootstrap 5",
+          "REST API",
+          "Stripe",
+          "Symfony Messenger",
           "Docker",
-          "GitHub Actions"
+          "GitHub Actions",
+          "Veri*factu/AEAT",
+          "XAdES",
+          "Multi-tenant"
         ],
         "links": {
           "demo": "https://gestionominegocio.com/"

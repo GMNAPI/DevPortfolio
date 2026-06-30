@@ -169,6 +169,18 @@
       ],
       "certifications": [
         {
+          "name": "Máster Online en IA e Innovación 2025",
+          "issuer": "Founderz",
+          "year": "2026",
+          "description": "Master's program in Artificial Intelligence and Innovation applied to business."
+        },
+        {
+          "name": "CS50x: Introduction to Computer Science",
+          "issuer": "Harvard University",
+          "year": "2025",
+          "description": "Computer science and programming fundamentals: C, Python, SQL, algorithms and data structures."
+        },
+        {
           "name": "Zend Certificate of E-Learning – PHP OOP & Software Patterns",
           "issuer": "Zend",
           "year": "2025",

@@ -105,14 +105,17 @@
     "career": {
       "experiences": [
         {
-          "role": "Consultant & Tech Lead",
+          "role": "Full-Stack Developer & Tech Lead",
           "company": "Fastbyte SL",
           "period": {
             "start": "2019",
             "end": "2025"
           },
-          "headline": "Requirements gathering with clients/teams and translation into practical solutions.",
-          "achievements": ["Constant communication, task follow-up and phased delivery."]
+          "headline": "Maintenance of a production ERP for a technical-services company and the design and implementation of its full-stack migration (Symfony/API Platform + Next.js).",
+          "achievements": [
+            "Full-stack migration: a Symfony 7.3 + API Platform REST API and a Next.js 15 SPA; paused by the client's business decision.",
+            "Incremental modernization of the legacy PHP system (Repository pattern, DI, Twilio/WhatsApp, DomPDF)."
+          ]
         },
         {
           "role": "Program Specialist",
@@ -125,14 +128,17 @@
           "achievements": []
         },
         {
-          "role": "Co-founder & Lead Dev",
-          "company": "GestionoMiNegocio",
+          "role": "Co-founder & Lead Developer",
+          "company": "GestionoMiNegocio (GMN)",
           "period": {
             "start": "2020",
-            "end": "2025"
+            "end": "Present"
           },
-          "headline": "Working with beta users: collecting feedback, improvements and product onboarding support.",
-          "achievements": ["Focus on clarity, quality and user experience."]
+          "headline": "Multi-tenant electronic-invoicing SaaS platform with Veri*factu/AEAT compliance; distributed architecture with a compliance microservice.",
+          "achievements": [
+            "Veri*factu/AEAT microservice: SHA-256 hash chaining, XAdES signatures and SOAP/mTLS (Symfony Messenger).",
+            "Database-per-tenant multi-tenancy and SaaS monetization with Stripe."
+          ]
         },
         {
           "role": "Developer",

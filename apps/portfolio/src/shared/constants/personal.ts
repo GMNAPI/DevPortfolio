@@ -44,12 +44,12 @@ export const personalInfo: PersonalInfo = {
     countryCode: 'ES',
   },
 
-  tagline: 'Tech Lead | Comunicación técnica | SaaS | Node.js | React | PHP/Symfony',
+  tagline: 'Full-Stack Developer | Symfony · React/Next.js | SaaS & IA aplicada',
 
   bio: {
     short:
-      'Tech Lead con experiencia colaborando con usuarios y clientes, comunicación clara y actitud resolutiva.',
-    full: 'Tech Lead especializado en traducir requisitos de negocio a soluciones técnicas. Experiencia liderando equipos, coordinando con stakeholders, y gestionando incidencias con comunicación efectiva. Enfocado en entregar valor a través de comunicación clara, seguimiento de tareas y entregas iterativas.',
+      'Desarrollador full-stack (Symfony/PHP, React/Next.js) especializado en SaaS en producción e IA aplicada.',
+    full: 'Desarrollador full-stack con 6+ años construyendo y desplegando SaaS en producción. Backend con Symfony/PHP y API Platform, frontend con React/Next.js y TypeScript. Experiencia en arquitecturas multi-tenant, integraciones de pago (Stripe), cumplimiento fiscal (Veri*factu/AEAT) e IA aplicada (RAG, OpenAI). Enfoque en escalabilidad, clean code y calidad.',
   },
 
   avatar: '/images/avatar-placeholder.svg',
@@ -91,22 +91,22 @@ export const workPreferences = {
  * Professional Focus Areas
  */
 export const focusAreas = [
+  'Full-Stack Development',
+  'SaaS Architecture',
+  'REST API Design',
+  'Multi-tenant Systems',
+  'Applied AI (RAG, OpenAI)',
+  'CI/CD & DevOps',
   'Technical Leadership',
-  'Stakeholder Communication',
-  'Requirements Analysis',
-  'Team Coordination',
-  'Incident Resolution',
-  'Iterative Delivery',
-  'User Support & Training',
-  'Technical Strategy',
+  'Code Quality & Testing',
 ] as const;
 
 /**
  * Years of Experience
  */
 export const experience = {
-  totalYears: 5,
-  startYear: 2020,
+  totalYears: 6,
+  startYear: 2019,
 } as const;
 
 /**
@@ -125,7 +125,7 @@ export const mainTechStack = {
  */
 export const quickStats = {
   projectsCompleted: 35,
-  yearsExperience: 5,
+  yearsExperience: 6,
   technologiesUsed: 20,
   contributionsLastYear: 1706,
   repositoriesContributed: 9,

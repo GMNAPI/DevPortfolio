@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "{name} | {tagline}",
-    "description": "Tech Lead con experiencia colaborando con usuarios y clientes, acostumbrado a tratar incidencias y necesidades reales con comunicación clara y actitud resolutiva. Especializado en traducir requisitos de negocio a soluciones técnicas.",
+    "description": "Desarrollador full-stack (Symfony/PHP, React/Next.js) con 6+ años construyendo SaaS en producción: arquitecturas multi-tenant, APIs REST y soluciones de IA aplicada (RAG, OpenAI).",
     "ogImageAlt": "{name} - Portfolio Profesional",
     "keywords": [
       "Ángel Hidalgo Barreiro",
@@ -63,7 +63,7 @@
   "about": {
     "eyebrow": "Experiencia",
     "title": "Sobre mí",
-    "intro": "Tech Lead con experiencia colaborando con usuarios y clientes, acostumbrado a tratar incidencias y necesidades reales con comunicación clara y actitud resolutiva. Enfocado en traducir requisitos de negocio a soluciones prácticas, con seguimiento constante y entregas iterativas.",
+    "intro": "Desarrollador full-stack con 6+ años construyendo y desplegando SaaS en producción. Backend con Symfony/PHP y API Platform, frontend con React/Next.js y TypeScript, e IA aplicada (RAG, OpenAI). Me centro en arquitectura escalable, clean code y calidad: del diseño de la API a la entrega y el soporte a usuarios reales.",
     "sections": {
       "timeline": "Timeline profesional",
       "activity": "Actividad reciente",
@@ -118,14 +118,17 @@
           ]
         },
         {
-          "role": "Especialista de Programa",
+          "role": "Especialista de Programa (Backend)",
           "company": "Vita Liber S.L.U.",
           "period": {
             "start": "2020",
             "end": "2025"
           },
-          "headline": "Gestión de necesidades de usuarios internos: priorización, incidencias, validación y soporte funcional.",
-          "achievements": []
+          "headline": "Modernización de un sistema legacy a una arquitectura backend con PHP/Symfony; desarrollo y mantenimiento de APIs REST y servicios core.",
+          "achievements": [
+            "Gestión de MariaDB: evolución de esquema, migraciones y optimización de consultas.",
+            "Testing automatizado e integración en procesos CI/CD."
+          ]
         },
         {
           "role": "Cofundador & Lead Developer",
@@ -752,7 +755,7 @@
     }
   },
   "footer": {
-    "tagline": "Desarrollo cosas",
+    "tagline": "Construyo productos que llegan a producción",
     "findMe": "Encuéntrame",
     "socialLabel": "Sígueme en {network}",
     "copyright": "Todos los derechos reservados"
@@ -772,7 +775,7 @@
       "city": "Barcelona",
       "country": "España"
     },
-    "tagline": "Tech Lead | Comunicación técnica | SaaS | Node.js | React | PHP/Symfony",
+    "tagline": "Full-Stack Developer | Symfony · PHP | React/Next.js | SaaS multi-tenant | IA aplicada",
     "bio": {
       "short": "Tech Lead con experiencia colaborando con usuarios y clientes, comunicación clara y actitud resolutiva.",
       "full": "Tech Lead especializado en traducir requisitos de negocio a soluciones técnicas. Experiencia liderando equipos, coordinando con stakeholders, y gestionando incidencias con comunicación efectiva. Enfocado en entregar valor a través de comunicación clara, seguimiento de tareas y entregas iterativas."

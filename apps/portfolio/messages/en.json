@@ -105,14 +105,17 @@
     "career": {
       "experiences": [
         {
-          "role": "Consultant & Tech Lead",
+          "role": "Full-Stack Developer & Tech Lead",
           "company": "Fastbyte SL",
           "period": {
             "start": "2019",
             "end": "2025"
           },
-          "headline": "Requirements gathering with clients/teams and translation into practical solutions.",
-          "achievements": ["Constant communication, task follow-up and phased delivery."]
+          "headline": "Maintenance of a production ERP for a technical-services company and the design and implementation of its full-stack migration (Symfony/API Platform + Next.js).",
+          "achievements": [
+            "Full-stack migration: a Symfony 7.3 + API Platform REST API and a Next.js 15 SPA; paused by the client's business decision.",
+            "Incremental modernization of the legacy PHP system (Repository pattern, DI, Twilio/WhatsApp, DomPDF)."
+          ]
         },
         {
           "role": "Program Specialist",
@@ -125,14 +128,17 @@
           "achievements": []
         },
         {
-          "role": "Co-founder & Lead Dev",
-          "company": "GestionoMiNegocio",
+          "role": "Co-founder & Lead Developer",
+          "company": "GestionoMiNegocio (GMN)",
           "period": {
             "start": "2020",
-            "end": "2025"
+            "end": "Present"
           },
-          "headline": "Working with beta users: collecting feedback, improvements and product onboarding support.",
-          "achievements": ["Focus on clarity, quality and user experience."]
+          "headline": "Multi-tenant electronic-invoicing SaaS platform with Veri*factu/AEAT compliance; distributed architecture with a compliance microservice.",
+          "achievements": [
+            "Veri*factu/AEAT microservice: SHA-256 hash chaining, XAdES signatures and SOAP/mTLS (Symfony Messenger).",
+            "Database-per-tenant multi-tenancy and SaaS monetization with Stripe."
+          ]
         },
         {
           "role": "Developer",
@@ -506,6 +512,68 @@
     }
   },
   "projects": {
+    "details": {
+      "gestiono-mi-negocio-facturacion": {
+        "sections": [
+          {
+            "heading": "Context",
+            "body": "GestionoMiNegocio (GMN) is a multi-tenant SaaS platform for business management and electronic invoicing for freelancers and SMEs, compliant with Spain's Veri*factu/AEAT regulation. Live in production with real businesses. As co-founder and Lead Dev (2020–present) I led its evolution from a legacy management system to the current distributed architecture."
+          },
+          {
+            "heading": "Multi-tenant architecture",
+            "body": "A management app (invoices, quotes, delivery notes and clients) on a database-per-tenant model with full data isolation, dynamic connection switching and automated tenant provisioning/migration. Built with Symfony 7, PHP 8.2, Doctrine ORM, MariaDB, Twig and Bootstrap 5."
+          },
+          {
+            "heading": "Veri*factu/AEAT compliance microservice",
+            "body": "A standalone service that handles tax registration with the Spanish Tax Agency (Anti-Fraud Law, RD 1007/2023): SHA-256 hash chaining, XAdES-EPES digital signatures with FNMT certificates (PKCS#12), QR generation and SOAP/mTLS communication, processed asynchronously via Symfony Messenger."
+          },
+          {
+            "heading": "Monetization and product",
+            "body": "A SaaS monetization layer with Stripe (plans, trials, idempotent webhooks and plan-based feature gating), self-service onboarding and integrations with TwentyCRM and an OpenAI assistant. Full product cycle with beta users: feedback, improvements and support."
+          },
+          {
+            "heading": "Engineering",
+            "body": "Docker containerization, CI on GitHub Actions and a REST API. ~31,000 lines of code across the GMN app and the compliance microservice, which has 33 REST endpoints and 27 test files."
+          }
+        ],
+        "metrics": [
+          { "label": "LOC (app + microservice)", "value": "~31k" },
+          { "label": "Microservice endpoints", "value": "33" },
+          { "label": "Compliance", "value": "Veri*factu/AEAT" },
+          { "label": "Data model", "value": "Database-per-tenant" }
+        ]
+      },
+      "fastbyte-api-servicios": {
+        "sections": [
+          {
+            "heading": "Context",
+            "body": "A technical-services company with its own in-house ERP (\"Genesis\") running in production: ~16 modules and ~118,000 lines of code covering repair orders, incidents, quotes, delivery notes, billing and clients."
+          },
+          {
+            "heading": "Legacy maintenance and modernization",
+            "body": "A hybrid PHP 7.4 system (procedural + OOP). Production maintenance and incremental modernization: Repository pattern and dependency injection in the newer modules, Twig templates, PDF generation (FPDF → DomPDF) and WhatsApp notifications via Twilio. Team work with a pull-request workflow."
+          },
+          {
+            "heading": "Full-stack migration",
+            "body": "Design and implementation of the decoupled rewrite. Backend: Symfony 7.3 + API Platform 4.1 with the State Provider/Processor pattern, custom normalizers, a sequential ID generator with locking, and JSON-LD/Hydra serialization. Frontend: Next.js 15 + React 19 + TypeScript with shadcn/ui, React Hook Form + Zod (schema-first validation) and TanStack Table."
+          },
+          {
+            "heading": "Quality and architecture",
+            "body": "Decisions documented in ADRs, ~24 backend tests (API, entities, serialization) and 300+ frontend tests with MSW for API mocking, plus continuous integration and documentation (OpenAPI, CHANGELOG)."
+          },
+          {
+            "heading": "Outcome",
+            "body": "The migration was built as a standalone project and paused by the client's business decision; the legacy ERP remains in production."
+          }
+        ],
+        "metrics": [
+          { "label": "API endpoints", "value": "~34" },
+          { "label": "Domain entities", "value": "16" },
+          { "label": "Tests (front + back)", "value": "320+" },
+          { "label": "Stack", "value": "Symfony · Next.js" }
+        ]
+      }
+    },
     "title": "Projects",
     "subtitle": "Selection of SaaS products, internal tools and technical documentation created in professional projects. Organized into 6 strategic categories.",
     "filters": {
@@ -568,16 +636,23 @@
     "items": [
       {
         "id": "gestiono-mi-negocio-facturacion",
-        "title": "GestionoMiNegocio - Billing Software",
-        "description": "Led development as Co-founder & Lead Dev. Comprehensive platform for basic administrative management, including billing and collection control. Architecture oriented to handle workload peaks while maintaining quality and response times.",
+        "title": "GestionoMiNegocio (GMN) — Electronic invoicing SaaS platform",
+        "description": "Multi-tenant SaaS platform for business management and electronic invoicing for freelancers and SMEs, fully compliant with Spain's Veri*factu / AEAT regulation. Distributed architecture: a management app (invoices, quotes, delivery notes and clients) on a database-per-tenant model, plus a standalone microservice that handles tax registration with the Spanish Tax Agency (hash chaining, XAdES digital signatures and SOAP communication). Includes Stripe subscription billing, plan-based feature gating and self-service onboarding. Live in production with real businesses.",
         "tech": [
           "Symfony 7",
-          "API Platform",
-          "PostgreSQL",
-          "React",
-          "TypeScript",
+          "PHP 8.2",
+          "Doctrine ORM",
+          "MariaDB",
+          "Twig",
+          "Bootstrap 5",
+          "REST API",
+          "Stripe",
+          "Symfony Messenger",
           "Docker",
-          "GitHub Actions"
+          "GitHub Actions",
+          "Veri*factu/AEAT",
+          "XAdES",
+          "Multi-tenant"
         ],
         "links": {
           "demo": "https://gestionominegocio.com/"
@@ -605,9 +680,18 @@
       },
       {
         "id": "fastbyte-api-servicios",
-        "title": "Fastbyte - Service Management REST API",
-        "description": "Consultant and Tech Lead focused on requirement gathering with clients and translating them into practical solutions. Robust REST API for service management with phased deliveries and constant client communication.",
-        "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Docker"],
+        "title": "Fastbyte — Technical-Services ERP Modernization",
+        "description": "Maintenance and evolution of the production ERP of a technical-services company (repair orders, incidents and billing), plus the design and implementation of its full-stack migration to a modern architecture: a Symfony 7.3 + API Platform REST API and a Next.js 15 SPA. The migration was built as a standalone project and paused by the client's business decision.",
+        "tech": [
+          "Symfony 7.3",
+          "API Platform",
+          "Next.js 15",
+          "React 19",
+          "TypeScript",
+          "Doctrine ORM",
+          "MariaDB",
+          "Docker"
+        ],
         "links": {},
         "categoryId": "gestion-servicios"
       },

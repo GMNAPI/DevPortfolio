@@ -605,9 +605,9 @@
       },
       {
         "id": "fastbyte-api-servicios",
-        "title": "Fastbyte - Service Management REST API",
-        "description": "Consultant and Tech Lead focused on requirement gathering with clients and translating them into practical solutions. Robust REST API for service management with phased deliveries and constant client communication.",
-        "tech": ["Symfony 7.3", "API Platform", "MariaDB", "Docker"],
+        "title": "Fastbyte — Technical-Services ERP Modernization",
+        "description": "Maintenance and evolution of the production ERP of a technical-services company (repair orders, incidents and billing), plus the design and implementation of its full-stack migration to a modern architecture: a Symfony 7.3 + API Platform REST API and a Next.js 15 SPA. The migration was built as a standalone project and paused by the client's business decision.",
+        "tech": ["Symfony 7.3", "API Platform", "Next.js 15", "React 19", "TypeScript", "Doctrine ORM", "MariaDB", "Docker"],
         "links": {},
         "categoryId": "gestion-servicios"
       },

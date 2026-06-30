@@ -506,6 +506,38 @@
     }
   },
   "projects": {
+    "details": {
+      "fastbyte-api-servicios": {
+        "sections": [
+          {
+            "heading": "Contexto",
+            "body": "Empresa de servicios técnicos con un ERP propio (\"Genesis\") en producción: ~16 módulos y ~118.000 líneas de código que cubren órdenes de reparación, incidencias, presupuestos, albaranes, facturación y clientes."
+          },
+          {
+            "heading": "Mantenimiento y modernización del legacy",
+            "body": "Sistema PHP 7.4 de arquitectura híbrida (procedural + OOP). Mantenimiento en producción y modernización incremental: Repository pattern e inyección de dependencias en los módulos nuevos, plantillas Twig, generación de PDF (FPDF → DomPDF) y notificaciones por WhatsApp vía Twilio. Trabajo en equipo con flujo de pull requests."
+          },
+          {
+            "heading": "Migración full-stack",
+            "body": "Diseño e implementación de la reescritura desacoplada. Backend: Symfony 7.3 + API Platform 4.1 con patrón State Provider/Processor, normalizers a medida, generador secuencial de IDs con bloqueo y serialización JSON-LD/Hydra. Frontend: Next.js 15 + React 19 + TypeScript con shadcn/ui, React Hook Form + Zod (validación schema-first) y TanStack Table."
+          },
+          {
+            "heading": "Calidad y arquitectura",
+            "body": "Decisiones documentadas en ADRs, ~24 tests en el backend (API, entidades, serialización) y 300+ tests en el frontend con MSW para el mocking de la API, además de integración continua y documentación (OpenAPI, CHANGELOG)."
+          },
+          {
+            "heading": "Desenlace",
+            "body": "La migración se desarrolló como proyecto independiente y se pausó por decisión de negocio del cliente; el ERP legacy continúa en producción."
+          }
+        ],
+        "metrics": [
+          { "label": "Endpoints API", "value": "~34" },
+          { "label": "Entidades de dominio", "value": "16" },
+          { "label": "Tests (front + back)", "value": "320+" },
+          { "label": "Stack", "value": "Symfony · Next.js" }
+        ]
+      }
+    },
     "title": "Proyectos",
     "subtitle": "Selección de productos SaaS, herramientas internas y documentación técnica desarrollada en proyectos profesionales. Organizados en 6 categorías estratégicas.",
     "filters": {
@@ -607,7 +639,16 @@
         "id": "fastbyte-api-servicios",
         "title": "Fastbyte — Modernización de ERP de Servicios Técnicos",
         "description": "Mantenimiento y evolución del ERP en producción de una empresa de servicios técnicos (órdenes de reparación, incidencias y facturación), y diseño e implementación de su migración full-stack a una arquitectura moderna: API REST con Symfony 7.3 + API Platform y SPA en Next.js 15. La migración se desarrolló como proyecto independiente y se pausó por decisión de negocio del cliente.",
-        "tech": ["Symfony 7.3", "API Platform", "Next.js 15", "React 19", "TypeScript", "Doctrine ORM", "MariaDB", "Docker"],
+        "tech": [
+          "Symfony 7.3",
+          "API Platform",
+          "Next.js 15",
+          "React 19",
+          "TypeScript",
+          "Doctrine ORM",
+          "MariaDB",
+          "Docker"
+        ],
         "links": {},
         "categoryId": "gestion-servicios"
       },

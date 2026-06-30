@@ -21,7 +21,7 @@ export interface ProjectDetailContent {
 
 export function getProjectDetail(
   details: Record<string, ProjectDetailContent> | undefined,
-  slug: string,
+  slug: string
 ): ProjectDetailContent | null {
   return details?.[slug] ?? null;
 }

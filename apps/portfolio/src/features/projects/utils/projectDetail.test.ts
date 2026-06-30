@@ -12,7 +12,7 @@ describe('getProjectDetail', () => {
 
   it('returns the detail content when the slug exists', () => {
     expect(getProjectDetail(details, 'fastbyte-api-servicios')).toEqual(
-      details['fastbyte-api-servicios'],
+      details['fastbyte-api-servicios']
     );
   });
 

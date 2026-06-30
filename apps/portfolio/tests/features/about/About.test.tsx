@@ -24,7 +24,7 @@ describe('About Section', () => {
 
     it('should render personal description', () => {
       renderAbout();
-      expect(screen.getByText(/tech lead con experiencia colaborando/i)).toBeInTheDocument();
+      expect(screen.getByText(/desarrollador full-stack con 6\+ años/i)).toBeInTheDocument();
     });
 
     it('should render GitHub stats block', () => {

@@ -777,21 +777,21 @@
     },
     "tagline": "Full-Stack Developer | Symfony · PHP | React/Next.js | SaaS multi-tenant | IA aplicada",
     "bio": {
-      "short": "Tech Lead con experiencia colaborando con usuarios y clientes, comunicación clara y actitud resolutiva.",
-      "full": "Tech Lead especializado en traducir requisitos de negocio a soluciones técnicas. Experiencia liderando equipos, coordinando con stakeholders, y gestionando incidencias con comunicación efectiva. Enfocado en entregar valor a través de comunicación clara, seguimiento de tareas y entregas iterativas."
+      "short": "Desarrollador full-stack (Symfony/PHP, React/Next.js) especializado en SaaS en producción e IA aplicada.",
+      "full": "Desarrollador full-stack con 6+ años construyendo y desplegando SaaS en producción. Backend con Symfony/PHP y API Platform, frontend con React/Next.js y TypeScript. Experiencia en arquitecturas multi-tenant, integraciones de pago (Stripe), cumplimiento fiscal (Veri*factu/AEAT) e IA aplicada (RAG, OpenAI). Enfoque en escalabilidad, clean code y calidad."
     },
     "availability": {
       "open": "Abierto a nuevas oportunidades"
     },
     "focusAreas": [
+      "Full-Stack Development",
+      "SaaS Architecture",
+      "REST API Design",
+      "Multi-tenant Systems",
+      "Applied AI (RAG, OpenAI)",
+      "CI/CD & DevOps",
       "Technical Leadership",
-      "Stakeholder Communication",
-      "Requirements Analysis",
-      "Team Coordination",
-      "Incident Resolution",
-      "Iterative Delivery",
-      "User Support & Training",
-      "Technical Strategy"
+      "Code Quality & Testing"
     ]
   },
   "career": {}

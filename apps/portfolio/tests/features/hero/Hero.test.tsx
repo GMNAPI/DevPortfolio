@@ -27,16 +27,14 @@ describe('Hero Section', () => {
       renderHero();
       expect(
         screen.getByRole('heading', {
-          name: /tech lead.*comunicación técnica.*saas.*node\.js.*react.*php\/symfony/i,
+          name: /full-stack developer/i,
         })
       ).toBeInTheDocument();
     });
 
     it('should render bio description', () => {
       renderHero();
-      expect(
-        screen.getByText(/tech lead especializado en traducir requisitos/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/desarrollador full-stack/i)).toBeInTheDocument();
     });
 
     it('should render all CTA buttons', () => {

@@ -513,6 +513,36 @@
   },
   "projects": {
     "details": {
+      "gestiono-mi-negocio-facturacion": {
+        "sections": [
+          {
+            "heading": "Contexto",
+            "body": "GestionoMiNegocio (GMN) es una plataforma SaaS multi-tenant de gestión y facturación electrónica para autónomos y pymes, con cumplimiento de la normativa española Veri*factu/AEAT. En producción con empresas reales. Como cofundador y Lead Dev (2020–actualidad) lideré su evolución desde un software de gestión legacy hasta la arquitectura distribuida actual."
+          },
+          {
+            "heading": "Arquitectura multi-tenant",
+            "body": "Aplicación de gestión (facturas, presupuestos, albaranes y clientes) sobre un modelo database-per-tenant con aislamiento total de datos, conmutación dinámica de conexión y provisión/migración automatizada de tenants. Construida con Symfony 7, PHP 8.2, Doctrine ORM, MariaDB, Twig y Bootstrap 5."
+          },
+          {
+            "heading": "Microservicio de compliance Veri*factu/AEAT",
+            "body": "Servicio independiente que resuelve el registro fiscal ante la AEAT (Ley Antifraude, RD 1007/2023): hash encadenado SHA-256, firma digital XAdES-EPES con certificados FNMT (PKCS#12), generación de QR y comunicación SOAP con mTLS, procesado de forma asíncrona con Symfony Messenger."
+          },
+          {
+            "heading": "Monetización y producto",
+            "body": "Capa de monetización SaaS con Stripe (planes, periodo de prueba, webhooks idempotentes y feature-gating por plan), onboarding self-service e integraciones con TwentyCRM y un asistente con OpenAI. Ciclo completo de producto con usuarios beta: feedback, mejoras y soporte."
+          },
+          {
+            "heading": "Ingeniería",
+            "body": "Contenedorización con Docker, CI con GitHub Actions y API REST. ~31.000 líneas de código entre la app GMN y el microservicio de compliance, que cuenta con 33 endpoints REST y 27 ficheros de test."
+          }
+        ],
+        "metrics": [
+          { "label": "LOC (app + microservicio)", "value": "~31k" },
+          { "label": "Endpoints microservicio", "value": "33" },
+          { "label": "Compliance", "value": "Veri*factu/AEAT" },
+          { "label": "Modelo de datos", "value": "Database-per-tenant" }
+        ]
+      },
       "fastbyte-api-servicios": {
         "sections": [
           {

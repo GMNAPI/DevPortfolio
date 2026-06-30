@@ -513,6 +513,36 @@
   },
   "projects": {
     "details": {
+      "gestiono-mi-negocio-facturacion": {
+        "sections": [
+          {
+            "heading": "Context",
+            "body": "GestionoMiNegocio (GMN) is a multi-tenant SaaS platform for business management and electronic invoicing for freelancers and SMEs, compliant with Spain's Veri*factu/AEAT regulation. Live in production with real businesses. As co-founder and Lead Dev (2020–present) I led its evolution from a legacy management system to the current distributed architecture."
+          },
+          {
+            "heading": "Multi-tenant architecture",
+            "body": "A management app (invoices, quotes, delivery notes and clients) on a database-per-tenant model with full data isolation, dynamic connection switching and automated tenant provisioning/migration. Built with Symfony 7, PHP 8.2, Doctrine ORM, MariaDB, Twig and Bootstrap 5."
+          },
+          {
+            "heading": "Veri*factu/AEAT compliance microservice",
+            "body": "A standalone service that handles tax registration with the Spanish Tax Agency (Anti-Fraud Law, RD 1007/2023): SHA-256 hash chaining, XAdES-EPES digital signatures with FNMT certificates (PKCS#12), QR generation and SOAP/mTLS communication, processed asynchronously via Symfony Messenger."
+          },
+          {
+            "heading": "Monetization and product",
+            "body": "A SaaS monetization layer with Stripe (plans, trials, idempotent webhooks and plan-based feature gating), self-service onboarding and integrations with TwentyCRM and an OpenAI assistant. Full product cycle with beta users: feedback, improvements and support."
+          },
+          {
+            "heading": "Engineering",
+            "body": "Docker containerization, CI on GitHub Actions and a REST API. ~31,000 lines of code across the GMN app and the compliance microservice, which has 33 REST endpoints and 27 test files."
+          }
+        ],
+        "metrics": [
+          { "label": "LOC (app + microservice)", "value": "~31k" },
+          { "label": "Microservice endpoints", "value": "33" },
+          { "label": "Compliance", "value": "Veri*factu/AEAT" },
+          { "label": "Data model", "value": "Database-per-tenant" }
+        ]
+      },
       "fastbyte-api-servicios": {
         "sections": [
           {

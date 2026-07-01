@@ -6,6 +6,7 @@
  */
 
 export const PROJECT_SLUGS = [
+  'devfreelancer-client-tracker',
   'gestiono-mi-negocio-facturacion',
   'vita-liber-erp-interno',
   'fastbyte-api-servicios',

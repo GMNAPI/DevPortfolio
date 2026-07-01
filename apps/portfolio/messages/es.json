@@ -528,6 +528,36 @@
   },
   "projects": {
     "details": {
+      "devfreelancer-client-tracker": {
+        "sections": [
+          {
+            "heading": "Contexto",
+            "body": "Proyecto final de CS50x (Harvard). Herramienta web real para gestionar el mantenimiento recurrente mensual de los clientes de un desarrollador freelance, con tres planes de servicio (Básico, Negocio, Crítico) y sus checklists asociados."
+          },
+          {
+            "heading": "Funcionalidad",
+            "body": "Autenticación segura (hash de contraseña y sesiones), CRUD de clientes, generación automática de checklists mensuales según el plan (de 5 a 14 tareas), marcado de tareas con progreso en tiempo real y navegación entre meses preservando el historial."
+          },
+          {
+            "heading": "Arquitectura",
+            "body": "Backend en Flask (Python) con rutas para autenticación, clientes y checklist. Persistencia en SQLite con tres tablas (usuarios, clientes, ítems de checklist) e índices. Plantillas Jinja2 (layout + cinco vistas) e interfaz con Bootstrap 5 y CSS propio."
+          },
+          {
+            "heading": "Stack y decisiones",
+            "body": "Python/Flask + SQLite por simplicidad y portabilidad; la lógica de planes y tareas vive en Python para flexibilidad; UI con Bootstrap para una interfaz limpia y responsive. ~657 líneas de código."
+          },
+          {
+            "heading": "Aprendizaje",
+            "body": "Capstone tras completar CS50x 2026 (C, Python, SQL, desarrollo web y Flask). Demuestra desarrollo full-stack con Python, del modelo de datos al frontend, resolviendo un problema real."
+          }
+        ],
+        "metrics": [
+          { "label": "Líneas de código", "value": "~657" },
+          { "label": "Stack", "value": "Flask · SQLite" },
+          { "label": "Planes de servicio", "value": "3" },
+          { "label": "Origen", "value": "CS50x final" }
+        ]
+      },
       "gestiono-mi-negocio-facturacion": {
         "sections": [
           {
@@ -649,6 +679,14 @@
       }
     ],
     "items": [
+      {
+        "id": "devfreelancer-client-tracker",
+        "title": "DevFreelancer Client Tracker — Gestión de mantenimiento freelance",
+        "description": "Aplicación web (Flask + SQLite) que automatiza el mantenimiento recurrente mensual de clientes freelance: autenticación segura, CRUD de clientes, checklists dinámicos por plan (Básico/Negocio/Crítico), navegación entre meses y dashboard de progreso. Proyecto final de CS50x, en uso real.",
+        "tech": ["Flask", "Python", "SQLite", "Jinja2", "Bootstrap 5", "HTML5", "CSS3"],
+        "links": { "github": "https://github.com/GMNAPI/devfreelancer-tracker" },
+        "categoryId": "herramientas"
+      },
       {
         "id": "gestiono-mi-negocio-facturacion",
         "title": "GestionoMiNegocio (GMN) — Plataforma SaaS de facturación electrónica",

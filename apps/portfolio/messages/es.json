@@ -588,6 +588,66 @@
           { "label": "Modelo de datos", "value": "Database-per-tenant" }
         ]
       },
+      "llarjove-rag-chatbot": {
+        "sections": [
+          {
+            "heading": "Contexto",
+            "body": "Asistente conversacional para jóvenes de 18 a 35 años en Cataluña que buscan vivienda: ayudas disponibles (Bono Alquiler Joven, ayudas de la Generalitat y municipales), derechos como inquilino (LAU, fianza, actualizaciones de alquiler) y recursos activos con sus plazos (Borsa Jove, HPO). Desplegado en producción en Railway con repositorio público."
+          },
+          {
+            "heading": "Pipeline RAG",
+            "body": "Ingesta offline de documentación oficial curada (ayudas, derechos, guías y leyes): carga, chunking, embeddings y vector store. En runtime, cada pregunta se convierte en embedding, se recupera contexto por búsqueda semántica con reranking y se genera la respuesta con GPT-4, validada y acompañada de fuentes citadas y nivel de confianza."
+          },
+          {
+            "heading": "Backend",
+            "body": "API en Fastify + TypeScript con el pipeline organizado por módulos (ingestion, retrieval, generation) y un endpoint de chat. Las respuestas devuelven answer, sources y confidence para que el usuario pueda contrastar la información."
+          },
+          {
+            "heading": "Frontend",
+            "body": "Interfaz en React 19 + Vite 6 + Tailwind CSS v4 con design system propio (identidad de marca, tokens de color y tipografía) y 59 tests de componentes con Vitest y Testing Library."
+          },
+          {
+            "heading": "Enfoque",
+            "body": "Proyecto de IA aplicada con impacto social: la información oficial sobre vivienda está dispersa y es difícil de interpretar; el asistente la centraliza y la responde en lenguaje claro, citando siempre la fuente oficial."
+          }
+        ],
+        "metrics": [
+          { "label": "Stack", "value": "Fastify · GPT-4" },
+          { "label": "Frontend", "value": "React 19 + Vite" },
+          { "label": "Tests frontend", "value": "59" },
+          { "label": "Despliegue", "value": "Railway" }
+        ]
+      },
+      "vitaliber-crm-erp-v2": {
+        "sections": [
+          {
+            "heading": "Contexto",
+            "body": "Reescritura completa del CRM/ERP legacy de VitaLiber, una empresa de telemarketing con 5-20 agentes en uso diario intensivo. El sistema anterior (MySQL, 28 tablas) acumulaba una deuda técnica severa. La v2 lo sustituye con un modelo de dominio limpio: CRM, telemarketing, ventas (catálogo editorial), facturación con SEPA y email."
+          },
+          {
+            "heading": "Multi-tenant con Row-Level Security",
+            "body": "Aislamiento de datos por proveedor implementado en la propia base de datos: PostgreSQL 15 con políticas de Row-Level Security. Un listener postConnect de Doctrine establece el tenant activo por conexión y lo verifica contra la tabla de accesos usuario-proveedor. Autenticación JWT con refresh tokens y selector de proveedor activo. Diseño alineado con RGPD."
+          },
+          {
+            "heading": "Backend y esquema",
+            "body": "API REST con Symfony 7 + API Platform 4 y Swagger UI. El esquema lo gobiernan migraciones SQL con DBmate (Doctrine actúa solo como capa de consulta), organizado en 7 esquemas lógicos de PostgreSQL (core, crm, tmk, sales, billing, comms, audit). Auditoría outbox-lite: los eventos de dominio se escriben en la misma transacción."
+          },
+          {
+            "heading": "Frontend tipado extremo a extremo",
+            "body": "React 18 + TypeScript estricto + Vite con Tailwind y shadcn/ui. El cliente de API se genera desde OpenAPI con orval: hooks de TanStack Query, tipos y schemas de Zod sincronizados con el backend. Internacionalización con react-intl (base español, preparado para catalán e inglés)."
+          },
+          {
+            "heading": "Proceso y estado",
+            "body": "Entrega por fases espejando el plan de migración (8 fases con milestones e issues en GitHub): identidad y acceso, catálogos, CRM, telemarketing, ventas y comunicaciones ya fusionadas en main. Decisiones documentadas en 7 ADRs, monorepo PNPM + Composer + Taskfile, CI/CD y tests de PHPUnit y Vitest, incluidos tests de aislamiento RLS. Migración solo de datos vivos, con el legacy como archivo de solo lectura."
+          }
+        ],
+        "metrics": [
+          { "label": "Fases entregadas", "value": "6 de 8" },
+          { "label": "ADRs", "value": "7" },
+          { "label": "Esquemas PostgreSQL", "value": "7" },
+          { "label": "Aislamiento", "value": "RLS por tenant" }
+        ]
+      },
       "fastbyte-api-servicios": {
         "sections": [
           {
@@ -712,6 +772,49 @@
         },
         "categoryId": "facturacion-compliance",
         "imageUrl": "/images/projects/gestiono-mi-negocio.webp"
+      },
+      {
+        "id": "llarjove-rag-chatbot",
+        "title": "LlarJove — Asistente RAG de vivienda para jóvenes",
+        "description": "Chatbot RAG que ayuda a jóvenes de 18-35 años en Cataluña a encontrar vivienda: ayudas (Bono Alquiler Joven, Generalitat, municipales), derechos como inquilino (LAU) y recursos activos con plazos. Pipeline RAG completo sobre fuentes oficiales: ingesta y chunking de documentos, embeddings con búsqueda semántica y reranking, y generación con GPT-4 que responde citando fuentes y con nivel de confianza. Backend Fastify + TypeScript y frontend React 19 + Vite con design system propio. Desplegado en producción en Railway.",
+        "tech": [
+          "TypeScript",
+          "Node.js",
+          "Fastify",
+          "RAG",
+          "OpenAI GPT-4",
+          "React 19",
+          "Vite",
+          "Tailwind CSS",
+          "Docker",
+          "Railway"
+        ],
+        "links": {
+          "github": "https://github.com/GMNAPI/llarjove",
+          "demo": "https://llarjove-production.up.railway.app/"
+        },
+        "categoryId": "ia-chatbots"
+      },
+      {
+        "id": "vitaliber-crm-erp-v2",
+        "title": "VitaLiber CRM/ERP v2 — Reescritura multi-tenant con PostgreSQL RLS",
+        "description": "Reescritura completa del CRM/ERP legacy de una empresa de telemarketing (MySQL, 28 tablas, deuda técnica severa) sobre un stack moderno, multi-tenant y alineado con RGPD. Aislamiento de datos por proveedor con Row-Level Security en PostgreSQL 15, API REST con Symfony 7 + API Platform 4 (JWT + refresh tokens) y frontend React 18 + TypeScript con cliente generado desde OpenAPI (orval → TanStack Query + Zod). Entrega por fases documentada con ADRs: identidad y acceso, catálogos, CRM, telemarketing, ventas y email ya fusionados en main; migración solo de datos vivos manteniendo el legacy como archivo de solo lectura.",
+        "tech": [
+          "Symfony 7",
+          "API Platform 4",
+          "PHP 8.3",
+          "PostgreSQL",
+          "Row-Level Security",
+          "React 18",
+          "TypeScript",
+          "TanStack Query",
+          "Tailwind CSS",
+          "shadcn/ui",
+          "Docker",
+          "Multi-tenant"
+        ],
+        "links": {},
+        "categoryId": "arquitectura-avanzada"
       },
       {
         "id": "vita-liber-erp-interno",
